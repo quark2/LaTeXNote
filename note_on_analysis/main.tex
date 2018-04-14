@@ -1,0 +1,612 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+
+\newcommand{\NaN}{\mathbb{N}}
+\newcommand{\InZ}{\mathbb{Z}}
+\newcommand{\RaQ}{\mathbb{Q}}
+\newcommand{\ReR}{\mathbb{R}}
+\newcommand{\CmC}{\mathbb{C}}
+
+\newcommand{\SBar}{|}
+
+\begin{document}
+
+\textbf{Riemann integration}
+
+We learned about Riemann summation which describes an integration of a function, given as $\sum_{i = 0}^{n - 1} f(x^*_i) (x_{i + 1} - x_i)$, where $f : [a, b] \to \ReR$ and $a = x_0 < x_1 < \cdots < x_{n - 1} < x_n = b$ and $x_i \le x^*_i \le x_{i + 1}$.
+It is questionable what condition on $f$ determines whether the Riemann sum is meaningful or not.
+What we doubt is that if the intervals $[x_i, x_{i + 1}]$ become narrower, the deviation of summation becomes smaller, since the choice of $x^*_i \in [x_i, x_{i + 1}]$ is totally arbitrary.
+The way to estimate the range of the deviation is following.
+We define a \textbf{partition} $P$ of $[a, b]$ as a set of $a = x_0 < x_1 < \cdots < x_{n - 1} < x_n = b$ and denote $I_{P;i} = [x_i, x_{i + 1}]$, and $|I_{P;i}| = x_{i + 1} - x_i$.
+Although the choice of $x^*_i$ is arbitrary, if $f(x^*_i)$ is bounded whatever $x^*_i$ is, then the deviation could be estimated.
+So, the first condition on $f$ is boundedness.
+Now we denote $\mathcal{U}(P; f) = \sum_{i = 0}^{n - 1} (\sup_{x \in I_{P;i}} f(x)) |I_{P;i}|$ and $\mathcal{L}(P; f) = \sum_{i = 0}^{n - 1} (\inf_{x \in I_{P;i}} f(x)) |I_{P;i}|$.
+Then every Riemann by a given partition $P$ is between $\mathcal{L}(P; f)$ and $\mathcal{U}(P; f)$.
+Thus the difference of $\mathcal{L}(P; f)$ and $\mathcal{U}(P; f)$ is the deviation.
+If we can control this deviation by choosing a suitable partition $P$, then we can calculate the Riemann sum more preciesly.
+In this sense, we call $f : [a, b] \to \ReR$ \textbf{integrable} if it is bounded and for every $\epsilon > 0$ there is a partition $P$ such that $|\mathcal{U}(P; f) - \mathcal{L}(P; f)| < \epsilon$.
+
+We see some properties of $\mathcal{L}(P; f)$ and $\mathcal{U}(P; f)$ relative to $P$.
+To do this we define a \textbf{refinement} of $P$ as a partition of $[a, b]$ which is obtained by adding some points into $P$.
+Then it is immediate that \textit{for every partition $P$ and its refinement $P'$ $\mathcal{L}(P; f) \le \mathcal{L}(P'; f)$ and $\mathcal{U}(P'; f) \le \mathcal{U}(P; f)$ for any $f : [a, b] \to \ReR$}.
+From this we can obtain that \textit{for any partition $P_1, P_2$ $\mathcal{L}(P_1; f) \le \mathcal{U}(P_2; f)$}, since for a common refinement $P'$ of $P_1$ and $P_2$ $\mathcal{L}(P_1; f) \le \mathcal{L}(P'; f) \le \mathcal{U}(P'; f) \le \mathcal{U}(P_2; f)$.
+It says that $\sup_P \mathcal{L}(P; f)$ and $\inf_P \mathcal{U}(P; f)$ are well-defined.
+Also, it is easy to show that \textit{a bounded $f$ is integrable if and only if $\sup_P \mathcal{L}(P; f) = \inf_P \mathcal{U}(P; f)$}; see $|\sup_P \mathcal{L}(P; f) - \inf_P \mathcal{U}(P; f)| \le |\mathcal{L}(P'; f) - \sup_P \mathcal{L}(P; f)| + |\mathcal{U}(P'; f) - \inf_P \mathcal{U}(P; f)|$for any partition $P'$ and $|\mathcal{U}(P; f) - \mathcal{L}(P; f)| \le |A - \mathcal{L}(P; f)| + |\mathcal{U}(P; f) - A|$.
+It is immediate that the Riemann summation becomes closer to $\inf_P \mathcal{L}(P; f) = \sup_P \mathcal{U}(P; f)$ if a chosen partition is finer.
+Now we denote $\sup_P \mathcal{L}(P; f) = \inf_P \mathcal{U}(P; f)$ by $\int_a^b dx f(x)$ or $\int_a^b f(x) dx$, or simply $\int_a^b f$.
+
+\newpage
+
+\textbf{Basic properties of Riemann integration (1)}
+
+We now introduce some basic properties of integrable functions.
+First, using common refinement (and triangle property) it is immediate that \textit{for every integrable $f, g$ $f + g$ is also integrable}.
+It is also immediate that \textit{if $f$ is integrable, then $cf$ ($c \in \ReR$) is integrable} and that \textit{if $f$ and $g$ are integrable and $f(x) \le g(x)$ for all $x \in [a, b]$, then $\int_a^b f \le \int_a^b g$}.
+On the other hand, for $c \in [a, b]$, by adding $c$ to refine a partition, we can obtain that \textit{$\int_a^b f = \int_a^c f + \int_c^b f$}.
+
+Now we shall show a useful property: \textit{if $f : [a, b] \to \ReR$ is integrable and $\phi : I \to \ReR$ is continuous, where $I$ is a closed interval containing the image of $f$, then $\phi \circ f$ is integrable}.
+Since there is $M > 0$ such that $|f(x)| \le M$ for all $x \in [a, b]$, we can restrict $I$ to $[-M, M]$.
+Then in this domain $\phi$ becomes uniformly continuous, so for every $\epsilon' > 0$ there is $\delta > 0$ such that $|f(x) - f(y)| < \epsilon'$ for any $x, y \in [-M, M]$ with $|x - y| < \delta$.
+To find, for $\epsilon > 0$, a partition $P$ such that $|\mathcal{U}(P; \phi \circ f) - \mathcal{L}(P; \phi \circ f)| < \epsilon$, the trick is choosing a partition $P$ such that $|\mathcal{U}(P; f) - \mathcal{L}(P; f)| < \delta^2$.
+We let $A$ be a set of $i = 0, 1, \cdots =, n - 1$ such that $\sup_{I_{P;i}} f - \inf_{I_{P; i}} f < \delta$; otherwise $i$ is included in another set $B$.
+Then we can write $\mathcal{U}(P; \phi \circ f) - \mathcal{L}(P; \phi \circ f) = \sum_{i \in A} (\sup_{I_{P;i}} \phi \circ f - \inf_{I_{P;i}} \phi \circ f) |I_{_{P;i}}| + \sum_{i \in B} (\sup_{I_{P;i}} \phi \circ f - \inf_{I_{P;i}} \phi \circ f) |I_{_{P;i}}|$.
+We denote the first term and second term by $S_1$ and $S_2$, respectively.
+The first term $S_1$ can be estimated as, since for $i \in A$ $|f(x) - f(y)| < \delta$ for $x, y \in I_{P;i}$, $|\phi(f(x)) - \phi(f(y))| < \epsilon'$ for $x, y \in I_{P;i}$ so that $S_1 < \sum_{i \in A} \epsilon' |I_{P;i}| \le \epsilon' (b - a)$.
+On the other hand, since $\sum_{i \in B} (\sup_{I_{P;i}} f - \inf_{I_{P;i}} f) |I_{P;i}|$ is smaller than or equal to $\mathcal{U}(P; f) - \mathcal{L}(P; f)$ which is smaller than $\delta^2$ but greater than $\sum_{i \in B} \delta |I_{P;i}|$, we obtain that $\sum_{i \in B} |I_{P;i}| < \delta$, so $S_2 < 2B \delta$, where $B$ is an upper bound of $|\phi \circ f|$.
+Thus $\mathcal{U}(P; \phi \circ f) - \mathcal{L}(P; \phi \circ f) < \epsilon' (b - a) + 2B \delta$.
+We can choose $\epsilon' \le \epsilon/2(b - a)$ so that the first term becomes smaller than or equal to $\epsilon/2$.
+After this we have $\delta$ from $\epsilon'$ but $2B \delta$ would be greater than $\epsilon/2$.
+However, $\delta$ can be chosen much smaller as we want so that we can make the second term smaller than or equal to $\epsilon/2$.
+Finally, with this $\delta$ we choose $P$ so that the inequality holds, which finishes the proof.
+Here are some direct consequences of this theorem.
+Letting $\phi(x) = x^2$ or $\phi(x) = |x|$, we pbtain that \textit{for integrable $f, g$ $fg$ is integrable} (use $fg = (1/2)((f + g)^2 - f^2 - g^2)$) and that \textit{$|\int_a^b f| \le \int_a^b |f|$}.
+
+\newpage
+
+\textbf{Basic properties of Riemann integration (2)}
+
+Some more properties are introduced.
+Assume that $f : [a, b] \to \ReR$ is bounded and increasing.
+Then for any partition $P$ consisting of $x_0, x_1, \cdots, x_n$ we have that $\sup_{x_i \le x \le x_{i + 1}} f(x) = \inf_{x_{i + 1} \le x \le x_{i + 2}} f(x)$ for every $i$.
+In this case, when $x_{i + 1} - x_i = 1/n$ for all $i$, it is immediate that $\mathcal{U}(P; f) - \mathcal{L}(L)(P; f) = (f(b) - f(a))/n$.
+Also, similar situation holds when $f$ is bounded and decreasing.
+Therefore, we have that \textit{any bounded monotonic $f : [a, b] \to \ReR$ is integrable}.
+There is another property.
+\textit{Let $f : [a, b] \to \ReR$ be bounded and $c \in [a, b]$.
+Assume that $f|_{[a, c - \delta]}$ and $f|_{[c + \delta, b]}$ are integrable for any (sufficiently small) $\delta > 0$.
+Then $f : [a, b] \to \ReR$ is integrable}.
+To prove this let $\epsilon > 0$, and let $M > 0$ be a bound of $|f|$.
+Now we also let $\delta = \frac{\epsilon}{12M}$.
+Then $(2\delta)(2M) = \epsilon/3$.
+By assumption we can find partitions $P_1$ and $P_2$ of $[a, c - \delta]$ and $[c + \delta, b]$, respectively, such that $|\mathcal{U}(P_1; f) - \mathcal{L}(P_1; f)| < \epsilon/3$ and $|\mathcal{U}(P_2; f) - \mathcal{L}(P_2; f)| < \epsilon/3$.
+Let $P$ be a partition of $[a, b]$ which is obtained by combining $P_1$ and $P_2$.
+Then $\mathcal{U}(P; f) - \mathcal{L}(P; f) = (\mathcal{U}(P_1; f) - \mathcal{L}(P_1; f)) + (2\delta)(2M) + (\mathcal{U}(P_2; f) - \mathcal{L}(P_2; f)) < \epsilon/3 + \epsilon/3 + \epsilon/3 = \epsilon$, which proves the integrability.
+
+\newpage
+
+\textbf{Uniform convergence}
+
+One may be interested in sequence of functions: $(f_n)$ with $f_n : X \to Y$ and its 'convergence' when $Y$ is a topological space, especially a (complete) metric space $(Y, d)$.
+One of natural way to define 'convergence' of $(f_n)$ is to consider the 'pointwise'.
+Thus, we call $(f_n)$ \textbf{pointwise converging to $f : X \to Y$} if for each $x \in X$ and $\epsilon > 0$ there is $N_{\epsilon, x} \in \NaN$ such that for every $N_{\epsilon, x} \le n \in \NaN$ $d(f_n(x), f(x)) < \epsilon$.
+It seems well, but its general behavior is not good.
+For example, when $X = Y = \ReR$ and $f_n(x) = \cos^{2n}{x}$, although $f_n$ are all continuous, $f = \lim_{n \to \infty} f_n$, where $f(x) = 0$ if $x \ne 2m\pi$ ($m \in \InZ$) while $f(2m\pi) = 0$, is not continuous.
+So we need a new term for convergence of which the behavior is well with continuity and so on.
+
+Let $X$ be a set and $Y \subseteq \ReR^n$ (or a metric space, especially complete) and $f_n : X \to Y$ ($n \in \NaN$).
+We call $(f_n)$ \textbf{uniformly converging to $f : X \to Y$} if for any $\epsilon > 0$ there is $N_\epsilon \in \NaN$ such that for all $N_\epsilon \le n \in \NaN$ and $x \in X$ $d(f_n(x), f(x)) < \epsilon$.
+($d : Y \to \ReR$ is a metric function.)
+Note that $N_\epsilon$ does not depend on choosing $x \in X$.
+Of course every uniformly converging sequence is pointwise converging.
+We also define a new term about uniform.
+We call $(f_n)$ \textbf{uniformly Cauchy} if for any $\epsilon > 0$ there is $N_\epsilon \in \NaN$ such that for all $N_\epsilon \le n, m \in \NaN$ and $x \in X$ $d(f_n(x), f_m(x)) < \epsilon$.
+Now we shall show that \textit{$(f_n)$ is uniformly converging to some function if and only if $(f_n)$ is uniformly Cauchy}.
+Assume that $(f_n)$ is uniformly converging to $f : X \to Y$.
+The result is actually straightforward; if $d(f_n(x), f(x)) < \epsilon/2$ and $d(f_m(x), f(x)) < \epsilon/2$, then $d(f_n(x), f_m(x)) \le d(f_n(x), f(x)) + d(f(x), f_m(x)) < \epsilon/2 + \epsilon/2 = \epsilon$.
+Conversely, we assume that $(f_n)$ is uniformly Cauchy.
+We define $f : X \to Y$ as $f(x) = \lim_{n \to \infty} f_n(x)$ and let $\epsilon > 0$.
+By assumption, we can choose $N \in \NaN$ such that for any $N \le n, m \in \NaN$ and $x \in X$ $d(f_n(x), f_m(x)) < \epsilon/2$.
+Then $d(f_n(x), f(x)) \le d(f_n(x), f_m(x)) + d(f_m(x), f(x)) < \epsilon/2 + d(f_m(x), f(x))$.
+In this stage we can choose $m \ge N$ such that $d(f_m(x), f(x)) < \epsilon/2$.
+Although this choice depends on $x$, replacing $d(f_m(x), f(x))$ by $\epsilon/2$ removes this dependence.
+Thus it is safe to say that for any $N \le n \in \NaN$ and $x \in X$ $d(f_n(x), f(x)) > \epsilon/2 + \epsilon/2 = \epsilon$, so $(f_n)$ is uniformly converging to $f$.
+Thus it is safe to say that for any $N \le n \in \NaN$ and $x \in X$ $d(f_n(x), f(x)) > \epsilon/2 + \epsilon/2 = \epsilon$, so $(f_n)$ is uniformly converging to $f$.
+
+From this result we can say about \textbf{Weierstrauss M-test}, as following (we assume that $Y \subseteq \ReR^n$ or $Y \subseteq \CmC^n$ and the distance function $d$ ordinal; $d(x, y) = |x - y|$).
+\textit{Let $f_i : X \to Y$ ($i \in \NaN$) and $S_n = \sum_{i = 1}^n f_i$.
+We assume that there is $L_i > 0$ for each $i \in \NaN$ such that $|f_i(x)| < L_i$ for all $x \in X$ and $\sum_{i = 1}^\infty L_i$ converges.
+Then $(S_n)$ is a uniformly converging sequence}.
+The proof is straightforward again.
+In this assumption it is immediate that $(S_n)$ is uniformly Cauchy since $(\sum_{i = 1}^n L_i)$ is a Cauchy sequence, so we can apply the above theorem to complete our proof.
+
+\newpage
+
+\textbf{Properties of uniformly converging sequences (1)}
+
+Uniform converging function sequences have many good behaviors.
+First, we shall show that \textit{if $(f_n : X \to Y)$ is uniformly converging to $f : X \to Y$ and each of $f_n$ is bounded (so $Y$ has a norm associated to the metric), then $f$ is also bounded}.
+The following method plays the crucial role for properties of uniform convergence.
+We fix $\epsilon > 0$ (e.g., $\epsilon = 1$).
+By the uniform convergence of $(f_n)$ we can choose $n \in \NaN$ such that $d(f_n(x), f(x)) < \epsilon$ and we fix this $n$.
+Assume that for each $n$ $|f_n(x)| \le L_n$ ($L_n > 0$) for all $x \in X$.
+Then for every $x \in X$ we have that $|f(x)| \le |f_n(x)| + d(f_n(x), f(x)) < L_n + \epsilon$ (remind that $n$ and $\epsilon$ are fixed), which implies the boundedness we seek.
+
+We are now interested in the case for $X$ a topological space and the continuity of the limit of $(f_n)$ when each $f_n$ is continuous.
+Uniform convergence gives a strong property about this: \textit{if $(f_n : X \to Y)$ is uniformly converging to $f : X \to Y$ and each $f_n$ is continuous, then $f$ is also continuous}.
+To prove this for each $a \in X$ and $\epsilon > 0$ we shall find a neighborhood $U_{a, \epsilon} \subseteq X$ of $a$ such that $d(f(x), f(a)) < \epsilon$ for all $x \in U_{a, \epsilon}$.
+The hint can be found in $d(f(x), f(a)) \le d(f(x), f_n(x)) + d(f_n(x), f_n(a)) + d(f_n(a), f(a))$.
+If we can make these two terms smaller than $\epsilon/3$, our proof would be done.
+It is always possible when we have the assumptions since we can choose $n \in \NaN$ such that $d(f_n(x), f(x)) < \epsilon/3$ for all $x \in X$ (hence for also $x = a$) and by the assumption for continuity of $f_n$ there is a neighborhood $U_{a, \epsilon}$ of $a$ such that $d(f_n(x), f_a(a)) < \epsilon/3$ for any $x \in U_{a, \epsilon}$.
+Therefore, by this selection we have a neighborhood $U_{a, \epsilon}$ of $a$ such that $d(f(x), f(a)) < \epsilon$ for all $x \in U_{a, \epsilon}$, which implies the continuity of $f$.
+
+One of immediate consequence of this theorem is that if $(f_n : X \to Y)$ is a uniformly converging sequence consisting of continuous mappings then $\lim_{x \to a} (\lim_{n \to \infty} f_n(x)) = \lim_{n \in \infty} (\lim_{x \to a} f_n(x))$ ($a \in X$).
+That is, the two limits can be exchanged.
+
+Now we investigate the integrability.
+But it requires the property about differentiability, which is discussed in the next page.
+Because of the layout(?!), we assume that we know about differentiability.
+Anyway, here is the theorem about integrability.
+\textit{If $(f_n : (a, b) \to \ReR)$, consisting of integrable functions, uniformly converge to $f : (a, b) \to \ReR$.
+Then $f$ is integrable.
+Also, for each $n$ let $F_n(x) = \int_a^x f_n(t) dt$ and $F(x) = \int_a^x f(t) dt$.
+Then $(F_n)$ uniformly converge to $F$}.
+We need to show that $(F_n)$ is uniformly Cauchy so that it uniformly converges.
+Let $\epsilon > 0$.
+Since $(f_n)$ is uniformly Cauchy, we can find $N \in \NaN$ such that $|f_n(x) - f_m(x)| < \epsilon/(b - a)$ for any $N \le n, m \in \NaN$ and $x \in (a, b)$.
+Then for any $N \le n, m \in \NaN$ and $x \in (a, b)$ $|F_n(x) - F_m(x)| \le \int_a^x |f_n(t) - f_m(t)| dt < (\epsilon/(b - a))(x - a) \le \epsilon$.
+Thus $(F_n)$ uniformly converge.
+Now we can use the result for differentiability since $f_n = F_n'$.
+It implies that $(\lim_{n \to \infty} F_n)' = f$, so $f$ is integrable.
+To prove the last assertion note that $|F_n(x) - F(x)| \le \int_c^x |f_n(t) - f(t)| dt$.
+To show that $(F_n)$ converges to $F$ we can use the method used in showing the uniformly convergence of $(F_n)$.
+
+\newpage
+
+\textbf{Properties of uniformly converging sequences (2)}
+
+From the interchangability of two limits as in the previous page one might wonder that such interchangability with $\lim_{n \to \infty}$ would works on differentiability and integrability.
+To do this we consider $X = (a, b) \subseteq \ReR$ and $Y = \ReR$ (but the followings can be generalized easily).
+
+First, we see the differentiability.
+Let $(f_n : (a, b) \to \ReR)$ be a uniformly converging sequence consisting of differentiable functions and $f = \lim_{n \to \infty} f_n$.
+We are interested in what $\lim_{n \to \infty} f_n'$ is.
+Unfortunately, it is not generally same with $f'$.
+For example, see $f_n(x) = \frac{x}{1 + nx^2}$.
+However, if we strengthen the condition, we can have a condition about differentiability as follow.
+\textit{If $(f_n)$ and $(f_n')$ converge uniformly, then $\lim_{n \to \infty} f_n$ is differentiable and $\lim_{n \to \infty} (f_n') = (\lim_{n \to \infty} f_n)'$}.
+Let $f_n \to f$ and $f_n' \to g$.
+We want to show that $f$ is differentiable and $f' = g$.
+To show this we fix $c \in (a, b)$, $\epsilon > 0$ and find $\delta > 0$ such that for any $x \in (a, b)$ with $|x - c| < \delta$ and $x \ne c$ $|\frac{f(x) - f(c)}{x -c} - g(c)| < \epsilon$.
+Note that $|\frac{f(x) - f(c)}{x -c} - g(c)| \le |\frac{f(x) - f(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c}| + |\frac{f_n(x) - f_n(c)}{x -c} - f_n'(c)| + |f_n'(c) - g(c)|$ for some $n$.
+If these three terms become smaller than or equal to (but at least one cannot be equal) $\epsilon/3$, then our proof is over.
+On the other hand, since $f_n$ is differentiable, there is $\delta_n > 0$ such that $|\frac{f_n(x) - f_n(c)}{x -c} - f_n'(c)| < \epsilon/3$ for any $x \in (a, b)$ with $|x - c| < \delta_n$ and $x \ne c$.
+Thus we shall find $n$ making the remaining two terms smaller than $\epsilon/3$ (thus after choosing $n$ the dependence of $\delta_n$ on $n$ becomes irrelevant, so we can then write $\delta = \delta_n$).
+The third term is immediate by the uniformly convergence of $(f_n')$.
+We choose $n_1$ so that $|f_{n_1}'(c) - g(c)| < \epsilon/3$.
+The second term can be estimated immediately, but since it depends on choosing $n$, we postpone it.
+Now we see the first term.
+Its form seems suitable to use the mean value theorem, but it cannot be used now since we do not know that $f$ is differentiable yet.
+Instead, if we have $n_2$ such that for every $n_2 \le m \in \NaN$ $|\frac{f_m(x) - f_m(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c}| < \epsilon/3$, where we have that $f_m$ is differentiable whatever $m$ is, then $|\frac{f(x) - f(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c}| = \lim_{m \to \infty} |\frac{f_m(x) - f_m(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c}| \le \epsilon/3$, which we seek, and we can use the mean value theorem.
+To avoid difficulty, we assume that $x$ is an open ball centered at $c$ with radius $\delta'$ which is contained in $(a, b)$ (with this configuration the domain can be extended to arbitrary open set) and use this form $\frac{f_m(x) - f_m(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c} = \frac{(f_m - f_n)(x) - (f_m - f_n)(c)}{x - c}$, so we can find $d$ between $x$ and $c$ such that it is equal to $(f_m - f_n)'(d)$ since $f_m - f_n$ is differentiable.
+Now we use again the uniform convergence of $(f_n')$ to find $n_2$ such that for any $n_2 \le n, m \in \NaN$ and any $d \in (a, b)$ $|f_m'(d) - f_n'(d)| < \epsilon/3$.
+So, putting $n = n_2$, we have found that $|\frac{f(x) - f(c)}{x -c} - \frac{f_n(x) - f_n(c)}{x -c}| \le \epsilon/3$.
+Finally, we let $n$ be the maximum of $n_1$ and $n_2$.
+Then the first and third terms become smaller than or equal to $\epsilon/3$ whatever $x$ and $c$ are.
+Now we can estimate the second term.
+Since $f_n$ is differentiable, we can find $\delta > 0$ (which might be smaller than $\delta'$) such that $|\frac{f_n(x) - f_n(c)}{x -c} - f_n'(c)| < \epsilon/3$ for any $x$ with $|x - c| < \delta$ ($x \ne c$).
+Therefore, for such $\delta$ and $x$ $|\frac{f(x) - f(c)}{x -c} - g(c)| < \epsilon$, so $f$ is differentiable at $c$ and $f'(c) = g(c)$, which we want.
+
+\newpage
+
+\textbf{Some terminologies}
+
+In the measure theory, we will meet a lot of 'boxes' and 'cubes' and 'spheres'.
+We have to make sure what they are and more terms.
+
+For $a_1, a_2, \cdots, a_n$ and $b_1, b_2, \cdots, b_n$ in $\ReR$ with $a_i \le b_i$ for each $i$ the set $(a_1, b_1) \times (a_2, b_2) \times \cdots \times (a_n, b_n) \subseteq \ReR^n$ is called an \textbf{open box}.
+We call the closure of an open box, or equivalently, the set $[a_1, b_1] \times [a_2, b_2] \times \cdots \times [a_n, b_n] \subseteq \ReR^n$, is called an \textbf{closed box}.
+Especially, if all $b_i - a_i$ are same, we call this set an \textbf{open (closed) cube}, and $b_i - a_i$ is called the \textbf{length of edge of the cube}.
+Now, we define the \textbf{volume} of box: if $B = (a_1, b_1) \times (a_2, b_2) \times \cdots \times (a_n, b_n)$ (or its closure), then $|B| = \prod_i (b_i - a_i)$.
+
+And for each $i$ the set of $x$ in a box such that $x_i = a_i$ and the set of $x$ in a box such that $x_i = b_i$ are called \textbf{$i$-faces} of the box, where the former is called lower and the latter upper.
+Also, for closed boxes $Q_i$s, we say $Q_i$s are \textbf{almost disjoint} if for each $i \ne j$ $\mathrm{Int}(Q_i) \cap \mathrm{Int}(Q_j)$ is empty, or equivalently, $Q_i \cap Q_j$ is empty or contained in a face of $Q_i$ and $Q_j$.
+
+For any $S \subseteq \ReR^n$ and $a \in \ReR^n$, $c > 0$, we denote $S + a = \{x + a | x \in S\}$ and $cS = \{cx | x \in S\}$.
+We call them \textbf{translation} and \textbf{dilation}, respectively.
+Another transformation is \textbf{rotation}; for $n \times n$-matrix $O$ such that $|Ov| = |v|$ for every $v \in \ReR^n$, $OS = \{Ox | x \in S\}$.
+Also, for each $i$, we always denote $e_i = (0, 0, \cdots, 0, 1, 0, \cdots, 0)$, where the number of zero in former is $i - 1$ while the latter is $n - i$, and $\ReR^n_i = \ReR^{i - 1} \times \{0\} \times \ReR^{n - i}$.
+Then, it is immediate that every $i$-face is contained in some $\ReR^n_i + a e_i$, and we call such set a \textbf{plane containing the face}.
+Now, for a closed box $B = \prod_i [a_i, b_i]$ and for $i$ we pick up $a_i < c < b_i$, and let $B_+ = \{ x \in B | x_i \ge c \}$ and $B_- = \{ x \in B | x_i \le c \}$.
+It is immediate that $B_+$ and $B_-$ are also closed boxes which are almost disjoint and $B = B_+ \cup B_-$.
+We say that \textbf{the plane $\ReR^n_i + ce_i$ divides $B$ (into $B_+$ and $B_-$)} and we call $B_+$ and $B_-$ the \textbf{upper side} and \textbf{lower side}, respectively.
+
+We denote $B(a, r) = \{x \in \ReR^n | |x - a| < r\}$ for $a \in \ReR^n$ and $r > 0$, called an \textbf{open ball with radius $r$ centered at $a$}.
+Also, we call the closure, or $\overline{B}(a, r) = \{x \in \ReR^n | |x - a| \le r\}$, an \textbf{closed ball with radius $r$ centered at $a$}.
+We also define the volume of a ball $B$ with radius $r$, but by some ambiguity, we denote $|B|_a = ar^n$ for some $a > 0$.
+This unknown $a$ will be set to be compatible with the volume of the boxes, or the 'general volume' which we will define.
+
+\newpage
+
+\textbf{Introduction: Spread an open set into cubes}
+
+We are now interested in the 'volume' of sets in $\ReR^n$.
+It is natural to spread a given set into several 'boxes' and consider the 'volume' of the set as the summation of the 'volume' of the 'boxes'.
+At least, if $n = 1$ and the given set is open, this idea has no problem; by the following theorem.
+\textit{Any open set is a union of countably may disjoint open intervals of which the way is unique.}
+Let $U \in \ReR$ be open.
+Then for each $x \in U$ it is immediate that $I_x = \bigcup I$ which is taken over all open interval in $U$ containing $x$ is the maximal open interval in $U$ containing $x$ (and non-empty).
+Also, it is immediate that for $x, y \in U$ $I_x = I_y$ or $I_x \cap I_y$ is empty.
+Thus, $U$ is the disjoint union of $I_x$.
+Finally, because $U \cap \RaQ$ is countable and dense in $U$, we have that $U = \bigcup_{x \in U \cap \RaQ} I_x$, which implies the countability.
+Because of this construction, the uniqueness is immediate.
+
+So, in $\ReR^1$, we can define the 'volume', or the 'length' of any open set easily: if $U = \bigcup_{i \in \NaN} I_i$ for disjoint open intervals $I_i = (a_i, b_i)$, then the 'length' of $U$ is $\sum_{i = 1}^n |I_i| = \sum_{i = 1}^n (b_i - a_i)$.
+We expect that such process can be done in any $\ReR^n$.
+To do this, we have to make sure some terminology.
+We introduce a partial answer of this.
+\textit{Any open set in $\ReR^n$ is a union of almost disjoint closed cubes.}
+To prove this, we need some kind of cubes.
+Let $\mathcal{C}_N = \{ \prod_i \left[ \frac{m_i}{2^N}, \frac{m_i + 1}{2^N} \right] | m_i \in \InZ \}$ for each $N \in \NaN$ and $\mathcal{C} = \bigcup_N \mathcal{C}_N$.
+It is immediate that for each $N$ and $B, B' \in \mathcal{C}_N$ $B$ and $B'$ are equal or almost disjoint, and that for $B, B' \in \mathcal{C}$ one of $B$ and $B'$ contains the other or they are almost disjoint.
+Now, let $U \subseteq \ReR^n$ be open.
+We denote $B_x$ for $x \in U$ by the biggest element in $\mathcal{C}$ which contains $x$ and is contained in $U$, which is well-defined because $U$ is open.
+Then, for each $x, y \in U$ it is immediate that $B_x$ and $B_y$ are equal or almost disjoint.
+Finally, we can conclude that $U = \bigcup_{x \in U} B_x$, or a union of a subset of $\mathcal{C}$ such that any two of elements in this subset are almost disjoint.
+Clearly, the subset is countably since $\mathcal{C}$ is obviously countable.
+
+Now one may think that the 'volume' of the open set can be defined as the summation of volumes of such cubes.
+But there is ambiguity: if we have another division into closed cubes (or closed boxes), the summation of the volumes of the other cubes can be 'volume', but we don't have any guarantee that such two 'volumes' are equal.
+Naturally, we expect that such two ways must give same result, and if not, we cannot say that it is 'volume'.
+Fortunately, we can overcome such problem, to define the 'volume' more concretely.
+
+\newpage
+
+\textbf{Properties of boxes}
+
+
+
+\newpage
+
+\textbf{Outer measure}
+
+Now we define the following: For $E \subseteq \ReR^n$, $m_*(E) = \inf_{(Q_i) \in \mathcal{Q}} \sum_{i = 1}^\infty |Q_i|$ where $\mathcal{Q}$ is the family of $(Q_i)$, where $Q_i$ are closed cubes and $E \subseteq \bigcup_{i = 1}^\infty Q_i$ (so, $Q_i$ are countably many).
+We call this \textbf{outer measure} (sometimes exterior measure).
+It provides one nice way to define 'volume' of (ordinary) sets.
+We will see how it will works well.
+
+We check that \textit{the outer measure is invariant under translation and covariant under dilation, i.e., for any set $E \subseteq \ReR^n$ and $a \in \ReR^n$, $c > 0$, $m_*(E + a) = m_*(E)$ and $m_*(cE) = c^n m_*(E)$.}
+It is immediate that translation and dilation send cubes into cubes exactly (i.e., homeomophically) so that they and their inverse send a cover of $E$ consisting of cubes into a cover of $E + a$ ($cE$) consisting of cubes and vice versa, and for any cube $Q$ $|Q + a| = |Q|$ and $|cQ| = c^n |Q|$, which are immediate.
+So, we have some invariance which we expect.
+But still we do not have the invariance under rotation, and the verification of this is a quite subtle problem.
+We will deal with this problem.
+
+Sometimes, we define $(m_-)_*$ defined in $\mathcal{P}(\ReR^{n - 1})$, to distinguish $m_*$ for $\ReR^n$.
+
+\newpage
+
+\textbf{Properties of outer measure (1)}
+
+The first property is that (PM1) \textit{if $E$ is compact, for each $\epsilon > 0$ there is a family of finite many and almost disjoint closed cubes $B_1, B_2, \cdots, B_m$ such that $\sum_{i = 1}^m |B_i| < m_*(E) + \epsilon$.}
+To prove this, first we let $\epsilon' = \epsilon / m_*(E)$ and $1 + \epsilon'' = \frac{1 + \epsilon'}{1 + \epsilon' / 2}$ if $m_*(E) > 0$, otherwise $\epsilon'' = 1$.
+We can find a family of countably many and almost disjoint closed cubes $B'_i$ such that $\sum_{i = 1}^\infty |B'_i| < m_*(E) + \epsilon / 2$.
+Now, for each $i$ let $I_i$ be an open cube such that $B'_i \subset I_i$ and $|I_i| < (1 + \epsilon'') |B'_i|$.
+Of course, the family of all $I_i$ is a open cover of compact $E$.
+Thus the open cover has a finite subcover.
+Rearranging the indices, we can say that $I_1, I_2, \cdots, I_r$ cover $E$.
+Let $B''_i = \overline{I_i}$ for each $i$.
+Then $B''_i$s also cover $E$.
+Finally, making finer, we can obtain $B_1, B_2, \cdots, B_m$ such that $\bigcup_{i = 1}^m B_i = \bigcup_{i = 1}^r B''_i$ but $B_i$s are almost disjoint, so that $B_i$s cover $E$, and $\sum_{i = 1}^m |B_i| \le \sum_{i = 1}^r |B''_i| = \sum_{i = 1}^r |I_i| < (1 + \epsilon'') \sum_{i = 1}^r |B'_i| \le (1 + \epsilon'') \sum_{i = 1}^\infty |B'_i| < m_*(E) + \epsilon$.
+
+A direct consequence of this property is the consistence of the measure: \textit{for any closed box $B$ $m_*(B) = |B|$.}
+Since every closed box is a union of some finite many almost disjoint cubes $Q_i$s and especially $|B| = \sum_i |Q_i|$, $m_*(B) \le |B|$.
+To show $|B| \le m_*(B)$, we let $\epsilon > 0$.
+Then by the above property there are (almost disjoint) closed cubes $B_1, B_2, \cdots, B_m$ covering $B$ and with $\sum_{i = 1}^m |B_i| < m_*(B) + \epsilon$.
+We already know that $|B| \le \sum_{i = 1}^m |m_*(B_i)|$.
+Thus, $|B| < m_*(B) + \epsilon$, which implies that $|B| \le m_*(B)$, so $|B| = m_*(B)$.
+
+One of the important one is that (PM2) \textit{if $E = \bigcup_i E_i$, then $m_*(E) \le \sum_i m_*(E_i)$.}
+It is enough to consider the case for $\sum_i m_*(E_i) < \infty$.
+For $\epsilon > 0$ and each $i$, we can find closed cubes $Q_{ij}$ such that $E_i \subseteq \bigcup_j Q_{ij}$ and $\sum_j |Q_{ij}| < m_*(E_i) + \epsilon / 2^{i + 1}$.
+Then, since the following series are all increasing, we have that $m_*(E) \le \sum_{i, j} |Q_{ij}| = \sum_i \sum_j |Q_{ij}| \le \sum_i (m_*(E_i) + \epsilon / 2^{i + 1}) < \sum_i m_*(E_i) + \epsilon$, which shows the inequality.
+
+As a corollary, we shall show that (PM3) \textit{if $\mathcal{O}$ is the family of open sets containing $E$, $m_*(E) = \inf_{U \in \mathcal{O}} m_*(U)$.}
+Because every open set can be written as a countably many closed cubes, it is direct that $m_*(E) \le \inf_{U \in \mathcal{O}} m_*(U)$.
+The reverse one is easy to be shown; for $\epsilon > 0$ let $Q_i$s be closed cubes covering $E$ with $\sum |Q_i| < m_*(E) + \epsilon / 2$.
+Then, for each $i$ let $I_i$ be an open box containing $Q_i$ with $m_i(I_i) < |Q_i| + \epsilon / 2^{i + 2}$ (it can be found in a closed box containing $Q_i$ with volume smaller than $|Q_i| + \epsilon / 2^{i + 2}$).
+Now, $\bigcup_i I_i$ is in $\mathcal{O}$ and $\inf_{U \in \mathcal{O}} m_*(U) \le m_*(\bigcup_i I_i) \le \sum_i m_*(I_i) \le \sum_i (|Q_i| + \epsilon / 2^{i + 2}) \le m_*(E) + \epsilon / 2 + \epsilon / 4 < m_*(E) + \epsilon$, so $m_*(E) = \inf_{U \in \mathcal{O}} m_*(U)$.
+
+Actually, we can define the outer measure by closed boxes, replacing closed cubes.
+In other word, \textit{for $E \subseteq \ReR^n$ we let $\mathcal{C}$ be the family of $(C_i)$, where $C_i$ are closed boxes and $E \subseteq \bigcup_{i = 1}^\infty C_i$.}
+\textit{Then $m_*(E) = \inf_{(C_i) \in \mathcal{C}} \sum_{i = 1}^\infty |C_i|$.}
+First we denote $m_C = \inf_{(C_i) \in \mathcal{C}} \sum_{i = 1}^\infty |C_i|$.
+Because every cover of $E$ by closed cubes is contained in $\mathcal{C}$, it is obvious that $m_C \le m_*(E)$.
+To show the reserve, we let $\epsilon > 0$ and let $(C_i) \in \mathcal{C}_E$ such that $\sum_{i = 1}^\infty |C_i| < (m_C)_*(E) + \epsilon / 2$.
+For each $i$, since $C_i$ is compact, by (PM1), we can find finitely many (almost disjoint) closed cubes $Q_{ij}$ such that $C_i \subset \bigcup_j Q_{ij}$ and $\sum_{j} |Q_{ij}| < m_*(C_i) + \epsilon / 2^{i + 1} = |C_i| + \epsilon / 2^{i + 1}$.
+Then, $Q_{ij}$s cover $E$ and $\sum_{i, j} |Q_{ij}| = \sum_{i} \sum_{j} |Q_{ij}| \le \sum_i ( |C_i| + \epsilon / 2^{i + 1} ) \le (m_C)_*(E) + \epsilon / 2 + \epsilon / 4 < (m_C)_*(E) + \epsilon$.
+Thus, $m_*(E) \le (m_C)_*(E)$.
+
+\newpage
+
+\textbf{Properties of outer measure (2)}
+
+We have shown that $m_*(E) \le \sum m_*(E_i)$ when $E = \bigcup E_i$.
+We will see some special cases in which the equality holds.
+
+The first one we shall show is that (PM4) \textit{for $E_1, E_2 \subseteq \ReR^n$ with $d(E_1, E_2) > 0$, then $m_*(E_1 \cup E_2) = m_*(E_1) + m_*(E_2)$.}
+Of course, it is enough to show $m_*(E_1) + m_*(E_2) \le m_*(E)$.
+To show this, we choose closed cubes $Q_i$ covering $E_1 \cup E_2$ with $\sum |Q_i| < m_*(E_1 \cup E_2) + \epsilon$.
+Dividing each $Q_i$ into closed cubes so that the length of edge of each cubes is smaller than $\frac{1}{3} d(E_1, E_2)$, we can assume that for all $i$ the length of edge of $Q_i$ is smaller than $\frac{1}{3} d(E_1, E_2)$.
+Now then each $Q_i$ satisfies at most one of these three cases: it intersects $E_1$ or $E_2$ or nothing.
+For each $i = 1, 2$ let $I_i$ be the sets of $j \in \NaN$ such that $Q_j$ intersects $E_i$.
+Then $I_1 \cap I_2$ is empty, and for each $i = 1, 2$ we have that $E_i \subseteq \bigcup_{j \in I_i} Q_j$.
+Finally, $m_*(E_1) + m_*(E_2) \le \sum_{j \in I_1} |Q_j| + \sum_{j \in I_2} |Q_j| \le \sum_{j \in \NaN} |Q_j| < m_*(E_1 \cup E_2) + \epsilon$.
+
+From this, we can obtain the next one: (PM5) \textit{If $E$ is a union of almost disjoint closed cubes $Q_1, Q_2, Q_3, \cdots$, then $m_*(E) = \sum |Q_i|$}.
+Again, it is enough to show $\sum |Q_i| \le m_*(E)$.
+Since $m_*(E) = 0$ implies $|Q_i| = 0$ for all $i$, it is also sufficient to consider only the case for $0 < m_*(E) < \infty$.
+To do this, choose any $\epsilon > 0$ and let $a = 1 + \epsilon / (2 m_*(E))$.
+The trick is to use closed cubes $Q'_i$ which is contained in $\mathrm{Int}(Q_i)$ and $a|Q'_i| = |Q_i|$ for each $i$, which of course exists.
+Note that each $Q'_i$ and $Q'_j$ are disjoint so that $d(Q'_i, Q'_j) > 0$.
+Hence, by (PM4) for every $i$ we have that $\sum_{j = 1}^i |Q'_j| = m_*(\bigcup_{j = 1}^i Q'_j) \le m_*(E)$.
+Thus, $\sum_{j = 1}^\infty |Q'_j| \le m_*(E)$.
+From this, $\sum_{j = 1}^\infty |Q_j| = a\sum_{j = 1}^\infty |Q'_j| \le am_*(E) < m_*(E) + \epsilon$, which implies the desired inequality.
+
+A consequence of this is that (PM6) \textit{if $K$ is compact, then for each $\epsilon > 0$ there is an open set $U$ such that $m_*(U - K) < \epsilon$.}
+By (PM3) we can find open $U \supset K$ such that $m_*(U) < m_*(K) + \epsilon$.
+Now we use the fact that $U - K$ is open and an open $U - K = \bigcup_{i = 1}^\infty Q_i$ for almost disjoint closed cubes $Q_i$.
+Note that for every $i$ $Q_i$ and $K$ are compact and disjoint so that $d(\bigcup_{j = 1}^i Q_j, K) > 0$ for every $i$.
+Thus, by (PM4) and (PM5) we obtain that for each $i$ $\sum_{j = 1}^i |Q_j| = m_*(K \cup \bigcup_{j = 1}^i Q_j) - m_*(K) \le m_*(U) - m_*(K)$.
+Then, by (PM5) and taking the limit over $i$, we have that $m_*(U - K) = \sum_{j = 1}^\infty |Q_j| \le m_*(U) - m_*(K) < \epsilon$.
+
+We will need the following: \textit{if $K$ is compact in $\ReR^{n - 1}$ and $I = [a, a + h] \subset \ReR$ for any $a, h$, then $m_*(K \times I) = (m_-)_*(K)h$.}
+For any closed cubes $Q'_i$ covering $K$, the union of $Q'_i \times I$ covers $K \times I$.
+Especially, $\sum |Q'_i \times I| = \sum (|Q'_i||I|) = (\sum |Q'_i|) h$.
+This and the fact that we can define outer measure by boxes, replacing cubes, implies easily that $m_*(K \times I) \le (m_-)_*(K)h$.
+To attack the reverse, consider finitely many closed cubes $Q_j$ ($1 \le j \le m$) covering $K \times I$ such that $\sum_{j = 1}^m |Q_j| < m_*(K \times I) + \epsilon$ for $\epsilon > 0$.
+Let $S$ be a set of $b \in \ReR$ such that a plane $\ReR^{n - 1} \times {b}$ contains at least one face of $Q_j$s, which must be finite, and let $a = t_0 < t_1 < \cdots < t_s = a + h$ be all elements of $S$.
+Dividing all $Q_j$ by $\ReR^{n - 1} \times {t_j}$, we obtain another boxes $Q'_j$.
+We denote $\mathcal{S}_i = \{Q'_j | Q'_j \subseteq \ReR^{n - 1} \times [t_i, t_{i + 1}]\}$.
+Then for each $r$, $\bigcup \mathcal{S}_r = T_r \times [t_r, t_{r + 1}]$ for some $T_r \subseteq \ReR^{n - 1}$, and we let $T = \bigcup T_r$.
+Now, $m_*(K \times I) + \epsilon > \sum_i |Q_i| = \sum_j |Q'_j| = \sum_r ( |T_r| (t_{i + 1} - t_i) ) \ge (\sum_r |T|) h \ge (m_-)_*(K) h$, which implies that $(m_-)_*(K) h \le m_*(K \times I)$.
+Thus, $m_*(K \times I) = (m_-)_*(K) h$.
+
+\newpage
+
+\textbf{Measurable sets}
+
+Now, we are addressed in a question: If $E = \bigcup E_i$ and $E_i$ are disjoint, does it hold that $m_*(E) = \sum m_*(E_i)$?
+We already have $m_*(E) \le \sum m_*(E_i)$, but not equality, and we have seen some example for this equality.
+But in general the equality does not hold; we will see an example.
+By the way, as in our 'intuition' (or our 'natural requirements') the equality must holds.
+This situation gives us two lesson; the analysis is shown to be (again) cumbersome, and we have to find a class of 'nice sets' in which the equality (and our intuitions) holds.
+
+The answer is easy; our intuition also suggest the following: for a 'nice set' $E$ we can always find an open set which contains $E$ but we can 'shrink' the volume of this as we want, and we will see that this condition is the keystone.
+Now for $E \subseteq \ReR^n$, we call $E$ \textbf{measurable} if for any $\epsilon > 0$ there is an open $U \supseteq E$ such that $m_*(U - E) < \epsilon$.
+It is immediate that \textit{any open set is measurable}.
+Also, by (PM6) \textit{every compact set is also measurable}.
+On the other hand, \textit{the set of outer measure 0 is measurable}; for $E \subseteq \ReR^n$ with $m_*(E) = 0$ and any $\epsilon > 0$, since by (PM3) there is an open $U \supseteq E$ such that $m_*(U) < \epsilon$, $m_*(U - E) \le m_*(U) < \epsilon$.
+
+Now, we can see that \textit{for measurable $E_1, E_2, \cdots$, $\bigcup_{i = 1}^\infty E_i$ is also measurable (closedness in countable union).}
+From this, since every closed set is a union of countably many compact sets, \textit{every closed set is also measurable}.
+The proof is easy: let $\epsilon > 0$ and we can find open $U_i \supseteq E_i$ for each $i$ such that $m_*(U_i - E_i) < \epsilon / 2^{i + 1}$, and let $U = \bigcup_i U_i$ which is open.
+Then, $m_*(U - \bigcup_i E_i) \le m_*(\bigcup_i (U_i - E_i)) \le \sum_i m_*(U_i - E_i) < \epsilon$.
+
+Also we shall show that \textit{the complementary of measurable set is also measurable (closedness in complementary).}
+Let $E$ be a measurable set.
+For each $n \in \NaN$ we can find an open $U_n \supseteq E$ such that $m_*(U_n - E) < 1/n$.
+Now, we let $D = \bigcup_i (U_i)^c$, which is measurable because we have the closedness in countable union and that every closed set is also measurable.
+On the other hand, we have that $m_*(E^c - D) = m_*(D^c - E) \le m_*(U_n - E) < 1/n$ for every $n$, which implies that $m_*(E^c - D)$ is of measure 0.
+Thus, $D$ and $E^c - D$ are measurable, so $E^c = (E^c - D) \cup D$ is also measurable.
+
+From the closedness of countable union and complementary, it is immediate that \textit{for measurable $E_1, E_2, \cdots$, $\bigcap_{i = 1}^\infty E_i$ is also measurable (closedness in countable intersection).}
+Also, the closedness of complementary immediately implies that \textit{$E \in \ReR^n$ is measurable iff for every $\epsilon > 0$ there is closed $F \subseteq E$ such that $m_*(E - F) < \epsilon$.}
+
+\newpage
+
+\textbf{Naturalness of measurable sets}
+
+Now we are addressed in the stage to show the problem; \textit{if $E_i$ are measurable and disjoint, then $m_*(\bigcup_i E_i) = \sum_i m_*(E_i)$.}
+We already have that $m_*(\bigcup_{i = 1}^\infty E_i) \le \sum_{i = 1}^\infty m_*(E_i)$, so we attack the reverse inequality.
+Actually, it is enough to focus on only the case for bounded $E_i$; if it is done, we can divide $E_i$ into bounded $E_{ij}$ and then we can argue that $m_*(\bigcup_i E_i) = m_*(\bigcup_{i, j} E_{ij}) = \sum_{i, j} m_*(E_{ij}) = \sum_i \sum_j m_*(E_{ij}) = \sum_i m_*(E_i)$.
+To show the bounded case, let $\epsilon > 0$ and find closed $F_i \subseteq E_i$ with $m_*(E_i - F_i) < \epsilon / 2^{i + 1}$, so that $m_*(F_i) > m_*(E_i) - \epsilon / 2^{i + 1}$.
+Since for each $i$ $F_i$ is bounded, $F_i$ is compact.
+Thus, by (PM4) for each $i$ we obtain that $m_*(\bigcup_{j = 1}^i F_j) = \sum_{j = 1}^i m_*(F_j)$.
+From this, $m_*(\bigcup_{j = 1}^\infty E_j) \ge m_*(\bigcup_{j = 1}^i F_j) = \sum_{j = 1}^i m_*(F_j) \ge \sum_{j = 1}^i m_*(E_j) - \epsilon / 2$, thus $m_*(\bigcup_{j = 1}^\infty E_j) \ge \sum_{j = 1}^\infty m_*(E_j)$.
+
+Now we have the naturalness.
+We will see that this property will be powerful in several stages.
+Here are some usages of this.
+First, we introduce some notions: Let $E, E_1, E_2, \cdots$ be sets, and if $E_i \subseteq E_{i + 1}$ for each $i$ and $E = \bigcup_i E_i$, we denote $E_i \nearrow E$, and if $E_i \supseteq E_{i + 1}$ for each $i$ and $E = \bigcap_i E_i$, we denote $E_i \searrow E$.
+Then, \textit{for measurable $E_1, E_2, \cdots$, if $E_i \nearrow E$, then $m_*(E) = \lim_{i \to \infty} m_*(E_i)$, and if $E_i \searrow E$ and $m_*(E_r) < \infty$ for some $r$, then $m_*(E) = \lim_{i \to \infty} m_*(E_i)$.}
+The proof of first one can be established by considering $A_1 = E_1$ and $A_{i + 1} = E_{i + 1} - E_i$.
+It is immediate that for each $i$ $E_i = \bigcup_{j = 1}^i A_i$ so that $E = \bigcup_{j = 1}^\infty A_i$ and all $A_i$ are disjoint.
+Then, $m_*(E) = m_*(\bigcup_{j = 1}^\infty A_i) = \lim_{i \to \infty} \sum_{j = 1}^i m_*(A_i) = \lim_{i \to \infty} E_i$.
+For the second one, because for every $i \le r$ $m_*(E_i) \le m_*(E_r) < \infty$, we can consider only the case $m_*(E_i) < \infty$ for all $i$.
+Let $B_i = E_i - E_{i + 1}$.
+Then any two of all $B_i$ and $E$ are disjoint and $E_i = E \cup \bigcup_{j = i}^\infty B_j$, and also $m_*(E_i) = m_*(E_{i + 1}) + m_*(B_{i + 1})$.
+From this, we obtain that $m_*(E_1) = m_*(E) + \sum_{j = 1}^\infty m_*(B_j) = m_*(E) + \lim_{i \to \infty} \sum_{j = 1}^\infty ( m_*(E_j) - m_*(E_{j + 1}) ) = m_*(E) + m_*(E_1) - \lim_{i \to \infty} m_*(E_i)$, which yields the result.
+
+Here are some more consequences.
+Note that every (unbounded) closed set $F$ has compact $K_1, K_2, \cdots$ such that $K_i \nearrow F$.
+Then, the sequence $m_*(K_i)$ converges $m_*(F)$, so if $m_*(E - F) < 2\epsilon$ for measurable $E$, then we can choose $i$ such that $m_*(E - K_i) < \epsilon$.
+Therefore, we have that \textit{$E$ is measurable if and only if for every $\epsilon$ there is a compact $K$ such that $m_*(E - K) < \epsilon$}, where the reverse one is immediate.
+
+Another interesting is that \textit{for measurable $E$ and any $\epsilon > 0$ there are finite many closed cubes $Q_i$ such that $m_*(E \bigtriangleup \left( \bigcup_i Q_i \right)) < \epsilon$}, where for sets $A$ and $B$ we denote $A \bigtriangleup B = (A - B) \cup (B - A)$, called the \textbf{symmetric difference}.
+First, find a (countably many) closed cubes $Q_i$ covering $E$ such that $\sum_{j = 1}^\infty |Q_i| < m_*(E) + \epsilon / 2$.
+Now, we denote $C = \bigcup_{j = 1}^\infty Q_i$ and $C_i = \bigcup_{j = 1}^i Q_i$ and $D_i = \bigcup_{j = i + 11}^\infty Q_i$.
+Then for each $i$, $C = C_i \cup D_i$.
+Since $E$ and $C_i$ are measurable, we have that $m_*(C_i - E) \le m_*(C - E) < \epsilon / 2$.
+On the other hand, for every $i$, since $C = C_i \cup D_i$ covers $E$, we have that $E - C_i \subseteq D_i$, so $m_*(E - C_i) \le m_*(D_i) \le \sum_{j = i + 1}^\infty |Q_j|$.
+If we choose $i$ such that $\sum_{j = i + 1}^\infty |Q_j| < \epsilon / 2$, which can be always possible, then $m_*(E - C_i) < \epsilon / 2$, which leads finally $m_*(C_i \bigtriangleup E) = m_*(C_i - E) + m_*(E - C_i) < \epsilon$.
+
+\newpage
+
+\textbf{Vitali coverings}
+
+To connect measures to geometry, we need to deal with measure by using spheres.
+Using spheres to measure theory is not quite easy one, and Vitali coverings and some theorems will be helpful for our works.
+First, we see a following lemma: \textit{For open balls $B_1, B_2, \cdots, B_r$ in $\ReR^n$ (or a metric space) we can choose disjoint $B_{i_1}, B_{i_2}, \cdots, B_{i_s}$ such that $\bigcup_i B_i \subseteq \bigcup_j 3B_{i_j}$, so that $\sum_i m_*(B_i) \le 3^n \sum_j m_*(B_{i_j})$.}
+The proof is easy: Choose $B_{i_1}$ with the largest radius, and then let $\mathcal{B}'$ be the set of $B_i$s which is not contained in $3B_{i_1}$.
+Then, all of $\mathcal{B}'$ is disjoint with $B_{i_1}$; if we use $aB_{i_1}$ with $a < 3$, we cannot ensure this.
+And then choose $B_{i_2}$ in $\mathcal{B}'$ with the largest radius, and so on.
+In finite iterations of this process, we can obtain $B_{i_1}, B_{i_2}, \cdots, B_{i_s}$ containing all $B_i$s.
+
+Now, a definition.
+For $E \subseteq \ReR^n$ we call a family $\mathcal{B}$ of open balls a \textbf{Vitali covering} if for every $x \in E$ and $\eta > 0$ we can find $B \in \mathcal{B}$ such that $x \in B$ and $m_*(B) < \eta$.
+Then, there is a theorem: \textit{For measurable $E \subseteq \ReR^n$ with $m_*(E) > 0$ and a Vitali covering $\mathcal{B}$ of $E$, for every $\delta > 0$ we can find disjoint $B_1, B_2, \cdots, B_m \in \mathcal{B}$ such that $\sum_i m_*(B_i) \ge m_*(E) - \delta$.}
+It is sufficient to assume that $\delta < m_*(E)$.
+Note that for every $\eta > 0$ we can always find compact $E'_1 \subseteq E_1$ such that $m_*(E_1 - E'_1) < \eta$, as we have seen, so that $m_*(E'_1) \ge m_*(E_1) - m_*(E_1 - E'_1) \ge m_*(E_1) - \eta$.
+Since $E'_1$ is compact, we can find finite subset of $\mathcal{B}$ covering $E'_1$.
+Now applying the above lemma, we obtain $B_1, B_2, \cdots, B_{m_1} \in \mathcal{B}$ such that $m_*(E'_1) \le 3^d \sum_{j = 1}^{m_1} m_*(B_j)$, or $\sum_{j = 1}^{m_1} m_*(B_j) \ge 3^{-d} \delta$.
+
+If $\sum_{j = 1}^{m_1} m_*(B_j) \ge m_*(E) - \delta$, we can finish the proof.
+Otherwise, let $E_2 = E_1 - \bigcup_{j = 1}^{m_1} \overline{B_j}$.
+Then it is immediate that $E_2$ is measurable and $m_*(E_2) > \delta$.
+Note that if we let $\mathcal{B}_2 = \{ B \in \mathcal{B}_1 | B \cap \bigcup_{j = 1}^{m_1} B_j \textrm{ is empty} \}$, then $\mathcal{B}_2$ is still a Vitali covering of $E_2$.
+As before, we can find $E'_2$ such like $E'_1$ and then $B_{m_1 + 1}, B_{m_1 + 2}, \cdots, B_{m_2}$ such that $\sum_{j = m_1 + 1}^{m_2} m_*(B_j) \ge 3^{-d} \delta$, which also implies that $\sum_{j = 1}^{m_2} m_*(B_j) \ge 2 \cdot 3^{-d} \delta$.
+If $\sum_{j = 1}^{m_2} m_*(B_j) \ge m_*(E) - \delta$, it is done, otherwise we define $E_3$ and $\mathcal{B}_3$ as before, and so on.
+We can repeat this so that for arbitrary $r \in \NaN$ we can obtain $B_1, B_2, \cdots, B_{m_r}$ with $\sum_{j = 1}^{m_r} m_*(B_j) \ge 3^{-d} r\delta$ if the process is not finished.
+It may continue infinitely, but we do not need; for $r \ge (m_*(E) - \delta) / (3^{-d} \delta)$, we obtain that $\sum_{j = 1}^{m_r} m_*(B_j) \ge m_*(E) - \delta$, which finishes the proof.
+
+From this theorem, we can prove that \textit{$m_*(E - \bigcup_{j = 1}^m B_j) < 2\delta$}.
+Because of $U$ is measurable, there is an open $U \supset E$ with $m_*(U - E) < \delta$ and $m_*(U - E) \le m_*(U) - m_*(E)$.
+Actually, restricting $\mathcal{B}$ into the collection of subsets of $U$, we can assume that $B_j \subseteq U$ for all $j$.
+Then, $m_*(E - \bigcup_{j = 1}^m B_j) = m_*(E) - m_*(\bigcup_{j = 1}^m B_j) \le m_*(O) - m_*(\bigcup_{j = 1}^m B_j) < (m_*(E) + \delta) - (m_*(E) - \delta) = 2\delta$.
+
+\newpage
+
+\textbf{Outer measure by spheres; rotation invariance}
+
+We define the outer measure by cubes.
+And also we showed that in the definition of outer measure we can replace the 'cubes' by 'boxes'.
+But we also need to write the outer measure by other kinds of cover; a cover by closed spheres.
+In other words, we expect that for any $E \subset \ReR^n$ (no need to be measurable) if we denote $(m_B)_*(E) = \inf_{(B_i) \in \mathcal{B}_E} \sum_{i = 1}^\infty |B_i|$, where $\mathcal{B}_E$ are the family of covers of $E$ by closed spheres, respectively (we will make sure what $|B_i|$ for closed ball $B_i$ is), then $m_*(E) = (m_B)_*(E)$.
+
+Before starting this, we first make sure $|B_i|$.
+Because of the invariances of $m_*$ under translation and dilation, for any $a \in \ReR^n$ and $r > 0$ we have that $m_*(\overline{B}(a, r)) = m_*(\overline{B}(0, 1)) r^n$, or $m_*(\overline{B}(a, r)) = \Omega_n r^n$ if we denote $\Omega_n = m_*(\overline{B}(0, 1))$.
+Thus, we denote $|\overline{B}(a, r)| = \Omega_n r^n$.
+Especially, considering a sphere with radius 1/2 and a cube with length of edge 1 which is contained in the sphere, we can obtain that $\Omega_1 = 2$ and $(n/4)^{n/2} \Omega_n > 1$ if $n > 1$, and that the volume of closed sphere containing a closed cube is bigger than or equal to $(n/4)^{n/2} \Omega_n V$ where $V$ is the volume of the cube.
+
+Now we attack $(m_B)_*(E)$.
+First, for $(B_i) \in \mathcal{B}_E$ and for each $i$, because $B_i$ is compact so that we can find finitely many (almost disjoint) closed cubes $Q_{ij}$ such that $B_i \subseteq \bigcup_j Q_{ij}$ and $\sum_j |Q_{ij}| < m_*(B_i) + \epsilon' = |B_i| + \epsilon'$ for any $\epsilon' > 0$, by the same way as above, we can say that $m_*(E) \le (m_B)_*(E)$.
+Now we consider the reverse.
+To prove this, we introduce some lemma: \textit{for any close cube $Q$ and $\epsilon > 0$ there are countably many closed balls $B_i$ covering $Q$ with $\sum m_*(B_i) < |Q| + \epsilon$.}
+First, find an open $U \supseteq Q$ with $m_*(U - Q) < \epsilon / 3$, which exists because $Q$ is measurable.
+By the corollary of Vitali theorems, we can find disjoint open balls $S_1, S_2, \cdots, S_r \subseteq U$ such that $m_*(Q - \bigcup_{j = 1}^r S_j) < \epsilon'$, where $\epsilon' = \epsilon / (6 (n/4)^{n/2} \Omega_n)$.
+Also we obtain that $\sum_{j = 1}^r m_*(S_j) = m_*(\bigcup_{j = 1}^r S_j) \le m_*(U) < m_*(Q) + \epsilon / 3$ because all $S_j$ are measurable.
+Meanwhile, we can find closed cubes $Q_{r + 1}, Q_{r + 2}, \cdots$ covering $Q - \bigcup_{j = 1}^r S_j$ with $\sum_{j = r + 1}^\infty |Q_j| < 2\epsilon'$.
+Now, as mentioned, for each $j > r$ we can find closed spheres $B_j$ containing $Q_j$ with $m_*(B_j) = (n/4)^{n/2} \Omega_n |Q_j|$.
+Then, $B_j$s cover $Q - \bigcup_{j = 1}^r S_j$ and $\sum_{j = r + 1}^\infty |B_j| < (n/4)^{n/2} \Omega_n \cdot 2\epsilon' = \epsilon / 3$.
+Finally, if for $j \le r$ we let $B_j = \overline{S_j}$, then all $B_j$ cover $Q$ and $\sum_{j = 1}^\infty m_*(B_j) = \sum_{j = 1}^r m_*(S_j) + \sum_{j = r + 1}^\infty m_*(B_j) < m_*(Q) + \epsilon$.
+With this lemma, showing the reverse inequality is a routine: Find closed cubes $Q_i$ covering $E$ with $\sum |Q_i| < m_*(E) + \epsilon / 2$, and for each $i$ find closed spheres $B_{ij}$ covering $Q_i$ with $\sum_{j} |B_{ij}| < |Q_i| + \epsilon / 2^{i + 2}$, and then summing them we can get that $B_{ij}$ guarantees the reverse inequality.
+Therefore, $m_*(E) = (m_B)_*(E)$.
+
+Especially, this result immediately implies the \textbf{rotation invariance of the outer measure}; \textit{for every orthogonal matrix $O$ and every $E \subseteq \ReR^n$ we have that $m_*(OE) = m_*(E)$.}
+It is immediate from the following fact; because $O$ sends covers of $E$ by closed balls into covers of $OE$ by closed balls and $O^{-1}$ sends covers of $OE$ by closed balls into covers of $E$ by closed balls.
+
+\newpage
+
+\textbf{Preliminary for volume of pillar}
+
+Now we prepare to attack an interesting problem: 'volume of pillar'.
+First, we shall show a simple case: \textit{For any $E \subseteq \ReR^{n - 1}$ and $h > 0$, $m_*(E \times [0, h]) = (m_-)^*(E) h$.}
+To show one side, let $Q_i$ be closed cubes covering $E$ with $\sum |Q_i| < (m_-)_*(E) + \epsilon / h$ for any $\epsilon > 0$.
+Then, closed boxes $Q_i \times [0, h]$ cover $E \times [0, h]$ and $\sum |Q_i \times [0, h]| = h \sum |Q_i| < (m_-)_*(E) h + \epsilon$.
+Thus, $m_*(E \times [0, h]) \le (m_-)_*(E) h$.
+
+To show the other side, let $R_i$ be closed cubes covering $E \times [0, 1]$ with $\sum |R_i| < m_*(E) + \epsilon$ for $\epsilon > 0$.
+Let $A$ be the set of $a \in \ReR$ such that a plane $\ReR^{n - 1} \times \{ a \}$ contains one of faces of $R_i$s.
+Since there are countably many of faces of $R_i$s, $A$ is countable, so we denote elements of $A$ by $a_j$.
+Also for each $i$ we denote $A_i$ be the set of $a \in A$ such that $\ReR^{n - 1} \times \{ a\}$ intersects $R_i$.
+Now, we denote $a^+_j$ by the minimum of the set of $a_j < a \in A$ if exists, otherwise $a^+_j = a_j$.
+We also denote $R_{ij}$ by $R_i \cap \ReR^{n - 1} \times [a_j, a^+_j]$.
+Then for all $i$ and $j$ $R_{ij}$ are closed boxes, i.e., $R_{ij} = R'_{ij} \times [a_j, a^+_j]$ for a closed box $R'_{ij} \subset \ReR^{n - 1}$.
+Also, for each $i$, $R_{ij}$ are almost disjoint and $\bigcup_j R_{ij} = R_i$.
+We can obtain that $|R_i| = \sum_j |R_{ij}| = (a^+_j - a_j) \sum_j |R'_{ij}|$.
+We now let $\mathcal{S}_j$ for each $j$ be the set of all $R_{ij}$ and $\mathcal{S}'_j$ be the set of all $R'_{ij}$.
+Then of course $\bigcup \mathcal{S}_j = \left( \bigcup \mathcal{S}'_j \right) \times [a_j, a^*_j]$, and $E \subseteq \bigcup \mathcal{S}'_j$.
+Combining these all, we obtain that $(m_-)_*(E) \le (m_-)_*\left( \bigcup \mathcal{S}'_j \right) \le \sum_i |R'_{ij}|$, so $(m_-)^*(E) (a^+_j - a_j) \le \sum_i |R'_{ij}| (a^+_j - a_j) = \sum_i |R_{ij}|$.
+Also, because all $[a_j, a^+_j]$ are almost disjoint and cover $[0, h]$, we have that $\sum_j (a^+_j - a_j) = h$.
+Therefore, $(m_-)_*(E) h = \sum_j (m_-)_*(E) (a^+_j - a_j) \le \sum_j \sum_i |R_{ij}| = \sum_i \sum_j |R_{ij}| = \sum_i |R_i| < m_*(E \times [0, h]) + \epsilon$, so $(m_-)_*(E) h \le m_*(E \times [0, h])$, which we want.
+
+\newpage
+
+\textbf{Volume of pillar}
+
+Now an interesting example: A volume of 'pillar'.
+Before specifying what is 'pillar' and the volume, we introduce a lemma.
+\textit{Let $E \subset \ReR^n$ be a compact\footnote{This condition is critical; see $\bigcup_{i = 1}^\infty [n, n + 1/n^2]$.} subset with $m_*(E) > 0$.}
+\textit{For $0 < r \in \ReR$ we denote $r * E = \bigcup_{x \in E} B(x, r)$.}
+\textit{Then, for each $0 < \epsilon \in \ReR$ there is $0 < \delta \in \ReR$ such that $m_*(\delta * E) - m_*(E) < \epsilon$.}
+Since $E$ is compact, we can find closed balls $B_1, B_2, \cdots, B_s$ such that $E \subseteq \bigcup B_i$ and $\sum |B_i| < m_*(E) + \epsilon / 2$.
+We denote first $\epsilon' = \epsilon / m_*(E)$ and $1 + \epsilon'' = \frac{1 + \epsilon'}{1 + \epsilon' / 2}$.
+To prove this, it is sufficient to find a countable open balls $B'_i$ such that $\sum |B'_i| < (1 + \epsilon') m_*(E) = m_*(E) + \epsilon$ from $B_i$s such that $B'_i$s cover $\delta * E$ for some $\delta > 0$.
+Let $x_i$ and $r_i$ be the center and radius of $B_i$ so that $B_i = B(x_i, r_i)$.
+Now, for each $i$ we can find $\eta_i > 0$ such that $|B(x_i, r_i + \eta_i)| < (1 + \epsilon'') |B_i|$.
+Let $\eta = \min(\eta_1, \eta_2, \cdots, \eta_s)$ and $B'_i = B(x_i, r_i + \eta)$.
+Of course, $|B'_i| \le |B(x_i, r_i + \eta_i)| < (1 + \epsilon'') |B_i|$.
+We let $\delta = \eta / 2$.
+Then, for each $i \le s$ and $a \in B_i$, $B(a, \delta) \subset B'_i$.
+From this, it is immediate that $B'_i$ ($i \le s$) covers $\delta * E$.
+Finally, $\sum_{i = 1}^s |B'_i| < (1 + \epsilon'') \sum_{i = 1}^s |B_i| < m_*(E) + \epsilon$, so $B'_i$s are the closed balls we want.
+
+With this lemma, we can treat 'the volume of pillar'.
+\textit{Let $E_0 \subset \ReR^{n - 1}$ be compact with $(m_-)_*(E_0) > 0$ ($(m_-)_*$ is the outer measure of $\ReR^{n - 1}$) and $v : [0, 1] \to \ReR^{n - 1}$ be a curve and $0 < h \in \ReR$.}
+\textit{Also let $E = \{ x + v(t) + the_n \SBar x \in E_0, t \in [0, 1] \}$.}
+\textit{Then, $m_*(E) = (m_-)_*(E_0)h$.}
+Actually, one can immediately see that $E$ is a (curved) 'pillar' with cap $E_0$ and height $h$.
+So, $m_*(E)$ is 'the volume of pillar'.
+
+To prove this, we first let $0 < \epsilon \in \ReR$, and we shall show that $m_*(E) \le (m_-)_*(E_0) h$.
+It can be established if we find a finite many 'strict pillars' covering $E$ but with the measure $\le (m_-)_*(E_0) h$.
+By the above lemma, there is $\delta > 0$ such that $(m_-)_*(\delta * E_0) < (m_-)_*(E_0) + \epsilon / h$.
+Also, since $[0, 1] \ni t \mapsto v(t)$ is uniformly continuous, we can find $0 = t_0 < t_1 < t_2 < \cdots < t_{m - 1} < t_m = 1$ such that for each $i < m$ $|v(t) - v(t_i)| < \delta$ for any $t \in [t_i, t_{i + 1}]$.
+We denote $E'_i = \{ x + v(t) + the_n \SBar x \in E_0, t \in [t_i, t_{i + 1}] \}$.
+Then, $E'_i \subseteq E''_i = (\delta * (E_0 + v(t_i))) \times [t_i, t_{i + 1}]$.
+Hence, $m_*(E) \le \sum_{i = 0}^{m - 1} m_*(E''_i) = m_*(\delta * E_0) \sum_{i = 0}^{m - 1} (t_{i + 1} - t_i) < ((m_-)_*(E_0) + \epsilon / h) h = (m_-)_*(E_0) h + \epsilon$, so $m_*(E) \le (m_-)_*(E_0) h$.
+
+Conversely, we shall show that $(m_-)_*(E_0) h \le m_*(E)$.
+It is obvious that $E$ is compact.
+Thus, there are almost disjoint closed boxes $B_1, B_2, \cdots, B_m$ covering $E$ with $\sum_{i = 1}^m |B_i| < m_*(E) + \epsilon$.
+We will not lose any generality if we assume that every $B_i$ is in $\bigcup_{t \in [0, h]} (\ReR^{n - 1} \times \{0\} + te_n)$.
+Now, we let $S \subseteq \ReR$ be the set of $t$ such that a plane $\ReR^{n - 1} \times \{0\} + te_n$ contains a face of one of $B_i$.
+Then, since the number of $B_i$s are finite, $s + 1 = \#(S) < \infty$, and then we can write the elements in $S$ as $0 = t_0 < t_1 < t_2 < \cdots < t_s = 1$.
+Dividing $B_i$s by planes $\ReR^{n - 1} \times \{0\} + t_j e_n$, we obtain almost disjoint closed boxes $B'_1, B'_2, \cdots, B'_r$ such that $\bigcup_{i = 1}^r B'_i = \bigcup_{i = 1}^m B_i$.
+Let $\mathcal{B}_j$ be the set of $B'_i$ contained in $\bigcup_{t \in [t_j, t_{j + 1}]} (\ReR^{n - 1} \times \{0\} + te_n)$.
+Then for each $j$ $\bigcup \mathcal{B}_j = T_j \times [t_j, t_{j + 1}]$ where $T_j \subset \ReR^{n - 1}$, and $E_0 + w \subseteq T_j$ for some $w \in \ReR^{n - 1}$.
+Finally, $(m_-)_*(E_0) h = \sum_{j = 0}^{s - 1} (m_-)_*(E_0) (t_{j + 1} - t_j) \le \sum_{j = 0}^{s - 1} m_*(T_j \times [t_j, t_{j + 1}]) = \sum_{i = 1}^r |B'_i| = \sum_{i = 1}^m |B_i| < m_*(E) + \epsilon$, so $(m_-)_*(E_0) h \le m_*(E)$.
+Therefore, $m_*(E) = (m_-)_*(E_0) h$.
+
+\newpage
+
+\textbf{Volume of parallelotope}
+
+In $\ReR^n$, \textbf{parallelotope} is defined as following: for $v_1, v_2, \cdots, v_n \in \ReR^n$ which are linearly independent, we call $\{ \sum_{i = 1}^n t_i v_i \SBar t_i \in \ReR, 0 \le t_i \le 1 \}$, or a set which is same as the translation of such set, a parallelotope with edges $v_1, v_2, \cdots, v_n$.
+What we shall show that is the measure of this set is $|\det{A}|$, where $A$ is a matrix with $j$-th column $v_j$.
+To prove this, we use induction on $n$.
+The case for $n = 1$ is immediate.
+Now we assume that the measure is equal to $|\det{A}|$ when the parallelotope is in $\ReR^n$ for certain $n$, and we consider linearly independent $v_1, v_2, \cdots, v_{n + 1}$ in $\ReR^{n + 1}$ and let $E = \{ \sum_{i = 1}^{n + 1} t_i v_i \SBar t_i \in [0, 1] \}$.
+at first, by Gram-Schmidt process, we can obtain an orthonormal set $(e'_1, e'_2, \cdots' e'_n)$ in $\ReR^{n + 1}$ such that all $v_1, v_2, \cdots, v_n$ is in $\bigoplus_{i = 1}^n \ReR e_i$.
+Then we can obtain $e'_{n + 1}$ which is normal and orthogonal to all other $e'_i$, and if we write $v_{n + 1} = \sum_{i = 1}^{n + 1} a_i e'_i$, then $a_i > 0$.
+Let $O$ be a matrix with $j$-th column $e'_j$.
+It is immediate that $O$ is an orthogonal matrix.
+and $w_i = O^{-1} v_i$.
+Then, $E' = \{ \sum_{i = 1}^{n + 1} t_i w_i \SBar t_i \in [0, 1] \}$ has same measure as $E$, so if we let $A$ be a matrix with $j$-column $w_j$ and we show that $m_*(E') = |\det{A}|$, then the proof is done since $|\det{A}| = |\det{OAO^{-1}}|$ and the $j$-th column of $OAO^{-1}$ is exactly $v_j$.
+
+Let $E_0 = \{ \sum_{i = 1}^n t_i w_i \SBar t_i \in [0, 1] \}$.
+Then $E = \{ x + tw_{n + 1} \SBar x \in E_0, t \in [0, 1] \}$.
+On the other hand, we can write $w_{n + 1} = u' + h e_{n + 1}$, where $u' \in \ReR^n \times \{0\}$ and $0 < h \in \ReR$.
+So, $E$ can be written as $\{ x + tu' + the_{n + 1} \SBar x \in E_0, t \in [0, 1] \}$, so it is a 'pillar with cap $E_0$ and height $h$'.
+Thus, $m_*(E) = (m_-)_*(E_0) h$.
+Meanwhile, if we denote $a_{ij}$ by the $(i, j)$-component of $A$, $w_j = \sum_i a_{ij} e_i$, and we have that $a_{n + 1, j} = 0$ if $j \le n$.
+Thus, if we let $A_0$ be a $n \times n$-matrix with $j$-th column $w_j$ removing $(n + 1)$-th row, it is immediate that $\det{A} = a_{n + 1, n + 1} \det{A_0}$, and actually $a_{n + 1, n + 1} = h$.
+Also, by the induction hypothesis, we know that $|\det{A_0}| = (m_-)_*(E_0)$.
+Therefore, $m_*(E) = |\det{A}|$, and by induction on $n$ we finish the proof.
+
+\end{document}
+

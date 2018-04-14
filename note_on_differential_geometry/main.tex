@@ -1,0 +1,480 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+
+\newcommand{\NaN}{\mathbb{N}}
+\newcommand{\InZ}{\mathbb{Z}}
+\newcommand{\RaQ}{\mathbb{Q}}
+\newcommand{\ReR}{\mathbb{R}}
+\newcommand{\CoC}{\mathbb{C}}
+
+\newcommand{\SBar}{\;|\;}
+
+\newcommand{\parder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\parderbar}[3]{\left. \frac{\partial #1}{\partial #2} \right|_{#3}}
+\newcommand{\spbar}[2]{\left.\partial_{#1}\right|_{#2}}
+
+\newcommand{\ordder}[2]{\frac{d #1}{d #2}}
+\newcommand{\ordderbar}[3]{\left. \frac{d #1}{d #2} \right|_{#3}}
+
+\newcommand{\lie}[1]{\mathfrak{#1}}
+
+\newcommand{\Ad}{\textrm{Ad}}
+\newcommand{\ad}[1]{\mathrm{ad}\; #1}
+\newcommand{\adu}[2]{\mathrm{ad}_{#1}\; #2}
+
+\begin{document}
+
+\textbf{Manifolds}
+
+We call a Hausdorff and second countable topological space $M$ a \textbf{(topological) $n$-manifold} if every point in this space has a neighborhood which is homeomorphic to $\ReR^n$, where we call a space equipping this additional property \textbf{locally Euclidean} space.
+It is used to describe lines, curves, polygons, surfaces, volumes, etc..
+
+In this note we are interested in a special bunch of this space.
+To introduce this we need some more understands about locally Euclidean spaces.
+Let $p \in M$ and $U$ a neighborhood of a $p$ which is homeomorphic to $\ReR^n$ and $\psi : U \to \ReR^n$ a homeomorphism.
+Then every point in $U$ is $\psi^{-1}(x_1, x_2, \cdots, x_n)$ for some $x_i \in \ReR$, so we can say that $p$ has a coordinate components $x_i$, or one can interpret this as $\psi$ gives a coordinate system.
+So we call $(U, \psi)$ a \textbf{coordinate chart} (or just a \textbf{chart}), and we call $U$ a \textbf{coordinate domain} and $\psi$ a \textbf{coordinate map} and the component functions of $\psi$ \textbf{local coordinates} on $U$.
+Also, we call a set of charts an \textbf{atlas} if all coordinate domains of its charts cover $M$.
+
+\newpage
+
+\textbf{What is smooth?}
+
+We have introduced manifolds.
+As mentioned, our interests are in manifolds in a special type; smooth manifolds.
+In this note 'smooth' means 'infinitely differentiable'.
+But one might guess that how we define 'differentiability' on manifolds; the locally Euclidean property does not say anything about differential.
+
+To discuss about 'differentiability' of a manifold $M$, it is reasonable to require that $f : M \to \ReR$ is 'differentiable'.
+But what we can 'differentiate' is basically a function such as $g : \ReR^n \to \ReR$.
+Fortunately, in this moment the local Euclidean-ness gives a stepstone; we have charts and we can use them.
+If for $p \in M$ we want to 'differentiate' $f$ at $p$, we choose a chart $(U, \psi)$ containing $p$ (i.e., $p \in U$) and differentiate $f \circ \psi^{-1}$ at $\psi(p)$.
+This definition seems having an ambiguity because we did not mentioned about choosing a chart.
+This issue is actually irrelevant since it is not different from 'changing basis in vector space', where basis corresponds to chart.
+In fact, the derivative can be regarded as a 'vector' and 'derivatives relative to a coordinate' as a basis.
+In this interpretation the derivatives of $f \circ \psi^{-1}$ is actually a 'coordinate in some basis', which depends on choosing a chart (basis).
+We will discuss about this later.
+
+There is an actual issue about differentiability.
+What we required is that $f \circ \psi^{-1}$ is differentiable at $\psi(p)$.
+Let $(V, \phi)$ be another chart containing $p$.
+Of course, it is required that $f \circ \phi^{-1}$ is differentiable at $\phi(p)$.
+In this situation if $\psi \circ \phi^{-1} : \phi(U \cap V) \to \psi(U \cap V)$, of which the domain and the range are open sets in $\ReR$, was not differentiable at $\phi(p)$, it might be strange.
+Thus to say about 'differentiability' without any ambiguity, \textit{for every two charts $(U, \psi)$ and $(V, \phi)$ with nonempty intersection (that is, $U \cap V \ne \emptyset$) the mapping $\psi \circ \phi^{-1} : \phi(U \cap V) \to \psi(U \cap V)$ is differentiable}.
+We call this map $\psi \circ \phi^{-1}$ the \textbf{transition mapping}.
+Hence, if this property holds, we can say about 'differential' on $M$.
+
+Now we can say about 'smoothness'.
+For two charts $(U, \psi)$ and $(V, \phi)$ if either $U \cap V \ne \emptyset$ or the transition mapping and its inverse are smooth, i.e., their component functions have continuous partial derivatives of all orders, we call $\psi \circ \phi^{-1}$ \textbf{smoothly compatible}.
+Now if any two charts of an atlas $\mathcal{A}$ are smoothly compatible, we call $\mathcal{A}$ a \textbf{smooth atlas}.
+With this we can say about smoothness of $f : M \to \ReR$: if there is a smooth atlas $\{(U_\lambda, \psi_\lambda) \SBar \lambda \in \Lambda\}$, $f$ is smooth if and only if $f \circ \psi^{-1}$ is smooth for any $\lambda \in \Lambda$.
+
+\newpage
+
+\textbf{Smooth manifolds}
+
+We have almost found a way to give a smoothness on a manifold $M$.
+However, there is another ambiguity.
+If we have two smooth atlas', how much are they different?
+Actually one can find two or more distinct 'smooth structure', about which we will discuss.
+To answer this issue we need to specify the 'smooth structure'.
+Note that one can extend a smooth atlas in many ways, e.g., choosing a chart and modifying its coordinate mapping by combining a smooth homeomorphism of $\ReR^n$ into $\ReR^n$ of which the inverse are smooth and adding this new chart, or restricting a chart into a open subset of its domain and adding this modified chart.
+Also, it is good way to extend it to unify two smooth atlas of which any two charts in each atlases,.
+Anyway, one can imagine a extended smooth atlas, but it is direct that this extension does not change the 'smooth structure' since it is just 'adding coordinate systems'.
+In this view, a 'maximal' smooth atlas, which means that it does not have any proper extension, describes 'completely' the smooth structure.
+Therefore, we can now say that a topological manifold has a 'smooth structure' if it has a maximal smooth atlas.
+Of course, in practice we usually do not have a maximal smooth atlas, but a little part of this.
+But since every smooth atlas can be extended into a maximal smooth atlas in principle, this definition does not useless and we can say that we have a smooth structure even if we have a small smooth atlas.
+In addition, it teaches how to know whether two different smooth atlas have same 'smooth structure'; just merge them and check whether it becomes a smooth atlas, since this merge is a way of extension.
+This says that a maximal smooth atlas containing a given smooth atlas is unique.
+
+Now we can give a name of manifold which equips a 'smooth structure'.
+We call a manifold which has a maximal smooth atlas (or just a smooth atlas, as mentioned) a \textbf{smooth manifold}.
+Also, we can rigorously define a term \textbf{smooth structure}; a maximal smooth atlas.
+
+Of course, for every $n \in \NaN$ the Euclidean space $\ReR^n$ has a natural smooth atlas $\{(\ReR^n, \textrm{Id})\}$, $\textrm{Id} : \ReR^n \to \ReR^n$ the identity mapping.
+In this note when we mention $\ReR^n$ it means the smooth manifold equipping this smooth structure.
+Also, when we mention its coordinates, it is always the coordinate mapping from $\textrm{Id}$.
+
+\newpage
+
+\textbf{One-step smooth manifold structure}
+
+One may be annoyed by trying to show that a given 'charts' $(U_\alpha, \varphi_\alpha)$ ($\alpha \in A$) makes a smooth atlas.
+In some case, any topological structure is not given so that $U_\alpha$ are actually not open yet.
+To avoid complicating we shall prove a helpful lemma to find a smooth structure.
+But, instead of introducing the lemma directly, we shall guess what condition for $(U_\alpha, \varphi_\alpha)$'s we need for constructing a suitable topological structure.
+
+It is reasonable to start with $(U_\alpha, \varphi_\alpha)$'s such that \textit{$\{U_\alpha \subseteq M \SBar \alpha \in A\}$ covers $M$ and $\varphi_\alpha$ is a bijection of $U_\alpha$ onto an open set of $\ReR^n$}.
+One may worry about how to treat $U_\alpha \cap U_\beta$ since, if $\varphi_\alpha$ and $\varphi_\beta$ does not work on this intersection well, there will occur several ambiguity.
+To avoid this it is natural that \textit{for any $\alpha, \beta \in A$ with $U_\alpha \cap U_\beta \ne \emptyset$ $\varphi_\alpha(U_\alpha \cap U_\beta)$ and $\varphi_\beta(U_\alpha \cap U_\beta)$ are open sets in $\ReR^n$ and $\varphi_\alpha \circ \varphi_\beta^{-1} : \varphi_\beta(U_\alpha \cap U_\beta) \to \varphi_\alpha(U_\alpha \cap U_\beta)$ is a smooth mapping (hence a diffeomorphism).}
+Now we shall construct a topological structure which is locally Euclidean and has $(U_\alpha, \varphi_\alpha)$'s charts.
+It is easy; we call $U \subseteq M$ open if $\varphi_\alpha(U \cap U_\alpha) \subseteq \ReR^n$ is open, and it is direct that the set of these 'open' sets can be a topology (remind that for any $B, C \subseteq U_\alpha$ $\varphi_\alpha(B \cap C) =  \varphi_\alpha(B) \cap \varphi_\alpha(C)$ since $\varphi_\alpha$ is injective).
+Obviously, all $U_\alpha$ become open.
+Thus, we have obtained a topological structure which is locally Euclidean.
+
+However, it is not what we want exactly since the topological structure which we actually seek must be not only locally Euclidean but also second countable and Hausdorff, and unfortunately the above configurations do not guarantee these properties.
+So we require more conditions to $U_\alpha$'s.
+There is a good news; the new assumptions needed are simple to guess.
+For the second-countably, one can remind that all $\varphi_\alpha(U_\alpha)$, hence all $U_\alpha$, are second countable, so it is sufficient to assume that \textit{countably some of $U_\alpha$ can cover $M$}.
+To be Hausdorff, by the definition it is natural and direct to require that \textit{if for two distinct point $x, y$ of $M$ there are no $U_\alpha$ and $U_\beta$ which are disjoint and contain $p$ and $q$, respectively, there should be $U_\alpha$ containing both $p, q$}.
+Now it is done.
+We have shown that the above topological structure makes $M$ a manifold.
+Finally, the smoothness of $\varphi_\alpha \circ \varphi_\beta^{-1}$ promises a smooth structure.
+
+
+Now we can summarize our result into a lemma; \textit{for a set $M$ if $(U_\alpha, \varphi_\alpha)$ ($\alpha \in A$), where $\bigcup_\alpha U_\alpha = M$ and for each $\alpha$ $\varphi_\alpha$ is a bijection of $U_\alpha$ onto an open set of $\ReR^n$, satisfies the following; (i) for $\alpha, \beta \in A$ $\varphi_\alpha(U_\alpha \cap U_\beta) \subseteq \ReR^n$ and $\varphi_\beta(U_\alpha \cap U_\beta) \subseteq \ReR^n$ are open sets and $\varphi_\alpha \circ \varphi_\beta^{-1} : \varphi_\beta(U_\alpha \cap U_\beta) \to \varphi_\alpha(U_\alpha \cap U_\beta)$ is a smooth mapping, (ii) countably some of $U_\alpha$ covers $M$, (iii) for any distinct $p, q \in M$ either there is $U_\alpha$ containing both of $p, q$ or there are disjoint $U_\alpha$ and $U_\beta$ containing $p$ and $q$ respectively, then one can construct a topological structure of $M$ (letting $U \subseteq M$ be open when $\varphi_\alpha(U \cap U_\alpha) \subseteq \ReR^n$ is open for all $\alpha$) so that $M$ becomes a smooth manifold with smooth atlas $\{(U_\alpha, \varphi_\alpha) \SBar \alpha \in A\}$}.
+
+\newpage
+
+
+
+\newpage
+
+\textbf{Interpretation of differentials of smooth mappings}
+
+It is also important how to use the concept about differentials in concrete case.
+Remind that the most of features of smooth manifolds would be realized by choosing a chart, and it also holds for differentials.
+For example, let $F : M \to N$ be a smooth mapping and $X_a \in T_a M$ and $f \in C^\infty(N)$.
+We know that $((T_a F) X_a)(f) = X_a(f \circ F)$.
+From this we shall obtain a 'representation' of $(T_a F) X_a$.
+To do this, let $\varphi$ be a chart of $M$ containing $a$ and $\psi$ of $N$ containing $F(a)$, and $x^i$ and $y^i$ the coordinates of $\varphi$ and $\psi$, respectively.
+In this configuration we can write $X_a = v^i \parderbar{}{x^i}{a}$, or $X_a(g) = v^i \parderbar{(g \circ \varphi^{-1})}{x^i}{\varphi(a)}$ for $g \in C^\infty(M)$.
+Then 
+\begin{eqnarray*}
+  X_a(f \circ F) &=& v^i \parderbar{((f \circ F) \circ \varphi^{-1})}{x^i}{\varphi(a)} = v^i \parderbar{((f \circ \psi^{-1}) \circ (\psi \circ F \circ \varphi^{-1}))}{x^i}{\varphi(a)} \\
+  &=& v_i \parderbar{(\psi \circ F \circ \varphi^{-1})^j}{x^i}{\varphi(a)} \parderbar{(f \circ \psi^{-1})}{y^j}{\psi(F(a))}.
+\end{eqnarray*}
+
+Thus, $(T_a F) \left( v^i \parderbar{}{x^i}{a} \right)$ can be written as $\left( \parderbar{(\psi \circ F \circ \varphi^{-1})^i}{x^j}{\varphi(a)} v^j \right) \parderbar{}{y^i}{F(a)}$.
+If there is no ambiguity about the charts (e. g., each of the charts is a restriction of the identity), we can just write $(T_a F) \left( v^i \parderbar{}{x^i}{a} \right) = \left( \left( \parderbar{F^i}{x^j}{a} \right) v^j \right) \parderbar{}{y^i}{F(a)}$.
+This representation helps us to treat several problem.
+Especially, it gives a meaning of $\parderbar{F}{x^i}{a}$; just a simpler version of $\parderbar{(\psi \circ F \circ \varphi^{-1})}{x^i}{\varphi(a)}$.
+
+In addition, we are interested in the case for $M = \ReR^n$.
+In this case $\parderbar{F}{x^i}{a}$ is just $\parderbar{(\psi \circ F \circ \textrm{Id}^{-1})}{x^i}{\textrm{Id}(a)} = \parderbar{(\psi \circ F)}{x^i}{a}$.
+Especially, when $n = 1$, we usually denote $\parderbar{F}{x^1}{\tau}$ by $\ordderbar{F}{t}{\tau}$.
+This notation will be used in several important stage.
+
+\newpage
+
+\textbf{Tangent bundle}
+
+We denote the disjoint union of $T_a M$ by $TM$.
+Now to obtain more rich structure we shall check that we can give a natural smooth structure to $TM$.
+To do this we use the one-step tool which is introduced; finding 'chart-like' pairs $(U_\alpha, \varphi_\alpha)$ which has some additional conditions for smoothness, second-countability and Hausdorff-ness.
+One might be expect that these pairs can be generated naturally from charts of $M$.
+To see this let $(U_\alpha, \varphi_\alpha)$ ($\alpha \in A$) be charts of $M$ of which a smooth atlas consists, and for each $\alpha$ we find sets $\tilde{U_\alpha} \subseteq TM$ and an injection $\tilde{\varphi_\alpha} : \tilde{U_\alpha} \to \ReR^{2n}$ of which the image is open in $\ReR^{2n}$.
+There is a good hint for this; we can write $X_a \in T_a M$ for $a \in U_\alpha$ as $X_{a, U_\alpha}^i \parderbar{}{x^i}{a}$.
+We can define a mapping $\tilde{\varphi_\alpha} : \tilde{U_\alpha} = \bigcup_{a \in U_\alpha} T_a M \to \ReR^{2m}$ as $T_a M \ni X_a \mapsto (\varphi_\alpha(x), X_{a, U_\alpha}) \in \ReR^{2n}$.
+It is obviously injective and its image is $\varphi_\alpha(U_\alpha) \times \ReR^n$, an open set.
+Thus we have a candidate for charts of $TM$.
+It is immediate that the conditions for second-countability and Hausdorff-ness are immediate, so the pairs $(\tilde{U_\alpha}, \tilde{\varphi_\alpha})$ gives a manifold structure of $TM$.
+
+Now the remaining is smoothness; for $\alpha, \beta \in A$ whether $\tilde{\varphi_\beta} \circ \tilde{\varphi_\alpha}^{-1}$ is smooth or not.
+We denote the coordinates of charts $(\tilde{U_\alpha}, \tilde{\varphi_\alpha})$ and $(\tilde{U_\beta}, \tilde{\varphi_\beta})$ by $x^i$ and $y^i$, respectively.
+We already have that $X_{a, U_\beta}^i = \parderbar{(\varphi_\beta \circ \varphi_\alpha^{-1})^i}{x^j}{\varphi_\alpha(a)} X_{a, U_\alpha}^j$.
+Thus, for $(x, v) \in \tilde{\varphi_\alpha}(\tilde{U_\alpha} \cap \tilde{U_\beta})$ with $x, v \in \ReR^n$ $\tilde{\varphi_\beta} \circ \tilde{\varphi_\alpha}^{-1}(x, v) = ((\varphi_\beta \circ \varphi_\alpha^{-1})(x), (\parderbar{(\varphi_\beta \circ \varphi_\alpha^{-1})^i}{x^j}{\varphi_\alpha(a)} v^j)^{i = 1, 2, \cdots, n})$.
+Since $\varphi_\beta \circ \varphi_\alpha^{-1}$ is smooth, this mapping is also smooth, which we seek.
+
+Finally, we find a natural smooth structure of $TM$.
+In this sense we call a smooth manifold $TM$ the \textbf{tangent bundle of $M$}.
+We also define $\pi_M : TM \to M$ (or simply $\pi$) such that $\pi_M(T_a M) = \{a\}$.
+It is immediate that this mapping is smooth.
+
+\newpage
+
+\textbf{Vector field}
+
+One might guess that if $X_a \in T_a M$ are given for each $a \in M$, a mapping of $M$, or of an open set $U \subseteq M$, into $TM$ defined as $a \mapsto X_a$ would be useful, especially the mapping is smooth.
+In this sense we call such smooth mapping $X : U \to TM$ with $\pi \circ X = \textrm{Id}_U$ a \textbf{(smooth) local section}, and if $U = M$, then it is called a \textbf{(smooth) vector field}.
+When treating this practically we usually work on a chart $(U, \varphi)$.
+If we denote its coordinates by $x^i$, for a vector field $X$ (or just a mapping $M \to TM$) we can write $X(x) = X^i(x) \parderbar{}{x^i}{x}$ for each $x \in U$.
+We call $X^i : U \to \ReR$ ($x \mapsto X^i(x)$) the \textrm{component function of $X$ in $(U, \varphi)$}.
+By the manifold configuration of $TM$ it is obvious that \textit{a mapping $X : M \to TM$ with $\pi \circ X = \textrm{Id}_M$ is a vector field if and only if all coordinate function of $X$ in any chart is smooth}.
+
+One may be interested in how a vector field $X : M \to TM$ plays with $C^\infty(M)$.
+It is natural to consider $X_x(f)$ for each $x \in M$ and $f \in C^\infty(M)$.
+In this situation it is reasonable to think about a mapping $M \ni x \mapsto X_x(f)$.
+Obviously, this mapping $Xf : M \to \ReR$ is in $C^\infty(M)$.
+Thus, we can say that \textit{a vector field can be regarded as a (continuous) linear mapping $C^\infty(M) \to C^\infty(M)$ with Leibnitz' rule} (compare it with $X_x \in T_xM$ which is a mapping $C^\infty(M) \to C^\infty(M)$).
+Geometrically, $Xf \in C^\infty(M)$ can be interpreted as a mapping which represents how $f$ 'infinitesimally changes' through the given direction (which corresponds to $X_x$).
+
+There is an important view about vector fields.
+Note that for any vector field $X$ and $f, g \in C^\infty(M)$ $X(fg) = (Xf)g + f(Xg)$.
+This Leibnitz' rule says that every vector field is a derivative of the $\ReR$-algebra $C^\infty(M)$.
+Conversely, let $D$ be a derivative of $\ReR$-algebra $C^\infty(M)$.
+We choose an arbitrary $a \in M$ and see how $D$ works at $a$.
+To investigate this we choose and fix a chart $(U, \varphi)$ containing $a$ and denote its coordinate by $x^i$.
+Again by using a smooth bump function we use a function $\tilde{\varphi}^i \in C^\infty(M)$ such that $\tilde{\varphi}^i(x) = \varphi^i(x)$ for every $x \in U_1$, $U_1$ a neighborhood of $a$ contained in $U$, and $\tilde{\varphi}^i(x) = 0$ for $x \notin U$ and let $v^i(a) = (D(\tilde{\varphi}^i))(x)$.
+It is obvious that $\varphi(U) \ni x \mapsto v^i(\varphi^{-1}(x))$ (we can define $v^i(\varphi^{-1}(x))$ without ambiguity) is smooth.
+To extend this result to more general $f \in C^\infty(M)$ we shall use $f(x) = f(a) + \int_0^1 dt \ordder{}{t} (f \circ \varphi^{-1})(\varphi(a) + t(\varphi(x) - \varphi(a)))$, where $x \in U_1$.
+The above integral can be written as $\left( \int_0^1 dt \parderbar{(f \circ \varphi^{-1})}{x^i}{\varphi(a) + t(\varphi(x) - \varphi(a))} \right) (\varphi^i(x) - \varphi^i(a))$, and the new integral becomes $\parderbar{(f \circ \varphi^{-1})}{x^i}{\varphi(a)}$ when $x = a$.
+Then by Leibnitz' rule we immediately obtain that $(Df)(a) = \parderbar{(f \circ \varphi^{-1})}{x^i}{\varphi(a)} v^i(a)$.
+This result and the smoothness of $v^i$ imply that $D$ it can be viewed as a vector field of $M$.
+Therefore, we have that \textit{vector fields of $M$ coincides with derivatives of $\ReR$-algebra $C^\infty(M)$}.
+Then it is natural to consider the \textbf{Lie bracket} $[X, Y] = X \circ Y - Y \circ X$ for vector fields $X$ and $Y$, which is also a derivative of $C^\infty(M)$.
+
+In addition we shall define more features which will be used.
+As known, the closure of the set of $x \in M$ such that $X(x) \ne 0$ is called the \textbf{support of $M$}.
+Especially, if the support is compact in $M$, we call $M$ \textbf{compactly supported}.
+
+\newpage
+
+\textbf{$F$-related vector fields}
+
+One might expect that if $M$ and $N$ are manifolds and $F : M \to N$ is a smooth mapping, then for any vector field $X$ of $M$ we can push it forward to $N$, like that $Y = (dF)X$, a vector field of $N$.
+But in general there is no such 'vector field' $Y$.
+For instance, if $M = S^1 = \{(\cos{\theta}, \sin{\theta}) \SBar \theta \in \ReR\} \subseteq \ReR^2$ and $N = \ReR^2$ and $F : M \to N$ is the restriction of the identity, there is an ambiguity to construct such $Y$ from any $X$ since we cannot say anything about $Y(b)$ for $b \in N \setminus F(M)$.
+Another example is that $M = N = S^1$ and $F : M \to N$ with $F(\cos{\theta}, \sin{\theta}) = (\cos{(2\theta)}, \sin{(2\theta)})$; in this case if $X$ is a vector field of $M$ which is not 'uniform', then for some $a, b \in M$ $F(a) = F(b)$ but $(dF)X_a \ne (dF)X_b$.
+So we cannot say a 'pushforward' of $X$ through $F$ in general.
+However, note that in the first example, although it is impossible to construct $Y$ from $X$, there may be a vector field $Y$ of $N$ such that for any $a \in M$ $(dF)X_a = Y_{F(a)}$.
+Of course, such $Y$ may not be unique, and maybe even does not exist, but if it exists anyway, then we can use $Y$ as a 'pushforward' of $X$.
+In this sense we now say that $X$ and $Y$ are \textbf{$F$-related} if for each $a \in M$ $(dF)(X(a)) = Y(F(a))$.
+Of course, regardless of the above example, if $F$ is a diffeomorphism, then for any vector field $X$ of $M$ we can always construct a vector field $Y$ of $N$ by $Y(a) = (dF)(X(F^{-1}(a)))$ which is the unique $F$-related vector field with $X$.
+
+Now we introduce an alternative description of $F$-related vector fields.
+See that for every $f \in C^\infty(N)$ and $a \in U$ we obtain that $((Yf) \circ F)(a) = Y_{F(a)}(f)$ and $((dF) X_a)(f) = X_a(f \circ F) = (X(f \circ F))(a)$.
+Thus we have that \textit{vector fields $X$ of $M$ and $Y$ of $N$ are $F$-related if and only if for every $f \in C^\infty(N)$ $(Yf) \circ F = X(f \circ F)$}.
+It has a direct consequence that \textit{if $X_1$ and $X_2$ are vector fields of $M$ and $Y_1$ and $Y_2$ of $N$, where for each $i$ $Y_i$ is $F$-related to $X_i$, then $[Y_1, Y_2]$ is $F$-related to $[X_1, X_2]$}, since $X_1 X_2(f \circ F) = X_1 ((Y_2 f) \circ F) = (Y_1 Y_2 f) \circ F$.
+
+We introduce one notation: for a diffeomorphism $F$, we define $F_* X$ as $(F_* X)(x) = dF_{F^{-1} (x)} X_{F^{-1}(x)}$, which is same as $(dF) X \circ F^{-1}$, called the \textbf{pushforward of $X$ by $F$}.
+This notation gives some convenience.
+For example, the above lemma about $F$-related vector fields can be written as, if $F$ is a diffeomorphism, $[F_* X_1, F_* X_2] = F_* [X_1, X_2]$.
+This notation will give a help for an important step which we will meet soon.
+
+\newpage
+
+
+
+\newpage
+
+\textbf{Left-invariance and Right-invariance}
+
+We mentioned that a vector field $X$ can be regarded as a mapping $C^\infty(G) \to C^\infty(G)$.
+Note that for $a \in G$ $L_a : G \to G$ can be regarded as an action $C^\infty(G) \to C^\infty(G)$, which is defined as $C^\infty(G) \ni f \mapsto f \circ L_a$.
+In this view one might wonder how $X(f \circ L_a)$ and $(Xf) \circ L_a$ for $f \in C^\infty(G)$ are different.
+In general, there is no reason that these functions are equal.
+But one may be interested in the case that they are same for every $a \in G$.
+We call a vector field $X$ with such property \textbf{left-invariant}.
+Of course, we can consider this argument to $R_a$ instead of $L_a$, and in this case $X$ is called \textbf{right-invariant}.
+Note that in the notation of pullback $X$ is left-invariant if and only if $(T_x L_a)(X_x) = X_{L_a x} = X_{ax}$ for all $a, x \in G$, and we can say this similarly to right-invariance.
+Note that a vector field $X$ is left-invariant if and only if $(L_g)_* X = X$ for all $g \in G$, which is immediate from the definition of the pushforward, and similar thing holds for right-invariance.
+
+Actually, the left invariance (and also right invariance) has very simple structure.
+For $X \in T_1 G$ (it is actually denoted by $X_1$, but for the latter purpose we just use this notation) we define $X^L : M \to TM$ as $X^L(g) = (T_1 L_g) X$.
+It is immediate that $X^L$ is a smooth vector field for every $X \in T_1 G$.
+Now we have that \textit{$Y$ is a left-invariant vector field if and only if $Y = X^L$ for some $X \in T_1 G$}, of which the proof is immediate (use that $(T_1 L_{ag}) X = (T_g L_a) ((T_1 L_g) X)$).
+
+We need to obtain the explicit form of left-invariant vector fields in the case for a linear Lie group $G$.
+Let $X \in T_1 G$ and $\tilde{X}$ be the left-invariant vector field induced from $X$.
+Then for $g \in G$ $\tilde{X}(g) = (T_1 L_g)(X)$.
+Now we use the notation $(T_a F) (v^i \spbar{i}{a}) = (\spbar{j}{a} F^i v^j) \spbar{i}{F(a)}$.
+Since for linear Lie groups it is usual to use (a restriction of) the identity of $\ReR^{n^2}$ as a chart, we can use the above notation directly.
+Then for $L_g : x \mapsto gx = (\sum_r g^i_r x^r_j)$ we obtain that $\partial_p^q (L_g)^i_j = \partial_p^q (\sum_r g^i_r x^r_j) = g^i_p \delta^q_j$.
+From this we have that $(T_1 L_g) (X^i_j \partial_i^j |_{1}) = (\sum_{p, q} g^i_p \delta^q_j X^p_q) \partial_i^j |_{gx} = (g \cdot X)^i_j \partial_i^j |_{gx}$, where $g \cdot X$ is the matrix multiplication of $g$ and $X$ which are viewed as matrices.
+Of course, we can obtain a similar result for right-invariance in the same way.
+
+In addition, \textit{for any two left-(right-)invariant vector fields $X$ and $Y$ $[X, Y]$ is also left-(right-)invariant}.
+The proof is immediate: $(L_g)_* [X, Y] = [X, Y]$ because $(L_g)_* [X, Y] = [(L_g)_* X, (L_g)_* Y]$.
+
+\newpage
+
+\textbf{Words for bewaring about vector fields}
+
+Although we have already that the 'space' of left-invariant vector fields are closed under the Lie bracket, many of this 'space' is in mysty.
+First, for a Lie group of dimension $n$, is the 'full' space of dimension $n$?
+And what is the 'left-invariant vector field', especially the form in 'derivative operator'?
+
+For the second question, there is one important thing: The full of all vector fields is more complicated than I thought and so is any left-invariant vector field.
+I thought only $\ReR$-linear combinations of $\partial_i$.
+But that's not, at all.
+This holds only in $T_a M$ ($M$ a mainfold, $a \in M$).
+First, not $\ReR$-linear combinations, but $x \mapsto X^i(x) \partial_i|_x$, where $x \mapsto X^i(x)$ is a (smooth) function of $M$.
+Second, it makes sense only in a given chart, i.e., too local!
+
+So, reversely, a Lie group has lots of vector fields than left-invariant vector fields.
+For example, considering a chart $(G, \exp)$ of $G = GL(n, \CoC)$, $G \ni x \mapsto \partial^{\exp}_i|_x$.
+But this is not a left-invariant vector field.
+The left-invariant vector fields have much more complicated form.
+
+Without this discussion in my mind I have a confusion.
+
+
+\newpage
+
+\textbf{Exponential mapping}
+
+
+
+Now we consider a case in which $G$ is a linear Lie group.
+We can choose a chart of $G$ as just $\textrm{Id}$, so there will be no ambiguity in the notation of $\parder{F}{x}$ for any smooth mapping $F$.
+By definition, for $X \in T_1 G$, $\ordderbar{}{t}{\tau} (\exp{(tX)}) = \tilde{X}(\exp{(\tau X)})$.
+We denote $\exp{(tX)} = A(t) = (A(t)^{11}, A(t)^{12}, \cdots, A(t)^{nn})$, and $X = X^{ij} \parderbar{}{x^{ij}}{1}$.
+Then $\ordderbar{}{t}{\tau} (\exp{(tX)}) = (\parderbar{}{t}{\tau} A(t)^{ij}) \parderbar{}{x^{ij}}{A(\tau)}$.
+We already saw that $\tilde{X}(A(\tau)) = (A(\tau) \cdot X)^{ij} \parderbar{}{x^{ij}}{A(\tau)}$ (again, $A(\tau) \cdot X$ is the matrix multiplication).
+Comparing them, we obtain an ordinary differential equation $\ordderbar{}{t}{\tau} A(t) = A(\tau) \cdot X$.
+We know the solution of this; $A(t) = \sum_{r = 0}^\infty \frac{1}{r!} (tX)^r$.
+Therefore, we obtain the explicit form of $\exp{(tX)}$, and the result agrees with the nomenclature.
+
+\newpage
+
+\textbf{Adjoint representations}
+
+Let $G$ be a Lie group.
+Remind that one can 'represent' $G$ by a mapping $\Ad : G \mapsto \textrm{Aut}(G)$ defined as, for $g \in G$ and $x \in G$, $\Ad(g)(x) = gxg^{-1}$.
+Since $\Ad(g) : G \to G$ is a diffeomorphism, we consider a mapping $T_1 \Ad(g) : T_1 G \to T_1 G$, or $T_1 \Ad(g) : \lie{g} \to \lie{g}$, where $\lie{g}$ is the Lie algebra of $G$ for each $g \in G$.
+Abusing notations, we denote the tangent mapping by $\Ad(g) : \lie{g} \to \lie{g}$.
+It is immediate that for any $g, h \in G$ $\Ad(g) \cdot \Ad(h) = \Ad(gh)$ and $\Ad(g^{-1}) = (\Ad(g))^{-1}$.
+Thus we have a representation $G \ni g \mapsto \Ad(g) \in GL(\lie{g})$ of $G$.
+
+We are interested in the tangent mapping of $\Ad(g)$, which is a linear mapping in $\lie{gl}(\lie{g})$.
+This mapping is denoted by $\ad{X}$ for $X \in \lie{g}$.
+Thus we have another mapping $\ad : \lie{g} \to \lie{gl}(\lie{g})$.
+
+\newpage
+
+\textbf{ODE : Existence of solution}
+
+
+
+\newpage
+
+\textbf{ODE comparison lemma; Uniqueness of solution, and Flow}
+
+We have found a solution of ODE: $\gamma : J \to U$ such that $\dot{\gamma}(t) = V(\gamma(t))$ with $\gamma(t_0) = c$.
+It is also important that the solution is unique; if there is another $\gamma' : J \to U$ such that $\dot{\gamma'}(t) = V(\gamma'(t))$ with $\gamma'(t_0) = c$, then $\gamma = \gamma'$.
+From this uniqueness, the uniqueness of flow follows directly.
+
+To show this, we need a powerful lemma.
+\textit{Let $A \ne 0, B$ be nonnegative constants, and $u : J \to \ReR^n$ be differentiable and $t_0 \in J$.}
+\textit{Now assume for $t \in J$ $|\dot{u}(t)| \le A |u(t)| + B$.}
+\textit{Then $|u(t)| \le C(e^{A|t - t_0|} - 1) + |u(t_0)|$ where $C = |u(t_0)| - \frac{B}{A}$.}
+ 
+To prove this, let $s(t) = |u(t)|$ and observe $\dot{s}(t)$.
+We obtain that $\dot{s}(t) = \partial_t \sqrt{u(t) \cdot u(t)} = \frac{1}{2\sqrt{u(t) \cdot u(t)}} 2 u(t) \cdot \dot{u}(t) \le \frac{1}{2\sqrt{u(t) \cdot u(t)}} 2 |u(t)||\dot{u}(t)| = |\dot{u}(t)|$.
+Thus, $\dot{s}(t) \le As(t) + B$ for all $t \in J$, and the aim is being to show that $s(t) \le v(t - t_0)$ for all $t_0 \le t \in J$ where $v(t) = C (e^{At} - 1) + s(t_0)$ (the case for $t < t_0$ is from this by $u(t) \to u(-t)$).
+The key of the proof is to use $w(t) = e^{-At}(s(t) - v(t - t_0))$.
+Of course, our aim is equivalent to showing that $w(t) \le 0$ for all $t_0 \le t \in J$.
+At first, note that $w(0) = 0$.
+Also, we have the following: for $t_0 \le t \in J$ if $w(t) > 0$ (so that $s(t) > v(t - t_0)$, or $|s(t) - v(t - t_0)| = s(t) - v(t - t_0)$), then 
+$\dot{w}(t) = e^{-At} (\dot{s}(t) - \dot{v}(t - t_0) - A(s(t) - v(t - t_0))) \le e^{-At} ((As(t) + B) - (Av(t - t_0) + B) - A(s(t) - v(t - t_0))) = 0$.
+Thus, $\dot{w}(t) \le 0$ if $w(t) > 0$.
+Regarding $w(t_0) = 0$, this situation looks impossible.
+To make sure, suppose that there is $t_0 \le a \in J$ such that $w(a) > 0$.
+Let $M = \{ t_0 \le t \in J \SBar t < a, w(t) \le 0\}$.
+Of course, $t_0 \in M$ so that $M$ is nonempty and it is upper-bounded.
+Let $b$ the supremum of $M$.
+It is immediate that $w(b) = 0$ and $w(c) < 0$ for every $b < c < a$ so that $\dot{w}(c) \le 0$.
+Now, by the mean value theorem, there is $c \in (b, a)$ such that $\frac{w(a) - w(b)}{a - b} = \dot{w}(c)$, which is obviously positive, a contradiction.
+Therefore, $w(t) \le 0$ for every $t_0 \in t \in J$, so $s(t) = |u(t)| \le C(e^{t - t_0} - 1 ) + |u(t_0)|$.
+
+Using this lemma, we can find an important inequality in the ODE theory.
+Let $\gamma_1, \gamma_2 : J \to U$ be solutions of the given ODE, with common initial time $t_0$.
+Also, let $J_1$ be a closed interval centered at $t_0$, in $J$.
+Then $\gamma_1(J_1) \cup \gamma_2(J_1)$ is compact, so $V|_{\gamma_1(J_1) \cup \gamma_2(J_1)}$ is Lipschitz continuous.
+Let $A$ be the Lipschitz constant of $V|_{\gamma_1(J_1) \cup \gamma_2(J_1)}$.
+Then, we obtain that $|\dot{\gamma_2}(t) - \dot{\gamma_1}(t)| = |V(\gamma_2(t)) - V(\gamma_1(t))| \le A |\gamma_2(t) - \gamma_1(t)|$ for every $t \in J_1$.
+By ODE comparison lemma, we obtain the following important inequality: 
+\begin{displaymath}
+  |\gamma_2(t) - \gamma_1(t)| \le e^{A|t - t_0|} |\gamma_2(t_0) - \gamma_1(t_0)| \;\;\;\; (t \in J_1).
+\end{displaymath}
+
+Now, the uniqueness is obvious.
+For any $t_1 \in J$, we set $J$ obtaining $t_1$, and find the Lipschitz constant $A$; since $\gamma'(t_0) - \gamma(t_0) = 0$, we obtain that $|\gamma'(t) - \gamma(t)| \le 0$ for every $t \in J_1$, especially $\gamma'(t_1) = \gamma(t_1)$.
+Therefore, $\gamma' = \gamma$, the uniqueness.
+
+Extra: the ODE comparison lemma can be generalized.
+Instead $|\dot{u}(t)| \le A|u(t)| + B$, let $|\dot{u}(t)| \le f(|u(t)|)$ for all $t \in J$, where $f : [0, \infty) \to [0, \infty)$ is Lipschitz continuous, where the Lipschitz constant is $A$ ($f(t) = At + B$ satisfies this).
+Now, let $v : [0, \infty) \to \ReR$ such that $\dot{v}(t) = f(v(t))$ for all $t \in \ReR$ with $t + t_0 \in J$ and $v(0) = |u(0)|$ .
+Then we have that $|u(t)| \le v(|t - t_0|)$ for all $t \in J$.
+The proof is almost same; but use that $f(s(t)) - f(v(t - t_0)) \le |f(s(t)) - f(v(t - t_0))| \le A |s(t) - v(t - t_0)|$.
+
+\newpage
+
+\textbf{ODE : Continuity of flow}
+
+
+
+\newpage
+
+\textbf{ODE : Continuously differentiability of flow (1)}
+
+Now we show that the flow is in same class with the generator.
+To show this, first we show that if for an open set $U \subseteq \ReR^n$ the generator vector field $V : U \to \ReR^n$ is in $C^1$, then a flow $\theta : J_0 \times U_0 \to U$ (open $U_0 \subseteq U$, $t_0 \in J_0$ the initial time) is in $C^1$, of which the proof is the most difficult part.
+
+For $0 \ne h \in \ReR$ and $(t, x) \in J_0 \times U_0$ we define $\Delta^i_{j; h}(t, x) = \frac{1}{h} (\theta^i(t, x + he_j) - \theta^i(t, x))$, and $\Delta_{h}(t, x)$ by their matrix, where $\Delta_{j; h}(t, x)$ is the $j$-column vector.
+We have to show that the limit $h \to 0$ of them exists and the mapping sending $(t, x)$ into the limit is continuous.
+Note that, actually it is enough to show that it holds for a restriction on a neighborhood of each $(t_1, x_1) \in J_0 \times U_0$.
+To do this, actually it is enough to show that $\Delta_{h}(t, x)$ is uniformly Cauchy on $h$ near 0; that is, for any $\epsilon > 0$ there is $\delta > 0$ such that if $|h_1|, |h_2| < \delta$ then $|\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| < \epsilon$ for every $(t, x)$ in the neighborhood of $(t_1, x_1)$.
+To establish this, we need to find a suitable compact $\overline{J_1} \times \overline{U_1} \subseteq J_0 \times U_0$ (compact for easily setting for uniform) to make $\Delta_{h}(t, x)$ work well as we want.
+Also note that we need a set $B_0$ which is compact and contains all $\theta(\overline{J_1} \times \overline{U_1})$.
+
+We now investigate what we need for $\overline{J_1} \times \overline{U_1}$ and $B_0$.
+Actually, there seems no other way to use ODE comparison lemma again to use the fact that $V$ is in $C^1$.
+Thus, we shall look up $|\partial_t \Delta_{h_1}(t, x) - \partial_t \Delta_{h_2}(t, x)|$ so that we will found a suitable function $f : [0, \infty) \to [0, \infty)$ such that $|\partial_t (\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x))| \le f(|\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)|)$.
+First, $\partial_t \Delta^i_{j; h}(t, x) = \frac{1}{h} (\partial_t \theta^i(t, x + he_j) - \partial_t \theta^i(t, x)) = \frac{1}{h} (V^i(\theta(t, x + he_j)) - V^i(\theta(t, x)))$.
+Now we shall use the theorem.
+Let $\zeta(s) = V^i(s\theta(t, x + he_j) - (1 - s)\theta(t, x))$ for $0 < s < 1$.
+Then, $\zeta(1) - \zeta(0) = V^i(\theta(t, x + he_j)) - V^i(\theta(t, x))$.
+On the other hand, by the mean value theorem there is $0 < s^i_{j; h} < 1$ such that $\zeta(1) - \zeta(0) = \dot{\zeta}(s^i_{j; h}) = \sum_r \partial_r V^i(z^i_{j;h}) (\theta^r(t, x + he_j) - \theta^r(t, x))$, where $z^i_{j;h} = s^i_{j;h} \theta^r(t, x + he_j) + (1 - s^i_{j;h}) \theta^r(t, x)$.
+So, $\partial_t \Delta^i_{j;h}(t, x) = \sum_r \partial_r V^i(z^i_{j;h}) \Delta^r_{j;h}(t, x)$.
+Note that to make this work, we have to make sure that all $s\theta(t, x + he_j) - (1 - s)\theta(t, x)$ ($0 < s < 1$) are in $B_0$, and it is the most complicated part to make sure this.
+
+For simplicity, for each $j$ we let $\tilde{DV}(z^i_{j;h}) = (\partial_r V^i(z^i_{j;h}))_{ir}$ (quite different from the simple $DV(z)$).
+Then, we can write $\partial_t \Delta_{h}(t, x) = \tilde{DV}(z^i_{j;h}) \Delta_{h}(t, x)$.
+So, $\partial_t \Delta_{h_1}(t, x) - \partial_t \Delta_{h_2}(t, x) = \tilde{DV}(z^i_{j;h_1}) \Delta_{h_1}(t, x) - \tilde{DV}(z^i_{j;h_2}) \Delta_{h_2}(t, x) = \tilde{DV}(z^i_{j;h_1}) (\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)) + (\tilde{DV}(z^i_{j;h_1}) - \tilde{DV}(z^i_{j;h_2})) \Delta_{h_2}(t, x)$.
+Now, we introduce some constants.
+Because $B_0$ is compact and $DV$ is continuous, there is the maximum $A$ of $|DV(x)|$ for $x \in B_0$.
+It is obvious that $|\tilde{DV}(z^i_{j;h})| \le A$.
+Then, we have that $|\partial_t \Delta_{h_1}(t, x) - \partial_t \Delta_{h_2}(t, x)| \le A |\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| + |\tilde{DV}(z^i_{j;h_1}) - \tilde{DV}(z^i_{j;h_2})| |\Delta_{h_2}(t, x)|$.
+Meanwhile, we introduce that the Lipschitz constant of $V|_{B_0}$, and $T$ the supremum of $|t - t_0|$.
+Then, $|\Delta^i_{j;h_2}(t, x)| = \frac{1}{|h|} |\theta^i(t, x + he_j) - \theta^i(t, x)| \le e^T{CT} |x + he_j - x| = e^{CT}$, so $|\Delta_{h_2}(t, x)| \le ne^{CT}$.
+Therefore, we have that $|\partial_t \Delta_{h_1}(t, x) - \partial_t \Delta_{h_2}(t, x)| \le A |\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| + |\tilde{DV}(z^i_{j;h_1}) - \tilde{DV}(z^i_{j;h_2})| ne^{CT}$.
+So, if we can set the restriction on $h_1$ and $h_2$ which makes $|\tilde{DV}(z^i_{j;h_1}) - \tilde{DV}(z^i_{j;h_2})| < \epsilon_1$ for $\epsilon_1$, then we can use the ODE comparison lemma well.
+In the next page, before investigating this, we set $B_0$ and $\overline{J_1} \times \overline{U_1}$ to make sure everything the condition we found.
+
+\newpage
+
+\textbf{ODE : Continuously differentiability of flow (2)}
+
+We found a requirement: $s\theta(t, x + he_j) + (1 - s)\theta(t, x) \in B_0$ for all $(t, x) \in \overline{J_1} \times \overline{U_1}$ and $0 < s < 1$.
+It is cumbersome to make sure the last requirement; if $U$ is convex, it holds automatically, but now we treat more general case.
+To establish this, actually it is enough to find $\delta_0 > 0$ such that for any $(t, x) \in \overline{J_1} \times \overline{U_1}$ $\theta(t, B(x, \delta_0))$ is contained in a ball in $B_0$ centered at $\theta(t, x)$; if we let $|h_1|, |h_2| < \delta_0$, then the requirement holds.
+
+Let $J_1$ be an open interval centered at $t_0$ which contains $t_1$ and $\overline{J_1} \subseteq J_0$, and that's all for setting of $J_1$.
+To find $B_0$ and $U_1$, we need some complicated works.
+Let $\tilde{U_1}$ be an open ball centered at $x_1$, of which the closure is in $U_0$, and $\tilde{U} = \bigcup_{t \in \overline{J_1}} \theta(t, \tilde{U_1})$.
+If we let $l_1 = \max_{(t, x) \in \overline{J_1} \times \overline{\tilde{U_1}}} |x - \theta(t, x)|$ (which is well-defined because $\overline{J_1} \times \overline{\tilde{U_1}} \ni (t, x) \mapsto |x - \theta(t, x)|$ is continuous), for any $t, s \in \overline{J_1}$ and $x, y \in \tilde{U_1}$ we have that $|\theta(t, x) - \theta(s, y)| \le |\theta(t, x) - x| + |x - y| + |s - \theta(s, y)| \le l_1 + |x - y| + l_1$, which implies the boundedness of $\tilde{U}$.
+So, if we let $B_0 = \overline{\tilde{U}}$, then $B_0$ is a compact set.
+Now let $2r$ the radius of $\tilde{U_1}$ and $U_1 = B(x_1, r)$.
+Then, it is obvious that $\theta(\overline{J_1} \times \overline{U_1}) \subseteq B_0$.
+
+So far, our tasks look not so special.
+But this setup will gives the requirement.
+Let $D$ be the minimum of $|\theta(t, x) - \theta(t, y)|$ for $t \in \overline{J_1}$ and $x \in \overline{U_1}$ and $y \in \partial \tilde{U_1}$.
+Note that such $D$ exists since $\overline{J_1} \times \overline{U_1} \times \partial \tilde{U_1} \ni (t, x, y) \mapsto |\theta(t, x) - \theta(t, y)|$ is continuous.
+Also, because $\overline{U_1}$ and $\partial \tilde{U_1}$ are disjoint compact sets and there must be $(t, x, y) \in \overline{J_1} \times \overline{U_1} \times \partial \tilde{U_1}$ such that $D = |\theta(t, x) - \theta(t, y)|$, we have that $D > 0$.
+This result implies $B(\theta(t, x), D) \subset \theta(t, \tilde{U_1}) \subset B_0$ for any $(t, x) \in \overline{J_1} \times \overline{U_1}$.
+Thus, if we can send every $\delta_0$-ball centered at $x \in \overline{U_1}$ into these $D$-ball, we have the requirement.
+By ODE comparison lemma again, we have that $|\theta(t, y) - \theta(t, x)| \le e^{CT} |y - x|$ so that if $|y - x| < De^{-CT}$ then $\theta(t, y) \in B(\theta(t, x), D)$.
+Therefore, we found $\delta_0 = De^{-CT}$, and $B_0$, $\overline{J_1} \times \overline{U_1}$.
+
+We now attack the last part: the inequality $|\tilde{DV}(z^i_{j;h_1}) - \tilde{DV}(z^i_{j;h_2})| < \epsilon_1$.
+If we show that $|\partial_r V_i(z^i_{j;h_1}) - \partial_r V_i(z^i_{j;h_2})| < \epsilon_1 / n$ for all $i, r$, it holds.
+But because $V$ is in $C^1$ and $B_0$ is compact, $DV|_{B_0}$ is uniformly continuous, so we can found $\delta_1 > 0$ such that $|\partial_r V_i(y) - \partial_r V_i(x)| < \epsilon_1 / n$ for every $i, j$ and $x, y \in B_0$ with $|y - x| < \delta_1$.
+Thus, it is enough to find $\delta > 0$ such that $|z^i_{j;h_1} - z^i_{j;h_2}| < \delta_1$ if $|h_1|, |h_2| < \delta$.
+On the other hand, $z^i_{j;h_1} = \theta(t, x) + s^i_{j;h_1} (\theta(t, x + h_1 e_j) - \theta(t, x))$, so $|z^i_{j;h_1} - z^i_{j;h_2}| = |s^i_{j;h_1} (\theta(t, x + h_1 e_j) - \theta(t, x)) + s^i_{j;h_2} (\theta(t, x + h_2 e_j) - \theta(t, x))| < |\theta(t, x + h_1 e_j) - \theta(t, x)| + |\theta(t, x + h_2 e_j) - \theta(t, x)|$.
+Thus, if we find $\delta > 0$ such that $|\theta(t, x + h e_j) - \theta(t, x)| < \delta_1 / 2$ for every $(t, x) \in \overline{J_1} \times \overline{U_1}$ if $|h| < \delta$ (and $< \delta_0$), this $\delta$ is what we found, and such $\delta$ exists because of the uniform continuity of $\theta|_{\overline{J_1} \times \overline{U_1}}$.
+
+Finally, we obtain that $|\partial_t(\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x))| \le A |\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| + \epsilon_1 ne^{CT}$ for every $(t, x) \in \overline{J_1} \times \overline{U_1}$ if $|h_1|, |h_2| < \delta$.
+By ODE comparison lemma, we have that for any $t \in \overline{J_1}$ $|\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| \le \epsilon_1 \frac{ne^{CT}}{A} (e^{A|t - t_0|} - 1) \le \epsilon_1 \frac{ne^{CT}}{A} (e^{AT} - 1)$.
+So, we set $\epsilon_1 = \frac{\epsilon Ae^{-CT}}{n(e^{AT} - 1)}$, we finally have that $|\Delta_{h_1}(t, x) - \Delta_{h_2}(t, x)| < \epsilon$ for every $(t, x) \in \overline{J_1} \times \overline{U_1}$ if $|h_1|, |h_2| < \delta$, which implies the existence of continuity of $\overline{J_1} \times \overline{U_1} \ni (t, x) \mapsto \partial_j V_i(t, x)$; $\theta$ is then in $C^1$.
+
+\end{document}
+
+

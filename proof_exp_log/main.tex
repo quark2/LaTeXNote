@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+Let us consider $k[[[t]]$, the ring of formal power series\footnote{Realized by giving the set of sequences $\mathbb{N} \cup {0} \to k$ (i.e., $(a_0, a_1, a_2, \cdots)$) the componentwise addition and polynomial-like multiplication, and denoting $(a_0, a_1, \cdots)$ by $\sum_{i = 0}^\infty a_i t^i$.}, where $k$ is a field of characteristic 0.
+We can define an ordinal derivation $D : t \mapsto 1$, so for any $f(t) = \sum_{n = 0}^\infty a_n t^n \in k[[t]]$, $Df(t) = \sum_{n = 1}^\infty n a_n t^{n - 1}$.
+Note that because this is a derivation (i.e., with Leibnitz' rule) so that we have that $D(f(t)^n) = n(f(t))^{n - 1} (Df(t))$, the famous chain rule holds: for any $f(t), g(t) \in k[[t]]$, if $f(g(t))$ makes sense (in two case: all coefficients of $f(t)$ but not finite are 0 or the constant term of $g(t)$ is 0), $Df(g(t)) = f'(g(t)) Dg(t)$, where $f'(t) \equiv Df(t)$.
+
+Now we let 
+\begin{displaymath}
+\exp{t} = \sum_{n = 0}^\infty \frac{1}{n!} t^n, 
+\end{displaymath} 
+
+\begin{displaymath}
+\log{(1 + t)} = \sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{n} t^n.
+\end{displaymath}
+
+As mentioned, $\log{\exp{t}}$ and $\exp{\log{(1 + t)}}$ are well-defined.
+(Note that $\log{(1 + f(t))} = \sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{n} (f(t))^n)$, and $\exp{t} - 1$ has zero constant coefficient, and so is $\log{(1 + t)}$.)
+Now we will show the followings: 
+\begin{displaymath}
+\log{\exp{t}} = t \;\;\; \textrm{ and } \;\;\; \exp{\log{(1 + t)}} = 1 + t.
+\end{displaymath}
+
+\textbf{Proof}) 
+At first, we have to note that 
+\begin{eqnarray*}
+D(\exp{t}) &=& \exp{t}, \\ 
+D(\log{(1 + t)}) &=& \sum_{n = 0}^\infty (-1)^n t^n, \\
+(1 + t) \left( \sum_{n = 0}^\infty (-1)^n t^n \right) &=& 1,
+\end{eqnarray*}
+of which the proof is straightforward.
+
+Denote $\log{\exp{t}} \equiv h_1(t)$.
+Then 
+\begin{eqnarray*}
+  Dh_1(t) &=& D(\log{(1 + (\exp{t} - 1))}) \\ 
+    &=& \left( \sum_{n = 0}^\infty (-1)^n (\exp{t} - 1)^n \right) D(\exp{t}).
+\end{eqnarray*}
+So, we obtain that 
+\begin{eqnarray*}
+  (1 + (\exp{t} - 1)) Dh_1(t) &=& (1 + (\exp{t} - 1)) \left( \sum_{n = 0}^\infty (-1)^n (\exp{t} - 1)^n \right) \exp{t} \\
+    &=& \exp{t}.
+\end{eqnarray*}
+Therefore, $Dh_1(t) = 1$.
+The only possible case for this is $h_1(t) = t + a$ for some $a \in k$.
+Finally, comparing the constant term of $\log{\exp{t}}$ (which can be calculated directly), we have that $\log{\exp{t}} = h_1(t) = t$.
+
+Now, let $h_2(t) \equiv \exp{\log{(1 + t)}}$, and let $h_2(t) = \sum_{n = 0}^\infty a_n t^n$.
+Then, 
+\begin{eqnarray*}
+  Dh_2(t) &=& D(\exp{\log{(1 + t)}}) \\ 
+    &=& \exp{\log{(1 + t)}} \left( \sum_{n = 0}^\infty (-1)^n t^n \right).
+\end{eqnarray*}
+
+From this,  
+\begin{eqnarray*}
+  (1 + t) Dh_2(t) &=& \exp{\log{(1 + t)}} (1 + t) \left( \sum_{n = 0}^\infty (-1)^n t^n \right) \\ 
+    &=& \exp{\log{(1 + t)}} = h_2(t).
+\end{eqnarray*}
+
+On the other hand, $Dh_2(t) = \sum_{n = 1}^\infty na_n t^{n - 1} = \sum_{n = 0}^\infty (n + 1) a_{n + 1} t^n$.
+We then have that $(1 + t) Dh_2(t) = \sum_{n = 0}^\infty ((n + 1) a_{n + 1} + na_n) t^n$.
+Comparing each coefficients, we now obtain that $(n + 1) a_{n + 1} + na_n = a_n$ for all $n \in \mathbb{N} \cup {0}$, or $a_{n + 1} = \frac{1 - n}{1 + n} a_n$.
+Note that $a_2 = a_{1 + 1} = \frac{1 - 1}{1 + 1} a_1 = 0$.
+From this, we obtain that $a_3 = a_4 = \cdots = 0$ recursively.
+Meanwhile, $a_1 = a_{0 + 1} = \frac{1 - 0}{1 + 0} a_0 = a_0$.
+Hence, we have that $h_2(t) = a_0 + a_0 t$.
+Finally, comparing the constant term of $\exp{\log{(1 + t)}}$ (which can be calculated directly), we obtain that $a_0 = 1$, so $\exp{\log{(1 + t)}} = h_2(t) = 1 + t$.
+
+\end{document}
+
