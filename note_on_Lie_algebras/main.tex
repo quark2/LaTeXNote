@@ -1785,11 +1785,15 @@ Note that $\mathcal{A} = T(V_\mathcal{X})$ can be wrriten as $\mathcal{A} = \big
 We consider a 'summation' $A = \sum_{i = 0}^\infty A_i$ ($A_i \in \mathcal{A}_i$), but the number of non-zero $A_i$ may not be finite.
 Of course, this is 'well-defined' if we just regard such element as a sequence $(A_0, A_1, A_2, \cdots)$.
 One can give an addition and a multiplication to the set of such elements by pointwise.
+This situation can be constructed more concretely; consider $\overline{\mathcal{A}} = \mathcal{A}_0 \times \mathcal{A}_1 \times \mathcal{A}_2 \times \cdots$, and give a componentwise addition and scalar multiplication, and denote $(A_0, A_1, A_2, \cdots) \in \mathcal{A}_0 \times \mathcal{A}_1 \times \mathcal{A}_2 \times \cdots$ by $\sum_{i = 0}^\infty A_i$.
 Also, we can define a 'multiplication' as $(\sum_{i = 0}^\infty A_i) (\sum_{i = 0}^\infty B_i) = \sum_{i = 0}^\infty (\sum_{j = 0}^i A_j B_{i - j})$, naturally.
+This multiplication makes sense since for each $i$ $\sum_{j = 0}^i A_j B_{i - j}$ is homogeneous of degree $i$.
 Now we let $\overline{\mathcal{A}}$ be the set of all such $\sum_{i = 0}^\infty A_i$, called a \textbf{formal power series}, and we can give an algebra structure as seen.
 In the similar sense one can define $\overline{\mathcal{F}_L(\mathcal{X})}$.
 Also we call $A \in \overline{\mathcal{A}}$ a Lie element if $A \in \overline{\mathcal{F}_L(\mathcal{X})}$.
 It is immediate that $\sum_{i = 0}^\infty A_i$ ($A_i \in \mathcal{A}_i$) is a Lie element if and only if $A_i \in \mathcal{F}_L(\mathcal{X})$.
+The Lie product is well-defined because of its well-acting graded structure.
+Note that the graded structure gives this formal power series structure as well.
 
 Our interest is in whether the Friedrichs' lemma can be used in $\overline{\mathcal{A}}$ and $\overline{\mathcal{F}_L(\mathcal{X})}$, especially the part for determination whether a given element in $\overline{\mathcal{A}}$ is in $\overline{\mathcal{F}_L(\mathcal{X})}$ or not.
 To do this we need to define $\overline{\mathcal{A} \otimes \mathcal{A}}$ as above.
