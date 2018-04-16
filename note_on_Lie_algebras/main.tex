@@ -1494,7 +1494,7 @@ There is, however, a good news; we have a useful tool.
 We consider $\ReR^m$ ($m \ge l$) and a subgroup $I = \{\sum a_i e_i \SBar a_i \in \InZ\} + \InZ e'$, where $(e_1, \cdots, e_m)$ is the standard (orthonormal) basis of $\ReR^m$ and $e' \in \ReR^m$ (it may be 0).
 Also we let $J$ be a certain subgroup of $I$ where $(\alpha, \beta) \in \InZ$ for any $\alpha, \beta \in J$.
 We let $\Phi$ be a subset of vectors in $J$ having one certain (squared) length or two lengths.
-It is immediate that $Phi$ is finite so that $\Phi$ satisfies (RS1).
+It is immediate that $\Phi$ is finite so that $\Phi$ satisfies (RS1).
 Also due to the ratio of the lengths of long and short and the lattice-structure of $J$, (RS2) is immediate.
 Now (RS3) and (RS4) seems hard.
 But the lattice-structure and group property of $J$ and the length-preservation of $\sigma_\alpha$ say that if (RS3) holds then (RS4) holds automatically.
@@ -1519,7 +1519,7 @@ It is also immediate that $\Phi = \{\pm(e_i \pm e_j) \SBar i \ne j\}$ and that $
 $G_2$ : Let $m = 2 + 1$ and $e' = 0$ and $E = P_{e_1 + e_2 + e_3}$ and $J = I \cap E$, and $\Phi = \{\alpha \in J \SBar (\alpha, \alpha) = \textrm{2 or 6}\}$.
 Then it is immediate that $\Phi = \pm\{e_1 - e_2, e_2 - e_3, e_1 - e_3, 2e_1 - e_2 - e_3, 2e_2 - e_1 - e_3, -2e_3 + e_1 + e_2\}$ (hence $|\Phi| = 12$).
 Note that since we choose vectors with squared length 6, we do not have (RS3) yet as for $A_l$.
-However, if $\beta \in \Phi$ has squared length 6, one can show that for any $\alpha \in \Phi$ $(\alpha, \beta)$ is 0 or $\pm 3$, which implies (RS3) so that $\Phi$ is a root system,and  that $\{e_1 - e_2, 2e_2 - e_1 - e_3\}$ is a base of $\Phi$, where its Cartan matrix is of type $G_2$.
+However, if $\beta \in \Phi$ has squared length 6, one can show that for any $\alpha \in \Phi$ $(\alpha, \beta)$ is 0 or $\pm 3$, which implies (RS3) so that $\Phi$ is a root system, and that $\{e_1 - e_2, 2e_2 - e_1 - e_3\}$ is a base of $\Phi$, where its Cartan matrix is of type $G_2$.
 
 \newpage
 
@@ -1738,13 +1738,16 @@ Therefore, for each type we see that there is unique (up to isomorphism) finite-
 There are some useful notes for free Lie algebras.
 First, we let a (just) set $\mathcal{X} = \{X_1, \cdots, X_n\}$ and consider the free objects $T(V_\mathcal{X})$ and $\mathcal{F}_L(\mathcal{X}) (\subseteq (T(V_\mathcal{X}))_L)$.
 Now we call $A \in T(V_\mathcal{X})$ a \textbf{Lie element} if $A \in \mathcal{F}_L(\mathcal{X})$.
-We call $A \in T(V_\mathcal{X})$ \textbf{homogeneous of degree $r$} if $A$ is a linear combination of elements in the form of $X_{i_1} X_{i_2} \cdots X_{i_r}$.
+We call $A \in T(V_\mathcal{X})$ \textbf{homogeneous of degree $r$}, of which the set is denoted by $T(V_\mathcal{X})_r$ if $A$ is a linear combination of elements in the form of $X_{i_1} X_{i_2} \cdots X_{i_r}$.
 It is immediate that every $A \in T(V_\mathcal{X})$ can be written (uniquely) as $A = \sum A_i$, where $A_i$ is homogeneous of degree $i$.
+Note that if $A, B \in T(V_\mathcal{X})$ are homogeneous of degree $r$ and $s$, respectively, then $AB$ is homogeneous of degree $r + s$.
+Also, $T(V_\mathcal{X})_r$ is a subspace.
+From these two we can say that $T(V_\mathcal{X})$ is \textbf{graded}.
 
 The following lemma (due to \textbf{Dynkin-Specht-Wever}) is relative to the homogeneity.
 We employ again the multiple Lie product $[ABC \cdots Z]$.
-\textit{We define $\sigma \in L([T(V_\mathcal{X}), T(V_\mathcal{X})], \mathcal{F}_L(\mathcal{X}))$ with $\sigma(X_i) = X_i$ and $\sigma(X_{i_1} \cdots X_{i_r}) = [X_{i_1} \cdots X_{i_r}]$.
-Then a homogeneous $A \in [T(V_\mathcal{X}), T(V_\mathcal{X})]$ of degree $r$ is a Lie element if and only if $\sigma(A) = rA$.}
+\textit{We define $\sigma \in L(T(V_\mathcal{X}), \mathcal{F}_L(\mathcal{X}))$ with $\sigma(1) = 0$ and $\sigma(X_i) = X_i$ and $\sigma(X_{i_1} \cdots X_{i_r}) = [X_{i_1} \cdots X_{i_r}]$.
+Then a homogeneous $A \in T(V_\mathcal{X})$ of degree $r$ is a Lie element if and only if $\sigma(A) = rA$.}
 Since the form of $\sigma(A)$ is a form of a Lie element, if $\sigma(A) = rA$, then $A$ is a Lie element.
 Now assume that $A$ is a Lie element.
 To prove this bizarre lemma we need to see that $\sigma(A) \in \textrm{Der}(\mathcal{F}_L(\mathcal{X}))$.
@@ -1754,9 +1757,11 @@ Thus $\sigma(X_{i_1} X_{i_2} \cdots X_{i_s} Y) = f(X_{i_1} X_{i_2} \cdots X_{i_s
 Especially, if $X \in \mathcal{F}_L(\mathcal{X})$, we have that $f(X)Y = [X, Y]$.
 From this we obtain that, if $X, Y \in \mathcal{F}_L(\mathcal{X})$,  $\sigma([X, Y]) = \sigma(XY) - \sigma(YX) = f(X) \sigma(Y) - f(Y) \sigma(X) = [X, \sigma(Y)] + [\sigma(X), Y]$.
 Thus $\sigma$ is a derivation.
-This fact implies our lemma immediately.
-Assume that $\sigma(A) = (r - 1)A$ if $A$ is of degree $r - 1$.
+Now, assume that $\sigma(A) = (r - 1)A$ if $A$ is of degree $r - 1$.
 Then $\sigma([X_i, A]) = [\sigma(X_i), A] + [X_i, \sigma(A)] = [X_i, A] + [X_i, (r - 1)A] = r[X_i, A]$, which implies the result due to the induction on $r$.
+Now, we let $\mathcal{F}_L(\mathcal{X})_r = T(V_\mathcal{X})_r \cap \mathcal{F}_L(\mathcal{X})$.
+Then, for $A \in \mathcal{F}_L(\mathcal{X})_r$ and $B \in \mathcal{F}_L(\mathcal{X})_s$, $[A, B] \in T(V_\mathcal{X})_{r + s}$ $\sigma([A, B]) = [\sigma(A), B] + [A, \sigma(B)] = (r + s)[A, B]$, so $[A, B] \in \mathcal{F}_L(\mathcal{X})_{r + s}$.
+Hence, we can say that \textit{$\mathcal{F}_L(\mathcal{X})$ is also graded.}
 
 Another lemma (due to \textbf{Friedrichs}) is introduced.
 We define a product rule of $T(V_\mathcal{X}) \otimes T(V_\mathcal{X})$ as $(A \otimes B)(C \otimes D) = (AC) \otimes (BD)$.
