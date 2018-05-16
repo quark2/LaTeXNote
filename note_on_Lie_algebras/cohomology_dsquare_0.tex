@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+
+\newcommand{\NaN}{\mathbb{N}}
+\newcommand{\InZ}{\mathbb{Z}}
+\newcommand{\RaQ}{\mathbb{Q}}
+\newcommand{\ReR}{\mathbb{R}}
+\newcommand{\CoC}{\mathbb{C}}
+
+\newcommand{\SBar}{\;|\;}
+
+\newcommand{\tr}[1]{\mathrm{tr}#1}
+\newcommand{\tru}[2]{\mathrm{tr}_{#1}#2}
+
+\newcommand{\lie}[1]{\mathfrak{#1}}
+\newcommand{\ad}[1]{\mathrm{ad}\; #1}
+\newcommand{\adu}[2]{\mathrm{ad}_{#1}\; #2}
+
+\newcommand{\triangleleftneq}{%
+  \mathrel{\ooalign{$\lneq$\cr\raise.22ex\hbox{$\lhd$}\cr}}}
+
+\begin{document}
+
+\begin{eqnarray*}
+  f : \lie{g} \times \lie{g} \times \cdots \times \lie{g} (\textrm{$n$-times}) \to V \\
+  df(X_0, X_1, \cdots, X_n) = \sum_{i = 0}^n (-1)^i \rho(X_i) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_n) \\ 
+    + \sum_{i < j} (-1)^{i + j} f([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_n) \\
+  d^2 f(X_0, X_1, \cdots, X_{n + 1}) = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) df(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_{n + 1}) \\ 
+    + \sum_{i < j} (-1)^{i + j} df([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{n + 1}) \\
+  (\textrm{the first part of the first term}) \\
+  = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) \left( \sum_{j < i} (-1)^j \rho(X_j) f(X_0, X_1, \cdots, \hat{X_j}, \cdots, \hat{X_i}, \cdots, X_{n + 1} \right. \\ 
+    \left. + \sum_{j > i} (-1)^{j - 1} \rho(X_j) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{n + 1}) \right) \\ 
+    = \sum_{i < j} (-1)^{i + j} \rho([X_i, X_j]) f((\hat{j}, \hat{i})) \\
+  (\textrm{the second part of the first term}) \\
+  = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) \left( \sum_{r < s < i} (-1)^{r + s} f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right. \\
+    \left. + \sum_{r < i < s} (-1)^{r + s - 1} f([X_r, X_s], (\hat{r}, \hat{i}, \hat{s})) + \sum_{i < r < s} (-1)^{r + s - 2} f([X_r, X_s], (\hat{i}, \hat{r}, \hat{s})) \right) \\
+  (\textrm{the first part of the second term}) \\
+  = \sum_{r < s} (-1)^{r + s} \left( \vphantom{\sum} \rho([X_r, X_s]) f((\hat{r}, \hat{s})) + \sum_{i < r} (-1)^{i + 1} f([X_r, X_s], (\hat{i}, \hat{r}, \hat{s})) \right. \\
+    \left. + \sum_{r < i < s} (-1)^{i} f([X_r, X_s], (\hat{r}, \hat{i}, \hat{s})) + \sum_{s < i} (-1)^{i - 1} f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right) \\
+  (\textrm{the first part of the first term}) + (\textrm{the second part of the first term}) + \\ 
+  (\textrm{the first part of the second term}) = 0
+\end{eqnarray*}
+\begin{eqnarray*}
+  (\textrm{the second part of the second term; deleting 0}) \\
+  = \sum_{i < j} (-1)^{i + j} \left( \sum_{r < i} (-1)^{r + 1} f([[X_i, X_j], X_r], (\hat{r}, \hat{i}, \hat{j})) \right. \\ 
+    \left. + \sum_{i < r < j} (-1)^{r} f([[X_i, X_j], X_r], (\hat{i}, \hat{r}, \hat{j})) \right. \\ 
+    \left. + \sum_{j < r} (-1)^{r - 1} f([[X_i, X_j], X_r], (\hat{i}, \hat{j}, \hat{r})) \right) \\
+  = \sum_{i < j < r} (-1)^{i + j + r + 1} f([[X_j, X_r], X_i] - [[X_i, X_r], X_j] + [[X_i, X_j], X_r], (\hat{i}, \hat{j}, \hat{r})) \\
+  = 0 \\
+  (\textrm{the second part of the second term; not deleting 0}) \\
+  = \sum_{i < j} (-1)^{i + j} \left( \sum_{r < s < i < j} (-1)^{r + 1 + s + 1} f([X_r, X_s], [X_i, X_j], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. + \sum_{r < i < s < j} (-1)^{r + 1 + s} f([X_r, X_s], [X_i, X_j], (\hat{r}, \hat{i}, \hat{s}, \hat{j})) \right. \\
+    \left. + \sum_{r < i < j < s} (-1)^{r + 1 + s - 1} f([X_r, X_s], [X_i, X_j], (\hat{r}, \hat{i}, \hat{j}, \hat{s})) \right. \\
+    \left. + \sum_{i < r < s < j} (-1)^{r + s} f([X_r, X_s], [X_i, X_j], (\hat{i}, \hat{r}, \hat{s}, \hat{j})) \right. \\
+    \left. + \sum_{i < r < j < s} (-1)^{r + s - 1} f([X_r, X_s], [X_i, X_j], (\hat{i}, \hat{r}, \hat{j}, \hat{s})) \right. \\
+    \left. + \sum_{i < j < r < s} (-1)^{r - 1 + s - 1} f([X_r, X_s], [X_i, X_j], (\hat{i}, \hat{j}, \hat{r}, \hat{s})) \right) \\
+  = \sum_{r < s < i < j} (-1)^{i + j + r + s} \left( f([X_r, X_s], [X_i, X_j], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. - f([X_r, X_i], [X_s, X_j], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. + f([X_r, X_j], [X_s, X_i], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. + f([X_s, X_i], [X_r, X_j], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. - f([X_s, X_j], [X_r, X_i], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right. \\
+    \left. + f([X_i, X_j], [X_r, X_s], (\hat{r}, \hat{s}, \hat{i}, \hat{j})) \right) \\
+  = 0 \\
+  \therefore d^2 = 0.
+\end{eqnarray*}
+
+\end{document}
+
+
