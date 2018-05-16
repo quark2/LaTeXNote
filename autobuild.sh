@@ -1,4 +1,4 @@
-timemod=`date -r $1 +%s`
+timemod=""
 
 while true ; do
   if [ "`date -r $1 +%s`" != "$timemod" ] ; then
