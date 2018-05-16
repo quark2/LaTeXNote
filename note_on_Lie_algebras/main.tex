@@ -535,37 +535,34 @@ Now we shall prove that \textit{every finite-dimensional Lie algebra has a Levi 
 
 The proof\footnote{\scriptsize{http://www.maths.adelaide.edu.au/thomas.leistner/2010-1-honours/LA10-handout01-Levi.pdf}} is starting from the case for $\lie{r}$ having non-zero proper ideal $\lie{a}$ of $\lie{g}$.
 It is good to use the induction on $\dim{\lie{g}}$; we assume that if $\dim{\lie{g}} < n$ for some $n \in \NaN$ then $\lie{g}$ has a Levi factor and we let $\dim{\lie{g}} = n$, where the case for $n = 1$ is trivial.
-Then, $\lie{g}/\lie{a}$ has a Levi factor $\lie{g}'_1$, i.e., $\lie{g}/\lie{a} = \lie{g}'_1 \oplus \lie{r}/\lie{a}$.
-Let $\lie{g}'$ be the preimage of $\lie{g}'_1$ under the canonical projection $\lie{g} \to \lie{g}/\lie{r}$.
-Then it is immediate that $\lie{g}' \lneq \lie{g}$ and that $\lie{a}$ is the radical of $\lie{g}'$.
-By induction hypothesis, $\lie{g}'$ has a Levi factor $\lie{g}_1$, and it is obviously a Levi factor of $\lie{g}$.
+Then, $\lie{g}/\lie{a}$ has a Levi factor $\tilde{\lie{g}_0}$, i.e., $\lie{g}/\lie{a} = \tilde{\lie{g}_0} \oplus \lie{r}/\lie{a}$.
+Let $\lie{g}_0$ be the preimage of $\tilde{\lie{g}_0}$ under the canonical projection $\lie{g} \to \lie{g}/\lie{r}$.
+Then it is immediate that $\lie{g}_0 \lneq \lie{g}$ and that $\lie{a} = \textrm{rad}(\lie{g}_0)$.
+By induction hypothesis, $\lie{g}_0$ has a Levi factor $\lie{g}_1$, and it is obviously a Levi factor of $\lie{g}$.
 
 We assumed that $\lie{r}$ has a non-zero proper ideal of $\lie{g}$.
 Now we shall handle the case for $\lie{r}$ with no such $\lie{a}$.
 In this case we shall construct a Levi factor explicitly.
 Since $\lie{g}/\lie{r}$ is semisimple, we can set our strategy to use the Weyl's theorem.
-Considering $[\lie{r}, \lie{r}]$, in this case $\lie{r}$ is Abelian.
-This case is splitted again into two cases: $[\lie{g}, \lie{r}] = 0$ or $[\lie{g}, \lie{r}] = \lie{r}$.
-In the former case, $\lie{r}$ is actually the center of $\lie{g}$, so one can consider a representation $\lie{g}/\lie{r} \to L(\lie{g})$ ($X + \lie{r} \mapsto \ad{X}$).
+By the assumption, these two are immediate: $[\lie{r}, \lie{r}] = 0$, and $[\lie{g}, \lie{r}] = 0$ or $[\lie{g}, \lie{r}] = \lie{r}$.
+Attacking the former case is easy; $\lie{r}$ is actually the center of $\lie{g}$, so one can consider a representation $\lie{g}/\lie{r} \to L(\lie{g})$ ($X + \lie{r} \mapsto \ad{X}$).
 It is of course faithful and $\lie{g}/\lie{r}$ is semisimple, and $\lie{r}$ is a $\lie{g}/\lie{r}$-submodule of $\lie{g}$.
 Then, by Weyl's theorem, $\lie{r}$ has a complementary $\lie{g}_1$, and obviously this is a Levi factor.
 
 Now consider the case for $[\lie{g}, \lie{r}] = \lie{r}$.
+Note that in this case $\lie{c}_\lie{g} = 0$ because it is in $\lie{r}$ so that it must be $0$ or $\lie{r}$ and the latter implies $[\lie{g}, \lie{r}] = 0$.
 To construct a $\lie{g}/\lie{r}$-module we use a method similar to a way which is used in the proof of Weyl's theorem.
-We define a representation $\rho : \lie{g} \to \lie{gl}(\lie{g})$ as $\rho(X) \phi = [\ad{X}, \phi]$ ($X \in \lie{g}$), and let $\lie{K} = \{\phi \in \lie{gl}(\lie{g}) \SBar \phi(\lie{g}) \subseteq \lie{r}, \phi|_{\lie{r}} = c1 \; (c \in k)\}$ and $\lie{L} = \{\phi \in \lie{K} \SBar \phi|_\lie{r} = 0\}$.
-As in the proof of Weyl's theorem, $\dim{\lie{K}} - \dim{\lie{L}} = 1$ and $\rho(\lie{g}) \lie{K} \subseteq \lie{L}$.
+We define a representation $\tau : \lie{g} \to \lie{gl}(\lie{g})$ as $\tau(X) \phi = [\ad{X}, \phi]$ ($X \in \lie{g}$), and let $\lie{K} = \{\phi \in \lie{gl}(\lie{g}) \SBar \phi(\lie{g}) \subseteq \lie{r}, \phi|_{\lie{r}} = c1 \; (c \in k)\}$ and $\lie{L} = \{\phi \in \lie{K} \SBar \phi|_\lie{r} = 0\}$.
+As in the proof of Weyl's theorem, $\dim{\lie{K}} - \dim{\lie{L}} = 1$ and $\tau(\lie{g}) \lie{K} \subseteq \lie{L}$.
 They are not $\lie{g}/\lie{r}$-modules, but we can modify them by considering another set; $\ad{\lie{r}}$.
 Of course, $\ad{\lie{r}} \subseteq \lie{L}$.
-For any $X \in \lie{r}$, $\phi \in \lie{K}$ and $A \in \lie{g}$ we have that $(\rho(X)(\phi))(A) = [X, \phi(A)] - \phi([X, A]) = -c[X, A] = (\ad{(-cX)})(A)$ for some $c \in k$ since $\phi(A)$ and $[X, Y]$ are in $\lie{r}$ and $\lie{r}$ is Abelian, so $\rho(\lie{r})(\lie{K}) \subseteq \ad{\lie{r}}$.
-It implies that we can regard $\lie{K}/\lie{L}$ and $\lie{K}/(\ad{\lie{r}})$ as $\lie{g}/\lie{r}$-modules.
-Furthermore, if $\pi : \lie{K}/(\ad{\lie{r}}) \to \lie{K}/\lie{L}$ is the canonical projection, it is immediate that $\pi$ is a $\lie{g}/\lie{r}$-module homomorphism, so $\ker{\pi}$ is a $\lie{g}/\lie{r}$-submodule of $\lie{K}/(\ad{\lie{r}})$.
-Since $\lie{g}/\lie{r}$ is semisimple, by Weyl's theorem again, we can find the complementary of $\ker{\pi}$, which is one-dimensional so that it can be written as $k(\psi + \ad{\lie{r}})$ ($\psi \in \lie{K} \setminus (\lie{L})$).
-On the other hand, since $k(\psi + \ad{\lie{r}}$ is one-dimensional, $\lie{g}/\lie{r}$ acts on this module trivially, which implies that $\rho(\lie{g})(\psi) \subseteq \ad{\lie{r}}$.
-Now let $\lie{g}_1 = \{X \in \lie{g} \SBar \rho(X)(\psi) = 0\}$, which is obviously a subalgebra.
-First, since $\psi \notin \ad{\lie{r}}$, $\lie{g}_1 \cap \lie{r}$ must be 0.
-Next, we choose $X \in \lie{g}$ and denote $Y = \psi(X)$.
-Then $\psi(Y) = cY$ for some $0 \ne c \in k$, so $\psi(X - \frac{1}{c} Y) = 0$, or $X - \frac{1}{c} Y \in \lie{g}_1$.
-Hence $X = (X - \frac{1}{c} Y) + \frac{1}{c} Y$, which implies that $\lie{g} = \lie{g}_1 \oplus \lie{r}$.
+For any $X \in \lie{r}$, $\phi \in \lie{K}$ and $A \in \lie{g}$ we have that $(\tau(X)(\phi))(A) = [X, \phi(A)] - \phi([X, A]) = -c[X, A] = (\ad{(-cX)})(A)$ for some $c \in k$ since $\phi(A)$ and $[X, A]$ are in $\lie{r}$ and $\lie{r}$ is Abelian, so $\tau(\lie{r})(\lie{K}) \subseteq \ad{\lie{r}}$, or $\tau(X)\phi + \ad{\lie{r}} = 0 + \ad{\lie{r}}$ for every $X \in \lie{r}$ and $\phi \in \lie{K}$.
+It implies that we can regard $\lie{K}/(\ad{\lie{r}})$ and $\lie{L}/(\ad{\lie{r}})$ as $\lie{g}/\lie{r}$-modules.
+Since $\lie{g}/\lie{r}$ is semisimple, by Weyl's theorem again, we can find the complementary of $\lie{L}/(\ad{\lie{r}})$ in $\lie{K}/(\ad{\lie{r}})$, which is one-dimensional so that it can be written as $k(\psi + \ad{\lie{r}})$, where $\psi \in \lie{K} \setminus (\lie{L})$.
+On the other hand, since $k(\psi + \ad{\lie{r}})$ is one-dimensional, $\lie{g}/\lie{r}$ acts on this module trivially, which implies that $\tau(\lie{g})(\psi) \subseteq \ad{\lie{r}}$.
+Now look up the non-zero scalar $c$, where $\psi|_\lie{r} = c1_\lie{r}$, and let $\lie{g}_1 = \{X \in \lie{g} \SBar \tau(X)(\psi) = 0\}$, which is obviously a subalgebra.
+For $X \in \lie{r}$, since $\tau(X)\psi = \ad{(-cX)}$ and $\lie{c}_\lie{g} = 0$, $\tau(X)\psi = 0$ only if $X = 0$.
+From this, $\lie{g}_1$, the kernel of $\lie{g} \ni A \mapsto \tau(A)\psi$, must be of dimensional $\dim{\lie{g}} - \dim{\lie{r}}$, and $\lie{g}_1 \cap \lie{r} = 0$, which finally implies that $\lie{g} = \lie{g}_1 \oplus \lie{r}$.
 Therefore, we can say that $\lie{g}_1$ is a Levi factor.
 Finally, induction on $n$ finishes the proof.
 
@@ -1813,7 +1810,7 @@ In the next page this configuration and the above lemmas give a new powerful for
 Now we get one of most important formulas in Lie theory.
 As seen, on $T(V_\mathcal{X})$ we can define $\exp{A} = 1 + A + \frac{1}{2!} A^2 + \frac{1}{3!} A^3 + \cdots$ and $\log{(1 +A)} = A - \frac{1}{2} A^2 + \frac{1}{3} A^3 - \cdots$ for $A \in \bigoplus_{i = 1}^\infty (T(V_\mathcal{A}))_i \subseteq \overline{T(V_\mathcal{X})}$ (there is no issue about convergence; all we use is formal!)
 Thanks to the 'standard' derivation, defined by $A \mapsto 1$, one can easily see that $\exp{\log{(1 + A)}} = 1 + A$ and $\log{\exp{A}} = A$.
-Also, if $A, B \in \bigoplus_{i = 1}^\infty (T(V_\mathcal{A}))_i$ with $AB = BA$, it is immediate that $\exp{(A + B)} = \exp{A} \exp{B}$ and $\log{((1 + A)(1 + B))} = \log{(1 + A)} + \log{(1 + B)}$.
+Also, if $A, B \in \bigoplus_{i = 1}^\infty (T(V_\mathcal{A}))_i$ with $AB = BA$, it is immediate that $\exp{(A + B)} = \exp{A} \exp{B}$ and $\log{((1 + A)(1 + B))} = \log{(1 + A)} + \log{(1 + B)}$ (it is from $\log{((1 + A)(1 + B))} = \log{((\exp{\log{A}}) (\exp{\log{B}}))}$).
 
 What about when $AB \ne BA$?
 The following theorem gives an answer and the important formula: \textit{Let $X, Y \in \mathcal{X}$.
@@ -1852,6 +1849,7 @@ To avoid this problem we extend the field.
 Let $K_1$ be the field of quotients of $k[[t_1]]$, which is the algebra of formal power series with respect to an indeterminant $t_1$, and we denote the extensipn of $L_k(V)$ by $L_{K_1}(V)$.
 Now, instead of $\exp{D_1}$, we consider $\exp{t_1 D_1}$.
 If we fix a basis of $V$ and denote the $(i, j)$-component of the matrix of $D_1^n$ relative to the basis by $(D_1^n)_{ij}$, then $\sum_{n = 0}^\infty ((D_1^n)_{ij}/n!) t_1^n$ is a well-defined element in $K_1$, so $\exp{t_1 D_1}$ is well-defined.
+Also, it is immediate that $L_{K_1}(V)$ is graded.
 
 We go further.
 Let $D_2 \in L_k(V)$ and we consider $\exp{D_1} \exp{D_2}$.
@@ -2250,7 +2248,7 @@ Since $\dim{\lie{g}_\alpha} = 1$ for any root $\alpha$, the dimension is the car
 This is the list of the dimensions of finite-dimensional simple Lie algebras in each types:
 
 \begin{eqnarray*}
-  &\;& A_l \;:\; l(l + 2), \;\;\; B_l \;:\; l(2l + 1), \;\;\; C_l \;:\; l(2l + 1), \;\;\; E_l \;:\; l(2l - 1), \\
+  &\;& A_l \;:\; l(l + 2), \;\;\; B_l \;:\; l(2l + 1), \;\;\; C_l \;:\; l(2l + 1), \;\;\; D_l \;:\; l(2l - 1), \\
   &\;& E_6 \;:\; 78, \;\;\; E_7 \;:\; 133, \;\;\; E_8 \;:\; 248, \;\;\; F_4 \;:\; 52, \;\;\; G_2 \;:\; 14.
 \end{eqnarray*}
 
