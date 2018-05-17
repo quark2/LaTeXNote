@@ -26,21 +26,21 @@
 \begin{document}
 
 \begin{eqnarray*}
-  f : \lie{g} \times \lie{g} \times \cdots \times \lie{g} (\textrm{$n$-times}) \to V \\
-  df(X_0, X_1, \cdots, X_n) = \sum_{i = 0}^n (-1)^i \rho(X_i) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_n) \\ 
+  f : \lie{g} \times \lie{g} \times \cdots \times \lie{g} (\textrm{$r$-times}) \to V \\
+  df(X_0, X_1, \cdots, X_n) = \sum_{i = 0}^r (-1)^i \rho(X_i) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_n) \\ 
     + \sum_{i < j} (-1)^{i + j} f([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_n) \\
-  d^2 f(X_0, X_1, \cdots, X_{n + 1}) = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) df(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_{n + 1}) \\ 
-    + \sum_{i < j} (-1)^{i + j} df([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{n + 1}) \\
+  d^2 f(X_0, X_1, \cdots, X_{r + 1}) = \sum_{i = 0}^{r + 1} (-1)^i \rho(X_i) df(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_{r + 1}) \\ 
+    + \sum_{i < j} (-1)^{i + j} df([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{r + 1}) \\
   (\textrm{the first part of the first term}) \\
-  = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) \left( \sum_{j < i} (-1)^j \rho(X_j) f(X_0, X_1, \cdots, \hat{X_j}, \cdots, \hat{X_i}, \cdots, X_{n + 1} \right. \\ 
-    \left. + \sum_{j > i} (-1)^{j - 1} \rho(X_j) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{n + 1}) \right) \\ 
+  = \sum_{i = 0}^{r + 1} (-1)^i \rho(X_i) \left( \sum_{j < i} (-1)^j \rho(X_j) f(X_0, X_1, \cdots, \hat{X_j}, \cdots, \hat{X_i}, \cdots, X_{r + 1} \right. \\ 
+    \left. + \sum_{j > i} (-1)^{j - 1} \rho(X_j) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{r + 1}) \right) \\ 
     = \sum_{i < j} (-1)^{i + j} \rho([X_i, X_j]) f((\hat{j}, \hat{i})) \\
   (\textrm{the second part of the first term}) \\
-  = \sum_{i = 0}^{n + 1} (-1)^i \rho(X_i) \left( \sum_{r < s < i} (-1)^{r + s} f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right. \\
+  = \sum_{i = 0}^{r + 1} (-1)^i \rho(X_i) \left( \sum_{r < s < i} (-1)^{r + s} f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right. \\
     \left. + \sum_{r < i < s} (-1)^{r + s - 1} f([X_r, X_s], (\hat{r}, \hat{i}, \hat{s})) + \sum_{i < r < s} (-1)^{r + s - 2} f([X_r, X_s], (\hat{i}, \hat{r}, \hat{s})) \right) \\
   (\textrm{the first part of the second term}) \\
-  = \sum_{r < s} (-1)^{r + s} \left( \vphantom{\sum} \rho([X_r, X_s]) f((\hat{r}, \hat{s})) + \sum_{i < r} (-1)^{i + 1} f([X_r, X_s], (\hat{i}, \hat{r}, \hat{s})) \right. \\
-    \left. + \sum_{r < i < s} (-1)^{i} f([X_r, X_s], (\hat{r}, \hat{i}, \hat{s})) + \sum_{s < i} (-1)^{i - 1} f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right) \\
+  = \sum_{r < s} (-1)^{r + s} \left( \rho([X_r, X_s]) f((\hat{r}, \hat{s})) + \sum_{i < r} (-1)^{i + 1} \rho(X_i) f([X_r, X_s], (\hat{i}, \hat{r}, \hat{s})) \right. \\
+    \left. + \sum_{r < i < s} (-1)^{i} \rho(X_i) f([X_r, X_s], (\hat{r}, \hat{i}, \hat{s})) + \sum_{s < i} (-1)^{i - 1} \rho(X_i) f([X_r, X_s], (\hat{r}, \hat{s}, \hat{i})) \right) \\
   (\textrm{the first part of the first term}) + (\textrm{the second part of the first term}) + \\ 
   (\textrm{the first part of the second term}) = 0
 \end{eqnarray*}
