@@ -20,6 +20,9 @@
 \newcommand{\ad}[1]{\mathrm{ad}\; #1}
 \newcommand{\adu}[2]{\mathrm{ad}_{#1}\; #2}
 
+\newcommand{\Rad}[1]{\mathrm{Rad}(#1)}
+\newcommand{\Nil}[1]{\mathrm{Nil}(#1)}
+
 \newcommand{\triangleleftneq}{%
   \mathrel{\ooalign{$\lneq$\cr\raise.22ex\hbox{$\lhd$}\cr}}}
 
@@ -565,6 +568,40 @@ For $X \in \lie{r}$, since $\tau(X)\psi = \ad{(-cX)}$ and $\lie{c}_\lie{g} = 0$,
 From this, $\lie{g}_1$, the kernel of $\lie{g} \ni A \mapsto \tau(A)\psi$, must be of dimensional $\dim{\lie{g}} - \dim{\lie{r}}$, and $\lie{g}_1 \cap \lie{r} = 0$, which finally implies that $\lie{g} = \lie{g}_1 \oplus \lie{r}$.
 Therefore, we can say that $\lie{g}_1$ is a Levi factor.
 Finally, induction on $n$ finishes the proof.
+
+\newpage
+
+\textbf{More on radicals and nil radicals}
+
+For some purpose on later, we discuss more of basic properties about radicals and nil radicals.
+In this page, $\lie{g}$ is always a finite-dimensional Lie algebra.
+First, \textit{if $\rho : \lie{g} \to \lie{gl}(V)$ is a finite-dimensional irreducible representation, then $\rho(\lie{g}' \cap \Rad{\lie{g}}) = 0$.}
+From this, considering $W$ and $V/W$ with an induction on the dimension if $V$ is no longer irreducible so that it has a non-zero proper submodule $W$, we can obtain the generalization: \textit{if $\rho : \lie{g} \to \lie{gl}(V)$ is a finite-dimensional representation, then all elements in $\rho(\lie{g}' \cap \Rad{\lie{g}})$ are nilpotent endomorphism.}
+The proof of proposition is following: Actually, if we let $\rho(\lie{a}) = \rho(\Rad{\lie{g}})^{(r)}$ where $\rho(\lie{a}) \ne 0$ but $\rho(\lie{a})' = 0$, and we will show that $\rho(\lie{g}' \cap \lie{a}) = 0$.
+Let $X \in \lie{g}$ and $A \in \lie{a}$.
+Since $[A, [X, A]] = 0$, we obtain that for every $i > 1$ $\tr{\rho([X, A])^i} = \tr{(\rho(X), [\rho(A), \rho([X, A])^{i - 1}])} = 0$, which implies that $\rho([X, A])$ is nilpotent.
+Further, since $\lie{a}$ is Abelian, we obtain that all in $\rho([\lie{g}, \lie{a}])$ is nilpotent.
+Now, by the main lemma of Engel's theorem, if we let $W = \{ w \in V \SBar \rho([\lie{g}, \lie{a}])w = 0 \}$, $W$ is not 0.
+Also, since $[\lie{g}, \lie{a}]$ is an ideal, $W$ is a submodule of $V$, so that $W = V$ by the irreducibility.
+Therefore, $\rho([\lie{g}, \lie{a}]) = 0$.
+To attack $\rho(\lie{g}' \cap \lie{a})$, we consider $X, Y \in \lie{g}$ with $[X, Y] \in \lie{a}$, and we can see that $\rho([Y, [X, Y]]) = 0$ by the previous result.
+The same argument as above finally shows that $\rho(\lie{g}' \cap \lie{a}) = 0$.
+Now, if $\rho(\lie{a}) = \rho(\Rad{\lie{g}})$, then $\rho(\lie{g}' \cap \Rad{\lie{g}}) = 0$, as we seek.
+If $\rho(\lie{a}) \ne \rho(\Rad{\lie{g}})$, since $\rho(\lie{a}) \subseteq \rho(\lie{g})'$, $\rho(\lie{a}) = \rho(\lie{g}' \cap \lie{a}) = 0$, which is weird.
+Then, we can say that in this case for irreducible $V$ $\rho(\lie{r}')$ is always 0, so that there is no case for $\lie{a} \ne \lie{r}$.
+Therefore, we have always $\rho(\lie{g}' \cap \Rad{\lie{g}}) = 0$.
+
+From this, we can argue that \textit{$[\lie{g}, \Rad{\lie{g}}]$ is nilpotent.}
+To prove this, we consider $\ad{(\lie{g}' \cap \Rad{\lie{g}})}$, of which all elements are nilpotent endomorphisms by the above lemma.
+By Engel's theorem, this ideal is nilpotent, and then an ideal $[\ad{\lie{g}}, \ad{\Rad{\lie{g}}}]$ contained in the ideal is also nilpotent.
+Since the center, which is the kernel of the adjoint representation, is also nilpotent, we finally obtain that $[\lie{g}, \Rad{\lie{g}}]$ is nilpotent.
+
+Now we shall show a connection of radicals to nil radicals via derivatives.
+To see this, let $D$ be a derivative of $\lie{g}$, and we define $\lie{g}^D = \lie{g} \oplus k$ with Lie product rule: $[(A, a), (B, b)] \equiv ([A, B] + aDB - bDA, 0)$.
+It is immediate that this rule gives a Lie algebra structure.
+Especially, $\lie{g} \oplus 0 = \lie{g}$ is an ideal and $[(0, 1), \lie{g}^D] = D\lie{g} \oplus 0$.
+Now, then $D(\Rad{\lie{g}}) = [(0, 1), \Rad{\lie{g}}^D] \subseteq [\lie{g}^D, \Rad{\lie{g}^D}] \cap \lie{g}$, and by the previous lemma the latter is a nilpotent ideal of $\lie{g}$.
+Therefore, we have that \textit{for any derivative $D$, $D(\Rad{\lie{g}}) \subseteq \Nil{\lie{g}}$}.
 
 \newpage
 
@@ -1873,60 +1910,74 @@ Then there is a derivation $D \in L_{K_r}(V)$ such that $\exp{D} = \exp{t_1 D_1}
 
 \textbf{Preliminaries for Ado's theorem}
 
-Although we already have a finite-dimensional faithful representation of semisimple Lie algebras, one might wish to have a finite-dimensional faithful representation of arbitrary Lie algebras.
-Ado's theorem is the good news.
-We shall study this theorem.
+First, we need a concept for algebraic modulo an ideal.
+For an ideal $\mathcal{I}$ of $U(\lie{g})$ we call $A \in U(\lie{g})$ \textbf{algebraic module $\mathcal{I}$} if there is a polynomial $f$ such that $f(A) \in \mathcal{I}$, or $f(A + \mathcal{I}) = 0 + \mathcal{I}$.
+It is immediate that if $\mathcal{I}$ is finite-codimensional, then every $A \in U(\lie{g})$ is algebraic modulo $\mathcal{I}$.
+To see the reverse, actually we only need to check a basis of $\lie{g}$; that is, \textit{for a basis $(U_i)$ of $\lie{g}$ if all $U_i$ is algebraic modulo $\mathcal{I}$, then $\mathcal{I}$ is finite-codimensional}.
+This is immediately shown from PBW-theorem; if we denote $\overline{U_i} \equiv U_i + \mathcal{I}$ and pick up a polynomial $f_i$ with $f_i(\overline{U_i}) = 0$ for each $i$, then every $\prod \overline{U_i}^{r_i}$ can be written as a linear combination of $\prod \overline{U_i}^{s_i}$ where $s_i < \deg{f_i}$, which implies the finiteness of codimension of $\mathcal{I}$.
+From this, it is immediate that \textit{for finite-codimensional $\mathcal{I}, \mathcal{J} \trianglelefteq U(\lie{g})$ $\mathcal{I} \mathcal{J}$ is also finite-codimensional}, because $f_i(U_i) g_i(U_i) \in \mathcal{I} \mathcal{J}$ if $f_i$ and $g_i$ are polynomials such that $f_i(U_i) \in \mathcal{I}$ and $g_i(U_i) \in \mathcal{J}$.
 
-Let $\lie{g}$ be a finite-dimensional Lie algebra.
-It is immediate that any aoosciative algebra with 1 has its faithful representation ($A \mapsto L_A$).
-Thus if one can find a finite-dimensional associative $k$-algebra $\mathcal{A}$ with 1 and a monomorphism of $\lie{g}$ into $\mathcal{A}_L$, our proof is done.
-Actually it can be archived if we can find finite-codimensional $\mathcal{K} \trianglelefteq U(\lie{g})$, so this is our aim.
+The main lemma of the (stronger) Ado's theorem is the following one: \textit{Assume that $\lie{g}$ is solvable and $\mathcal{I} \trianglelefteq U(\lie{g})$ satisfies (i) $\mathcal{I}$ is finite-codimensional and (ii) for every $N \in \lie{n}$ $N + \mathcal{I}$ is nilpotent.}
+\textit{Then there is $\mathcal{J} \trianglelefteq U(\lie{g})$ contained in $\mathcal{I}$ which satisfies (i) and (ii) and also (iii) for every derivation $D$ of $\lie{g}$ the extended derivation of $D$ on $U(\lie{g})$ leaves $\mathcal{J}$ invariant.}
+The key of the proof is the two-sided ideal $\mathcal{L}$ of $U(\lie{g}) / \mathcal{I}$ generated by $\lie{n} / \mathcal{I}$.
+Consider the mapping sending $A + \mathcal{I}$ into $NA + \mathcal{I} = (N + \mathcal{I})(A + \mathcal{I})$ for each $N \in \mathcal{N}$, and note that this mapping is of finite-dimensional $U(\lie{g}) / \mathcal{I}$ into itself by (i) and nilpotent by (ii).
+Then, by the lemma of Engel's lemma and the proof of Lie's theorem, we can obtain a basis of $U(\lie{g}) / \mathcal{I}$ which makes all the mappings $A + \mathcal{I} \mapsto NA + \mathcal{I}$ upper-triangular matrices.
+From this, there is $r \in \NaN$ such that the product of $r$ such of mapppings is always 0.
+On the other hand, $\mathcal{L}^r$ consists in linear combinations of products of $\lie{g}$ in which the number of elements in $\lie{n}$ is at least $r$.
+In each of such terms, we can send elements in $\lie{n}$ to the left end by $AN = NA + [A, N]$, so finally we can conclude that such terms must be 0, which means that $\mathcal{L}^r = 0$.
+Now, we let $\mathcal{K}$ be the preimage of the canonical projection $U(\lie{g}) \to U(\lie{g}) / \mathcal{I}$ from $\mathcal{L}$ and $\mathcal{J} = \mathcal{K}^r$.
 
-To do this we need some stuffs.
-Let $\mathcal{K} \trianglelefteq U(\lie{g})$.
-We call $A \in U(\lie{g})$ \textbf{algebraic modulo $\mathcal{K}$} if $f(A) \in \mathcal{K}$ for some polynomial $f$, or $f(A + \mathcal{K}) = 0 + \mathcal{K}$.
-Obviously, if $\mathcal{K}$ is finite-codimensional, every $A \in U(\lie{g})$ is algebraic modulo $\mathcal{K}$.
-Actually, the inverse also holds, i.e., \textit{if $(U_i)$ is a basis of $\lie{g}$, then $\mathcal{K}$ is finite-codimensional if and only if all $U_i$ are algebraic modulo $\mathcal{K}$}.
-The inverse is an almost direct consequence of PBW theorem.
-Let $f_i$ be polynomials such that $f_i(U_i) \in \mathcal{X}$ and $m_i$ its degree.
-Then every $\prod U_i^{r_i} + \mathcal{K}$ can be written as a linear combination of $\prod U_i^{s_i} + \mathcal{K}$ with $s_i < m_i$, which implies the finite-codimensionality.
-From this it is immediate that \textit{if $\mathcal{K}, \mathcal{L} \trianglelefteq U(\lie{g})$ are finite-codimensional, then so is $\mathcal{K} \mathcal{L}$}; if we let $f_i, g_i$ be polynomials such that $f_i(U_i) \in \mathcal{K}$ and $g_i(U_i) \in \mathcal{L}$, then $f_i(U_i) g_i(U_i) \in \mathcal{K} \mathcal{L}$.
-Another stuff is that \textit{for an algebra $\mathcal{A}$ with generator $\mathcal{X}$ and a derivative $D$ of $\mathcal{A}$ if for each $X \in \mathcal{X}$ there is $n_X \in \NaN$ such that $D^{n_X} X = 0$, then $D$ is locally nilpotent}, which is obvious by Leibnitz' rule.
+Then first $\mathcal{I} \subseteq \mathcal{K}$ so that $\mathcal{K}$ is finite-codimensional and $\mathcal{J} = \mathcal{K}^r$, which immediately implies (i).
+Also, for $N \in \lie{n}$ we have $N^i \in \mathcal{I}$, and then $N^{ir} \in \mathcal{I}^r \subseteq \mathcal{K}^r = \mathcal{J}$, which implies (ii).
+Finally, since any derivative $D$ of $\lie{g}$ sends $\Rad{\lie{g}} = \lie{g}$ into $\lie{n}$, so it leaves $\lie{n}$ invariant, and it follows directly that the extension of $D$ leaves $\mathcal{J}$ invariant, which means that (iii) holds.
 
-What we are interested in is $\mathcal{K}$ such that all elements in the nil radical $\lie{n}$ of $\lie{g}$ are nilpotent modulo $\mathcal{K}$ (i.e., its some power is in $\mathcal{K}$).
-Such ideal which is also finite-codimensional is useful, but we need a more strengthened ideal.
-The following lemma is for this: \textit{if $\lie{g}$ is solvable, then for such above $\mathcal{K}$ there is a finite-codimensional ideal $\mathcal{L} \subseteq \mathcal{K}$ of $U(\lie{g})$ such that not only all elements in $\lie{n}$ is nilpotent modulo $\mathcal{L}$ but also for every derivation $D$ of $\lie{g}$ its extension on $U(\lie{g})$ leaves $\mathcal{L}$ invariant.}
-What we first guess is that if we let $\mathcal{B}$ be the ideal generated by $\lie{n}$ and $\mathcal{K}$ then $\mathcal{B}$ is somewhat 'nilpotent modulo $\mathcal{K}$'.
-It would be treated in the language of quotient spaces, so we consider $\mathcal{B}/\mathcal{K}$.
-Obviously, it is an ideal of $U(\lie{g})/\mathcal{K}$ generated by $(\lie{n} + \mathcal{K})/\mathcal{K}$.
-But by the assumptions (n.b., not only the nilpotency modulo $\mathcal{K}$ but also the fact that $\lie{n}$ is a nilpotent ideal are required) all elements in this ideal are nilpotent, thus the (finite-dimensional) subalgebra $(\lie{n} + \mathcal{K})/\mathcal{K}$ of $(\lie{g} + \mathcal{K})/\mathcal{K}$ is nilpotent so that it is contained in the radical of $(\lie{g} + \mathcal{K})/\mathcal{K}$.
-Hence, as we know, $\mathcal{B}/\mathcal{K}$ is in the radical of $U(\lie{g})/\mathcal{K}$.
-It implies that there is $r \in \NaN$ such that $\mathcal{B}^r \subseteq \mathcal{K}$.
-
-Now we let $\mathcal{L} = \mathcal{B}^r$ and show that this is what we want.
-It is obvious that $\mathcal{L} \trianglelefteq U(\lie{g})$.
-Also, since $\mathcal{B}$ contains $\mathcal{K}$ so that it is finite-codimensional, $\mathcal{L} = \mathcal{B}^r$ is also finite-codimensional, as seen.
-To see the property about derivative, remind that the radical of any finite-dimensional Lie algebra is sent into the nil radical by any derivative of the whole Lie algebra.
-Using this, we can see that any derivative $D$ sends $\lie{g}$ into $\lie{n}$, which makes the last required property hold.
+For the proof of Ado's theorem, we need to consider a chain; for $\lie{g}$ and $\lie{r} = \Rad{\lie{g}}$ and $\lie{n} = \Nil{\lie{g}}$, $\lie{c}_\lie{g} = \lie{r}_0 \triangleleftneq \lie{r}_1 \triangleleftneq \cdots \triangleleftneq \lie{r}_r = \lie{n} \triangleleftneq \lie{r}_{r + 1} \triangleleftneq \cdots \triangleleftneq \lie{r}_s = \lie{r} \trianglelefteq \lie{r}_{s + 1} = \lie{g}$, and for each $i$ a subalgebra $\lie{g}_i \subseteq \lie{r}_{i + 1}$ such that $\lie{r}_{i + 1} = \lie{g}_i \oplus \lie{r}_i$.
+We can always find such a chain.
+Since $\lie{n} / \lie{c}_\lie{g}$ and $\lie{r} / \lie{n}$ are solvable, we can find a chain $0 \triangleleftneq \lie{s}_1 \triangleleftneq \lie{s}_2 \triangleleftneq \cdots \triangleleftneq \lie{s}_r \lie{n} / \lie{c}_\lie{g}$ and $0 \triangleleftneq \lie{t}_{r + 1} \triangleleftneq \lie{t}_{r + 2} \triangleleftneq \cdots \triangleleftneq \lie{t}_s = \lie{r} / \lie{n}$ where for each $i$ $\lie{s}_{i + 1} / \lie{s}_i$ and $\lie{t}_{i + 1} / \lie{t}_i$ is of dimension 1, and from these chain we can obtain the chain $\lie{r}_0, \lie{r}_1, \cdots$.
+It is immediate that if we choose any $X_i \in \lie{r}_{i + 1} - \lie{r}_i$ and let $\lie{g}_i = kX_i$, then $\lie{g}_i$ is a subalgebra and $\lie{r}_{i + 1} = \lie{g}_i \oplus \lie{r}_i$ if $i \le s$.
+Finally, by Levi's theorem, we can let $\lie{g}_s$ be the Levi factor of $\lie{g}$, so finally we can construct the chain and the complement subalgebras.
 
 \newpage
 
 \textbf{Ado's theorem}
 
+Instead of original Ado's theorem, we shall prove stronger version.
+First, let $\lie{g}$ be a finite-dimensional Lie algebra, and $\lie{n}$ be the nil radical.
+We call a representation $\rho$ of $\lie{g}$ \textbf{nilrepresentation} if for every $N \in \lie{n}$ $\rho(N)$ is nilpotent.
+
 In this page we show that \textit{every finite-dimensional Lie algebra has a finite-dimensional faithful representation}, called the \textbf{Ado's theorem}.
-Let $\lie{g}$ be a finite-dimensional Lie algebra, and $\lie{c}$, $\lie{n}$, $\lie{r}$ its center, nil radical, radical, respectively.
-We already know that the adjoint representation $\lie{c}$ becomes 0 so it is not faithful in general.
-The solution is to find a finite-dimensional representation $\rho$ with $\rho(C) \ne 0$ for all $0 \ne C \in \lie{c}$, and to sum directly this with the adjoint representation.
-Hence, such $\rho$ is our target.
-The main plan is to use a chain $\lie{c} = \lie{r}_1 \triangleleftneq \lie{r}_2 \triangleleftneq \cdots \triangleleftneq \lie{r}_{r - 1} \triangleleftneq \lie{r}_r = \lie{n} \triangleleftneq \lie{r}_{r + 1} \triangleleftneq \lie{r}_{r + 2} \triangleleftneq \cdots \triangleleftneq \lie{r}_{s - 1} \triangleleftneq \lie{r}_s = \lie{r} \trianglelefteq \lie{g} = \lie{r}_{s + 1}$, which exists by Lie's theorem.
-Note that for each $i$ there is a subalgebra $\lie{g}_i$ such that $\lie{r}_{i + 1} = \lie{g}_i \oplus \lie{r}_i$, where the case for $i = s$ the existence of such $\lie{g}_i$ is from Levi's theorem, and then if there is a representation $\rho_i$ of $\lie{r}_i$ for some $i$, we shall construct a representation $\rho_{i + 1}$ of $\lie{r}_{i + 1}$ with $\ker{\rho_{i + 1}} \subseteq \ker{\rho_i}$, then we can conclude that there will be a representation $\rho = \rho_{s + 1}$ of $\lie{g}$ which we seek, since we already have a sufficient faithful representation of $\lie{c}$.
-To see this let $\rho_{i + 1}^0$ be a homomorphism $\lie{r}_{i + 1} \to \lie{gl}(U(\lie{r}_i))$ defined as $\rho_0(Y + Z)(A) = (\ad{Y})A + ZA$ for $Y \in \lie{g}_i$ and $Z \in \lie{r}_i$ and $A \in U(\lie{r}_i)$.
-It is not finite-dimensional, but it is immediate that $\rho_0$ is well-defined representation of $\lie{r}_{i + 1}$.
-To make this finite-dimensional, we let $\mathcal{K}$ be the kernel of homomorphism $U(\lie{r}_i) \to \lie{r}_i$, and let $\mathcal{L} \subseteq \mathcal{K}$ be the ideal constructed in the previous page.
-Then it is also immediate that $\mathcal{L}$ is invariant under $\rho_{i + 1}^0(\lie{r}_{i + 1})$ since $\mathcal{K}$ is invariant under derivatives $\ad{Y}$, so we can have the induced representation, $\rho_{i + 1} : \lie{r}_{i + 1} \to U(\lie{r}_i)/\mathcal{L}$ which is finite-dimensional.
-The remaining is to show that $\ker{\rho_{i + 1}} \subseteq \ker{\rho_i}$; it guarantees that $\ker{\rho_{i + 1}} \cap \lie{c} = 0$.
-But it is obvious since the condition $\rho_{i + 1}(X) = 0$ is equivalent to that $X \in \mathcal{L}$ and $\mathcal{L} \subseteq \mathcal{K}$.
-Hence, the proof of Ado's theorem is over.
+But, as mentioned, we will show the stronger version: \textit{Every finite-dimensional Lie algebra has a finite-dimensional faithful \textbf{nilrepresentation}.}
+
+The proof of this theorem will be archieved if the following lemma is granted: \textit{Let $\lie{g}$ be a finite-dimensional Lie algebra with $\lie{g} = \lie{h} \oplus \lie{r}$ where $\lie{r}$ is a solvable ideal and $\lie{h}$ is a subalgebra.}
+\textit{Also assume that we have a nilrepresentation $\sigma$ of $\lie{r}$.}
+\textit{Then there is a representation $\rho$ of $\lie{g}$ such that $\lie{r} \cap \ker{\rho} \subseteq \ker{\sigma}$.}
+\textit{Especially, $\Nil{\lie{g}} = \lie{g}$ or $\Nil{\lie{g}} = \Nil{\lie{r}}$, then $\rho$ can be taken to be a nilrepresentation.}
+First, let $V$ be the module of $\rho$.
+We can find an algebra-homomorphism of $U(\lie{r})$ into $L(V)$ corresponding to the $\sigma$, and we let $\mathcal{I}$ be the kernel of this homomorphism.
+Then it is immediate that $\mathcal{I}$ satisfies (i) and (ii) in the previous page.
+According to the property in the previous page, we can find $\mathcal{J} \trianglelefteq U(\lie{r})$ which is contined in $\mathcal{I}$ and satisfies (i), (ii) and (iii).
+Now we find the action of $\lie{g}$ on $U(\lie{r}) / \mathcal{J}$.
+We define $T_X = L_Y + \ad{Z} \in L(U)$ for $X = Y + Z$ with $Y \in \lie{r}$ and $Z \in \lie{h}$, where $L_Y$ is the left-multiplication and $D_Z$ is the extended derivation of $\ad{Z}$, and $\tilde{T_X}$, the induced mapping on $U(\lie{r}) / \mathcal{J}$.
+It is direct to show that for any $X_1, X_2 \in \lie{g}$ $T_{[X_1, X_2]} = T_{X_1} T_{X_2} - T_{X_2} T_{X_1}$.
+So, a mapping $\rho : X \mapsto \overline{T_X} \in \lie{gl}(U(\lie{r}) / \mathcal{J})$ is a representation of $\lie{g}$.
+
+First, because $\mathcal{J}$ is finite-dimensional, $\rho$ is also finite-dimensional.
+Also, for $Y \in \lie{r}$ if $\overline{L_Y} = 0$, or $L_Y U(\lie{r}) \subseteq \mathcal{J}$, then because of $1 \in U(\lie{r})$, $Y \in \mathcal{J} \subseteq \mathcal{I}$, which implies that $Y \in \ker{\sigma}$.
+Now, we want to check if $\rho$ is nilrepresentation.
+We check the first case: $\Nil{\lie{g}} = \lie{g}$, or $\lie{g}$ is nilpotent.
+We shall extend $\rho$ to an algebra-homomorphism of $U(\lie{g}))$ into $L(U(\lie{r}) / \mathcal{J})$, and let $\mathcal{P} \trianglelefteq \rho(U(\lie{g}))$ be generated by $\rho(\lie{r})$.
+Note that by (ii) of $\mathcal{J}$ $\rho(Y)$ for $Y \in \lie{r}$ is nilpotent, and $\lie{r}$ is an ideal of $\lie{g}$.
+As in the proof of the lemma for finding $\mathcal{J}$ to show that $\mathcal{L}$ is nilpotent -- using the main lemma of Engel's theorem and moving all factors from $\rho(Y)$ in a power of $\mathcal{P}$ to the left side -- we can show that $\mathcal{P}^r = 0$ for some $r \in \NaN$, which implies that $\rho(Y)$ for all $Y \in \lie{r}$ is nilpotent.
+On the other hand, since $\lie{g}$ is nilpotent, for every $Z \in \lie{h}$ $\ad{Z}$ is nilpotent, so $D_Z$ on $U(\lie{a})$ is locally-nilpotent, which implies that $\rho(Z)^s = 0$ for some $s$.
+Now, see $(\rho(Y) + \rho(Z))^{rs}$; each of term contains either at least $r$-$\rho(Y)$ or, otherwise $\rho(Z)^s$, which implies that $(\rho(Y) + \rho(Z))^{rs} = 0$.
+Hence, for all $X \in \lie{g}$ $\rho(X)$ is nilpotent when $\Nil{\lie{g}} = \lie{g}$.
+In the case for $\Nil{\lie{g}} = \Nil{\lie{r}}$, we already have seen that for $N \in \Nil{\lie{r}}$ some power of $L_N$ sends $U(\lie{r})$ into $\mathcal{J}$, which implies that $\rho(N)$ is nilpotent.
+Therefore, $\rho$ is the representation we seek.
+
+Now, we are about to prove Ado's theorem.
+The above lemma says that if we make a faithful nilrepresentation of $\lie{c}_\lie{g}$, then we can grow up this to a nilrepresentation $\rho$ of $\lie{g}$; the first stage is easy, by considering $C_i \mapsto E_{1i}$ where $(C_i)$ is a basis of $\lie{c}_\lie{g}$.
+Note that $\ker{\rho} \cap \lie{c}_\lie{g} = $.
+Finally, because the adjoint representation is also a nilrepresentation, with kernel $\lie{c}_\lie{g}$, $\ad \oplus \rho$ is a faithful nilrepresentation of $\lie{g}$.
 
 \newpage
 
@@ -1941,7 +1992,7 @@ We denote $\lie{g}_0(\ad{A}) = \{X \in \lie{g} \SBar [A, X] = 0\}$.
 As the root space decomposition (consider a subalgebra $k(\ad{A})$) $\lie{g}_0(\ad{A})$ is a subalgebra.
 We call this subalgebra $\lie{g}_0(\ad{A})$ an \textbf{Engel subalgebra}.
 
-We investigate some lemma for Engel subalgbras.
+We investigate some lemma for Engel subalgebras.
 First, \textit{let $\lie{h} \le \lie{g}$ and assume that we have $A \in \lie{h}$ such that for $X \in \lie{h}$ with $\lie{g}_0(\ad{X}) \subseteq \lie{g}_0(\ad{A})$ we have $\lie{g}_0(\ad{X}) = \lie{g}_0(\ad{A})$ (hence it is minimal) and $\lie{h} \subseteq \lie{g}_0(\ad{A})$.
 Then $\lie{g}_0(\ad{A}) \subseteq \lie{g}_0(\ad{X})$ for every $X \in \lie{h}$ (hence it is least).}
 To show this we denote $\lie{h}_0 = \lie{g}_0(\ad{A})$ and fix $B \in \lie{h}$, and consider $T_a = \ad{(A + aB)}$ ($a$ scalar).
