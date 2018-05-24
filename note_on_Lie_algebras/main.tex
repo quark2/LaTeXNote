@@ -3129,25 +3129,28 @@ We call this formula \textbf{Steinberg's formula}.
 For $r \in \NaN$, we call a skew-symmetric mapping of $\lie{g} \times \lie{g} \times \cdots \cdots \lie{g}$ ($r$-times) into $V$ an \textbf{$r$-dimensional $V$-cochain of $\lie{g}$} (or just \textbf{$r$-cochain}) for $\lie{g}$ and for $r = 0$ we call a 'constant' mapping $\lie{g} \ni X \mapsto v$, $v \in V$ fixed, \textbf{$0$-dimensional $V$-cochain of $\lie{g}$} (or just \textbf{$0$-cochain}) for $\lie{g}$.
 Also for each $r$, we denote the set of $r$-cochains for $\lie{g}$ by $C^r(\lie{g}; V)$, and we give a natural vector space structure to $C^r(\lie{g}; V)$.
 
-Now for each $r$ we define a mapping $\delta_r : C^r(\lie{g}; V) \to C^{r + 1}(\lie{g}; V)$ as
+Now for each $r$ we define a mapping $d_r : C^r(\lie{g}; V) \to C^{r + 1}(\lie{g}; V)$ as
 \begin{eqnarray*}
-  & & (\delta_i f)(X_0, X_1, \cdots, X_r) = \sum_i (-1)^i \rho(X_i) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_r) + \\
+  & & (d_i f)(X_0, X_1, \cdots, X_r) = \sum_i (-1)^i \rho(X_i) f(X_0, X_1, \cdots, \hat{X_i}, \cdots, X_r) + \\
   & & \;\;\;\; \sum_{i < j} (-1)^{i + j} f([X_i, X_j], X_0, X_1, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_r).
 \end{eqnarray*}
 ($\hat{\;}$ means that this is omitted.)
 This mappimg is obviously a linear mapping.
-If there is no ambiguity, we denote frequently $\delta_i$ by just $\delta$; for example, we denote $\delta_{i + 1} \circ \delta_i$ by $\delta \circ \delta$, or $\delta^2$.
-There is an important result: \textit{for any case $\delta^2 = 0$}, where the proof is straightforward but dizzy.
+If there is no ambiguity, we denote frequently $d_i$ by just $d$; for example, we denote $d_{i + 1} \circ d_i$ by $d \circ d$, or $d^2$.
+There is an important result: \textit{for any case $d^2 = 0$}, where the proof is straightforward but dizzy.\footnote{Hint for proof; if one expands $d_{i + 1} (d_i f)$, there are several terms, but terms with triple Lie product (such like $[X_0, [X_1, X_2]]$) in arguments of $f$ are cancelled by themselves and so is terms with two Lie products in arguments of $f$. It should be so because it must work when $\rho$ is trivial.}
 From this we can say about \textbf{cohomology}.
 
-Now, we call $f \in C^r(\lie{g}; V)$ an \textbf{$r$-cocycle} if $\delta f = 0$, and call $g \in C^r(\lie{g}; V)$ ($r > 0$) an \textbf{$r$-coboundary} if there is $h \in C^{r - 1}(\lie{g}; V)$ such that $g = \delta h$.
+Now, we call $f \in C^r(\lie{g}; V)$ an \textbf{$r$-cocycle} if $df = 0$, and call $g \in C^r(\lie{g}; V)$ ($r > 0$) an \textbf{$r$-coboundary} if there is $h \in C^{r - 1}(\lie{g}; V)$ such that $g = dh$.
 We denote the set of all $r$-cocycles by $Z^r(\lie{g}; V)$ and the set of all $r$-coboundaries by $B^r(\lie{g}; V)$ for $r > 0$, and $B^0(\lie{g}; V) = 0$.
-Then by definition $Z^r(\lie{g}; V) = \ker{\delta_r}$ and $B^r(\lie{g}; V) = \textrm{Im } \delta_{r - 1}$ if $r > 0$.
+Then by definition $Z^r(\lie{g}; V) = \ker{d_r}$ and $B^r(\lie{g}; V) = \textrm{Im } d_{r - 1}$ if $r > 0$.
 
-Since $\delta^2 = 0$, we have that $B^r(\lie{g}; V) \le Z^r(\lie{g}; V)$.
+Since $d^2 = 0$, we have that $B^r(\lie{g}; V) \le Z^r(\lie{g}; V)$.
 Then we can define $H^r(\lie{g}; V) = Z^r(\lie{g}; V) / B^r(\lie{g}; V)$, which is called the \textbf{$r$-dimensional cohomology group of $\lie{g}$ relative to $V$}.
 Note that $H^0(\lie{g}; V) \cong Z^0(\lie{g}; V)$ can be considered as $I_\lie{g}(V) = \{v \in V \SBar \rho(\lie{g}) v = 0\}$, of which each of elements is called an \textbf{invariant}.
 Also note that by skew-symmetry $C^r(\lie{g}; V) = 0$ for any $r > n = \dim{\lie{g}}$, so $H^r(\lie{g}; V) = 0$ for all $r > n$.
+
+Note that if $f : \lie{g} \to V$ is 1-cocycle, or $df(A, B) = \rho(A) f(B) - \rho(B) f(A) - f([A, B]) = 0$ for every $A, B \in \lie{g}$, and $H^1(\lie{g}; V) = 0$, that is, $Z^1(\lie{g}; V) = B^r(\lie{g}; V)$, then there is $v \in V$ such that if $g : \lie{g} \ni A \to v$, then $f = dg$, or $f(A) = \rho(A)v$.
+These functions will be used in some important moments.\footnote{Actually Weyl's complete reducibility theorem and Levi's theorem can be proved by using this; see [Jacobson]. But we will not introduce them.}
 
 \newpage
 
@@ -3158,7 +3161,7 @@ We set two cases for this subject; $\rho$ is non-trivial or trivial.
 One might guess that the latter is easier than the former, but actually it does not; we have a theorem that \textit{if $\rho(\lie{g})V \ne 0$, then for all $r \in \NaN_0$ $H^r(\lie{g}; V) = 0$}, called the \textbf{Whitehead's theorem}.
 It does not harm any generality to assume that $\rho$ is faithful.
 Since for $v \in V$ $\rho(\lie{g})v = 0$ implies $v = 0$ by irreducibility, $H^0(\lie{g}; V) = 0$.
-Thus it suffices to show that for each $f \in Z^r(\lie{g}; V)$ ($r > 0$) we can find $g \in C^{r - 1}(\lie{g}; V)$ such that $f = \delta g$.
+Thus it suffices to show that for each $f \in Z^r(\lie{g}; V)$ ($r > 0$) we can find $g \in C^{r - 1}(\lie{g}; V)$ such that $f = dg$.
 
 To find such $g$ we let $(U_i)$ be a basis of $\lie{g}$ and $(U'_i)$ the dual basis of $(U_i)$ relative to the Killing form $\kappa_\lie{g}$ of $\lie{g}$, and $C = \sum_i \rho(U_i) \rho(U'_i)$, the Casimir element, which is in this case invertible.
 Also, for $A \in \lie{g}$ we define $a_{ij}(A)$ as $[U_i, A] = \sum_j a_{ij}(A) U_j$ and $b_{ij}(A)$ as $[U'_i, A] = \sum_j a_{ij}(A) U'_j$.
@@ -3167,7 +3170,7 @@ Then, (in this moment we denote $\rho(A)v$ for $A \in \lie{g}$ and $v \in V$ by 
 
 {\small
 \begin{eqnarray*}
-  0 &=& \sum_s U_s (\delta f)(X_0, X_1, \cdots, X_{r - 1}, U'_s) \;\;\; (\delta f = 0) \\
+  0 &=& \sum_s U_s (df)(X_0, X_1, \cdots, X_{r - 1}, U'_s) \;\;\; (df = 0) \\
   &=& \sum_s U_s \left( \sum_{i = 0}^{r - 1} (-1)^i X_i f(X_0, \cdots, \hat{X_i}, \cdots, X_{r - 1}, U'_s) + (-1)^r U'_s f(X_0, \cdots, X_{r - 1}) + \right. \\
   & & \left. \sum_{i < j < r} (-1)^{i + j} f([X_i, X_j], X_0, \cdots, \hat{X_i}, \cdots, \hat{X_j}, \cdots, X_{r - 1}, U'_s) + \right. \\
   & & \left. \sum_{i = 0}^{r - 1} (-1)^{i + r} f([X_i, U'_s], X_0, \cdots, \hat{X_i}, \cdots, X_{r - 1}) \right).
@@ -3185,7 +3188,42 @@ The second term will be $(-1)^r Cf(X_1, \cdots, X_r)$, and the remaining will be
 \end{eqnarray*}
 }
 
-Now if $g(X_0, \cdots, X_{r - 1}) = (-1)^{r + 1} C^{-1} \sum_s U_s f(X_0, \cdots, X_{r - 1}, U'_s)$, then we have that $g \in C^{r - 1}(\lie{g}; V)$ and $f = \delta g$, which we seek.
+Now if $g(X_0, \cdots, X_{r - 1}) = (-1)^{r + 1} C^{-1} \sum_s U_s f(X_0, \cdots, X_{r - 1}, U'_s)$, then we have that $g \in C^{r - 1}(\lie{g}; V)$ and $f = dg$, which we seek.
+
+\newpage
+
+\textbf{Levi-Mal'cev theorem}
+
+We had proven that every finite-dimensional Lie algebra admits Levi factor.
+One may ask whether there is a relation between two Levi factors if there are two Levi factors.
+Mal'cev's the following theorem (or called \textbf{Levi-Mal'cev thereom}, combining the Levi's theorem) gives an strong answer; \textit{for finite-dimensional Lie algebra $\lie{g}$ with two Levi factors $\lie{g}_1$ and $\lie{g}_2$ there is an automorphism $\tau$ generated by $\exp{\ad{Z}}$ for $Z \in \Nil{\lie{g}}$ such that $\lie{g}_2 = \tau \lie{g}_1$}.
+
+To prove this, we first attack a special case; $\lie{r} = \Rad{\lie{g}}$ is Abelian.
+We can define an action of $\lie{g}_1$ on $\lie{r}$ by $\lie{g}_1 \ni A \mapsto \ad{A}|_\lie{r}$, and it gives a well-defined representation of $\lie{g}_1$.
+Let $P_2$ be the projection of $\lie{g}_1$ into $\lie{r}$ with a decomposition $\lie{g} = \lie{g}_2 \oplus \lie{r}$.
+Then it is direct that for $A_1, A_2 \in \lie{g}_1$ with $A_i = S_i + R_i$ where $S_i \in \lie{g}_2$ and $R_i \in \lie{r}$ $(\ad{A_1}) P_2(A_2) - (\ad{A_2}) P_2(A_1) = [S_1, R_2] + [R_1, S_2]$, which coincides with $P_2([A_1, A_2])$ (note that $[R_1, R_2] = 0$ because $\lie{r}$ is Abelian).
+Thus, $P_2$ is 1-cocycle, so there is $Z \in \lie{r}$ such that $P_2(A_1) = [A_1, Z]$ for every $A_1 \in \lie{g}_1$ by Whitehead's theorem.
+Note that since $\lie{r}$ is an Abelian ideal $\exp{\ad{Z}} = 1 + \ad{Z}$.
+Then, for every $A \in \lie{g}_1$ we have that $(\exp{\ad{Z}}) A = A + (\ad{Z})A = A - P_2(A) \in \lie{g}_2$, which implies $(\exp{\ad{Z}})\lie{g}_1 \subseteq \lie{g}_2$.
+Since $\dim{\lie{g}_1} = \dim{\lie{g}_2}$, we have that $(\exp{\ad{Z}})\lie{g}_1 = \lie{g}_2$.
+
+Now we deal with the general case.
+There is a shortcut for the proof, the following lemma: \textit{if $\lie{g}_1 \subseteq \lie{g}_2 + \lie{n}^{(r)}$ for some $r$, where $\lie{n} = \Nil{\lie{g}}$, then there is $Z \in \lie{n}^{(r)}$ such that $(\exp{\ad{Z}}) \lie{g}_1 \subseteq \lie{g}_2 + \lie{n}^{(r + 1)}$ (the exponential is well-defined since $Z \in \lie{n}$)}.
+To prove this, again we shall find and use an 1-cocycle.
+In this moment for $S_1, S_2 \in \lie{g}_2$ and $R_1, R_2 \in \lie{n}^{(r)}$ $P_2([S_1 + R_1, S_2 + R_2]) = [S_1, R_2] + [R_1, S_2] + [R_1, R_2]$ ($A_i = S_i + R_i$), with an extra term $[R_1, R_2]$, so it seems not in the form of $\rho(A_1) P_2(A_2) - \rho(A_2) P_2(A_1)$.
+But since $[R_1, R_2] \in \lie{n}^{(r + 1)}$, $\overline{P_2}([A_1, A_2]) \equiv P_2([A_1, A_2]) + \lie{n}^{(r + 1)} = [S_1, R_2] + [R_1, S_2] + \lie{n}^{(r + 1)}$, which seems the required form.
+From this, we expect that the corresponding representation for the cohomology structure making $\overline{P_2}$ an 1-cocycle must be $\rho : \lie{g}_1 \ni A \mapsto \overline{\ad{P_1(A)}} \in L(\lie{n}^{(r)} / \lie{n}^{(r + 1)})$, where $P_1 \equiv 1 - P_2 : \lie{g} \to \lie{g}_2$.
+Note that $P_1$ is actually a Lie algebra homomorphism and any of $\ad{\lie{g}}$ sends an ideal into the ideal itself, so $\rho$ is a well-defined representation of $\lie{g}_1$.
+Thus, $\overline{P_2}$ becomes an 1-cocycle, so there is $\overline{Z} \in \lie{n}^{(r)} / \lie{n}^{(r + 1)}$ such that $\overline{P_2}(S) = (\overline{\ad{S}}) \overline{Z}$ for every $S \in \lie{g}_1$, or $P_2(S) + [Z, S] \in \lie{n}^{(r + 1)}$ for any $Z \in \overline{Z}$.
+Thus, $S + [Z, S] = P_1(S) + P_2(S) + [Z, S] \in \lie{g}_2 + \lie{n}^{(r + 1)}$ for every $S \in \lie{g}_1$, which implies that $(\exp{\ad{Z}})S \in \lie{g}_2 + \lie{n}^{(r + 1)}$ since $(\ad{Z})^i A \in \lie{n}^{(r)}$ so that $(\ad{Z})^{i + 1} A \in \lie{n}^{(r + 1)}$ for any $A \in \lie{g}$ and $i > 0$.
+Therefore, $(\exp{\ad{Z}}) \lie{g}_1 \subseteq \lie{g}_2 + \lie{n}^{(r + 1)}$.
+
+Finally, we can prove Mal'cev theorem.
+By the above theorem and the solvability of $\Nil{\lie{g}}$ for any $\lie{g}$ and an induction on $r$, the remaining is to show $\lie{g}_1 \subseteq \lie{g}_2 + \lie{n}$.
+Note that for any $A_1, A_2 \in \lie{g}_1$, $P_2([A_1, A_2]) = [P_1(A_1), P_2(A_2)] + [P_2(A_1), P_1(A_2)] + [P_2(A_1), P_2(A_2)]$, so $P_2([A_1, A_2]) \in [\lie{g}, \Rad{\lie{g}}] \subseteq \Nil{\lie{g}}$.
+Since $\lie{g}_1 = [\lie{g}_1, \lie{g}_1]$, we have that $\lie{g}_1 \subseteq \lie{g}_2 \oplus \lie{n}$, which implies the first stage of the induction.
+Finally, by induction, we obtain that there is an automorphism $\tau$ generated by $\exp{\ad{Z}}$ where $Z \in \Nil{\lie{g}}$ such that $\tau \lie{g}_1 \subseteq \lie{g}_2$.
+Since their dimensional is same, we finally obtain that $\tau \lie{g}_1 = \lie{g}_2$.
 
 \end{document}
 
