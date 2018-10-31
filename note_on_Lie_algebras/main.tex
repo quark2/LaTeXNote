@@ -709,12 +709,12 @@ But then it is immediate that its weights are negative all, a contradiction.
 This implies that $\dim{\lie{g}_\alpha} = 1$ for all $\alpha \in \Phi$.
 
 
-The next is supposing that there is  $c' \in k$ which is not an integer or a negative integer smaller than -1 such that $\lie{g}_{c\alpha} \ne 0$.
+The next is supposing that there is  $c' \in k$ which is not an integer or a half-integer or a negative integer smaller than -1 such that $\lie{g}_{c\alpha} \ne 0$.
 
 Then, since $\lie{g}_{c'\alpha}$ is a weight space, there is an irreducible submodule $\lie{u}$ different from $\lie{s}_\alpha$ which contains $\lie{g}_{c'\alpha}$.
 Let $\lie{g}_{c'\alpha} = kX'$ for some $X' \in \lie{g}$.
 We argue that there is $c = c' + m$ for some $m \in \NaN$ such that for all $i = 0, 1, 2, \cdots, m$ $(\ad{E_\alpha})^i X' \ne 0$ but $(\ad{E_\alpha})^{m + 1} X' = 0$.
-When $c'$ is not an integer, since $|\Phi| < \infty$, there must be such $m$.
+When $c'$ is not an integer nor a half-integer, since $|\Phi| < \infty$, there must be such $m$.
 Assume that $c'$ is a negative integer.
 In this case $c$ cannot excess -1 since, if not, $(\ad{E_\alpha})^i X'$ is in $\lie{s}_1$, a contradiction.
 Now we denote $X = (\ad{E_\alpha})^m X'$.
@@ -723,6 +723,14 @@ Thus the subspace spanned by $((\ad{F_\alpha})^i X)$ ($i = 0, 1, 2, \cdots$) for
 But then it is immediate that its weights are not integers or negative integers all, a contradiction.
 Thus, such $\lie{u}$ cannot exist.
 We did not consider the case for positive integer $c$ bigger than 1, however, this case also can be banned by replacing $\alpha$ by $-\alpha$.
+
+So we ruled out all $c\alpha$ where $c$ is an integer other than $\pm 1$ and non-integer without half-integers.
+Now we shall check the cases for half-integers.
+If $\lie{g}_{\frac{1}{2} \alpha} \ne 0$, then by the previous result $\lie{g}_{2 \cdot \frac{1}{2} \alpha} = \lie{g}_\alpha = 0$, a contradiction.
+Thus $\lie{g}_{\frac{1}{2} \alpha} = 0$.
+Now the remaining is similar to the above; suppose that there is a half-integer $c'$ with $\lie{g}_{c'\alpha} \ne 0$, then we can find another half-integer $c \ge c'$ where $\lie{g}_{c\alpha} \ne 0$ and $(\ad{E_\alpha}) \lie{g}_{c\alpha} = 0$, but $c$ must be smaller than $-\frac{1}{2}$.
+Then, the highest weight of the irreducible $\lie{s}_\alpha$-submodule containing $\lie{g}_{c\alpha}$ is $2c$, which is negative, a contradiction.
+Therefore, no any multiplicity of $\alpha$ by a half-integer cannot be in $\Phi$.
 Finally, we obtain that $\lie{p} = \lie{s}_\alpha$, so if $c\alpha \in \Phi$ for some $c \in k$, then $c = \pm 1$.
 This is the first result of integrality of $\lie{g}$.
 
@@ -843,7 +851,7 @@ We define a base $\Delta$ which is a subset of a root system $\Phi$ of if it sat
 
 (B1) $\Delta$ is a basis of $E$
 
-(B2) Every element in $\Phi$ is a nonnegative or nonpositive $\InZ$-linear combination of $\Delta$.
+(B2) All $\alpha \in \Phi$ is a nonnegative or nonpositive $\InZ$-linear combination of $\Delta$.
 
 (which means that when $\alpha = \sum_{\alpha \in \Delta} a_\alpha \alpha$, $a_\alpha \in \InZ_+ \cup \{0\}$ or $a_\alpha \in \InZ_- \cup \{0\}$.)
 
@@ -851,9 +859,9 @@ The (B2) seems too strong.
 But our conditions (RS1)$\sim$(RS4) guarrantee the existence of base.
 To see this we need a useful ingredient.
 We define $P_\alpha = \{\lambda \in E \SBar (\lambda, \alpha) = 0\}$.
-Since $\Phi$ is finite, $E - \bigcup_{\alpha \in \Phi} P_\alpha$ is not empty.
+Since $\Phi$ is finite, $E - \bigcup_{\alpha \in \Phi} P_\alpha \ne \emptyset$.
 We call an element in this set \textbf{regular}.
-By definition, of course, for any regular $\gamma$ $(\gamma, \alpha) \ne 0$ for all $\alpha \in \Phi$.
+By definition, $(\gamma, \alpha) \ne 0$ for all $\alpha \in \Phi$ and regular $\gamma$.
 
 We fix a regular $\gamma$, and then we define $\Phi^+(\gamma) = \{\alpha \in \Phi \SBar (\alpha, \gamma) > 0\}$ and $\Phi^-(\gamma) = \{\alpha \in \Phi \SBar (\alpha, \gamma) < 0\}$.
 Note that $\Phi$ is the disjoint union of $\Phi^+(\gamma)$ and $\Phi^-(\gamma)$, and $-\Phi^+(\gamma) = \Phi^-(\gamma)$.
@@ -878,16 +886,19 @@ Therefore, $\Phi^+(\gamma) = M$, which we want.
 By (RS1), if (B2) holds, then $\Delta(\gamma)$ spans $E$.
 Thus the remaining is to show the linear independence of $\Delta(\gamma)$.
 First, we need to show that for any distinct $\alpha, \beta \in \Delta(\gamma)$ $(\alpha, \beta) \le 0$.
-But it is direct from the result of the previous page; if not, that is, $(\alpha, \beta) > 0$, then $\alpha - \beta \in \Phi$, a contradiction to (B2).
+But it is direct from the result of the previous page; if not, that is, $(\alpha, \beta) > 0$, then $\alpha - \beta \in \Phi$.
+It seems a contradiction to (B2), but not enough since there is a possibility to be written as a form indicated in (B2).
+Instead, suppose that $\alpha - \beta \in \Phi^+(\gamma)$.
+Then, $\alpha = (\alpha - \beta) + \beta$, so $\alpha$ is decomposable, a contradiction.
+If we suppose that $\alpha - \beta \in \Phi^-(\gamma)$, then $\beta - \alpha \in \Phi^+(\gamma)$, so we can say that $\beta$ is decomposable, a contradiction.
+Therefore, $\alpha - \beta$ cannot be in $\Phi$, so $(\alpha, \beta) \le 0$.
 Now we consider scalars $a_{\alpha}$ making $\sum_{\alpha \in \Delta(\gamma)} a_{\alpha} \alpha = 0$.
 We denote $\Delta_+ = \{\alpha \in \Delta(\gamma) \SBar a_{\alpha} \ge 0\}$ and $\Delta_- = \{\alpha \in \Delta(\gamma) \SBar a_{\alpha} < 0\}$.
 Then $\beta = \sum_{\alpha \in \Delta_+} a_{\alpha} \alpha = -\sum_{\alpha \in \Delta_-} a_{\alpha} \alpha$.
 But $(\beta, \beta) = \sum_{\alpha \in \Delta_+, \alpha' \in \Delta_-} a_{\alpha} (-a_{\alpha'}) (\alpha, \alpha')$, which is nonpositive, so $\beta = 0$.
 Finally, $0 = (\beta, \gamma) = \sum_{\alpha \in \Delta_+} a_{\alpha} (\alpha, \gamma) = -\sum_{\alpha \in \Delta_-} a_{\alpha} (\alpha, \gamma)$ requires $a_{\alpha} = 0$.
 Therefore, $\Delta(\gamma)$ is linearly independent, so (B1) holds.
-Then $\Delta(\gamma)$ is a base of $\Phi$, so we have found a basis.
-
-For the later, we define an ordering in $E$: for $\lambda , \mu \in E$ we denote $\lambda \succeq \mu$ when $\lambda - \mu$ can be written as a nonnegative linear combination of $\Delta$.
+Then $\Delta(\gamma)$ is a base of $\Phi$.
 
 \newpage
 
@@ -1005,6 +1016,10 @@ Since $W$ is finite, we can choose $\sigma \in W$ which is generated by $\sigma_
 Now for any $\alpha \in \Delta$ we have that, by the maximality, $(\delta, \sigma(\gamma)) \ge (\delta, (\sigma_\alpha \sigma)(\gamma)) = (\sigma_\alpha(\delta), \sigma(\gamma)) = (\delta - \alpha, \sigma(\gamma))$, so that $(\alpha, \sigma(\gamma)) \ge 0$ for all $\alpha \in \Delta$, where the equality cannot hold since $\sigma(\gamma)$ is regular.
 Therefore, $\sigma$ is what we want, so \textit{the action of $W$ on the set of bases (or on the set of the Weyl chambers) is transitive}.
 
+Now we define \textbf{an ordering in $E$}: for $\lambda , \mu \in E$ we denote $\lambda \succ \mu$ when $\lambda - \mu = \sum_{\alpha \in \Delta} a_\alpha \alpha$ for $0 \le a_\alpha \in \InZ$.
+Let $\lambda \in E$, and let M = $\{\sigma(\lambda) \SBar \sigma(\lambda) \succ \lambda, \sigma \in W\}$ and $\sigma \in W$ be such that $\sigma(\lambda)$ is maximal of $M$ in the ordering.
+If $(\sigma(\lambda), \alpha_i) < 0$, then $\sigma_i(\sigma(\lambda)) \succ \sigma(\lambda) \succ \lambda$, so $\sigma_i(\sigma(\lambda)) \in M$, a contradiction, so we can say that \textit{there is $\sigma$ such that $\sigma(\lambda) \in \overline{\mathcal{W}_\Delta}$ and $\sigma(\lambda) \succ \lambda$}.
+
 We found $\sigma \in W$ such that $\Delta' = \sigma(\Delta)$ for any bases $\Delta$ and $\Delta'$.
 Let $\Delta = (\alpha_1, \alpha_2, \cdots, \alpha_l)$.
 Then, as we noted, $\langle \sigma(\alpha_i), \sigma(\alpha_j) \rangle = \langle \alpha_i, \alpha_j \rangle$.
@@ -1019,23 +1034,24 @@ Next, let $\gamma = \gamma + \frac{\epsilon}{(\alpha, \alpha)} \alpha$, so that 
 Then $\gamma$ is regular and, by the minimality of $(\alpha, \gamma)$, $\alpha$ must be indecomposable in $\Phi^+(\gamma)$, so that $\alpha \in \Delta(\gamma)$, which we seek.
 The above argument says then that \textit{for every $\alpha \in \Phi$ and base $\Delta$ there is $\sigma \in W$ (especially, which is generated by $\sigma_\beta$ for $\beta \in \Delta$) such that $\sigma(\alpha) \in \Delta$}.
 
-From this result, we can obtain very important one.
-Let $\alpha \in \Phi$ and $\Delta = (\alpha_1, \alpha_2, \cdots, \alpha_l)$ a base.
-We found that there is $\sigma \in W$ which is generated by $\sigma_{\alpha_i}$'s and satisfies that $\sigma(\alpha) = \sigma_{\alpha_j}$ for some $j$.
-Now we consider $\sigma_\alpha$, which is $\sigma_{\sigma^{-1} \alpha_j} = \sigma^{-1} \sigma_{\alpha_j} \sigma$.
-Then the right hand side is a product of $\sigma_{\alpha_i}$'s.
-Therefore, we obtain that \textit{$W$ is generated by $\sigma_{\alpha_i}$'s}.
-
 \newpage
 
 \textbf{Weyl group (3) More on}
 
-In this page we fix a base $\Delta$ and denote $\Delta = (\alpha_1, \alpha_2, \cdots, \alpha_l)$, and $\sigma_i = \sigma_{\alpha_i}$.
+We can see a pretty result with the results of the previous page.
+In this page we fix a base $\Delta$ and denote $\Delta = (\alpha_1, \alpha_2, \cdots, \alpha_l)$.
+Also, we denote $\sigma_i = \sigma_{\alpha_i}$.
+Let $\alpha \in \Phi$ and $\Delta$ a base.
+We found that there is $\sigma \in W$ which is generated by $\sigma_i$'s and satisfies that $\sigma(\alpha) = \sigma_j$ for some $j$.
+Now we consider $\sigma_\alpha$, which is $\sigma_{\sigma^{-1} \alpha_j} = \sigma^{-1} \sigma_j \sigma$.
+Then the right hand side is a product of $\sigma_i$'s.
+Therefore, we obtain that \textit{$W$ is generated by $\sigma_i$'s}.
 
 We shall see one more stuff: \textit{simplicity of the action of $W$ on bases}.
 To see this we need a lemma.
 \textit{If $(\sigma_{i_1} \sigma_{i_2} \cdots \sigma_{i_{m - 1}})(\alpha_{i_m})$ is negative, then $\sigma_{i_1} \sigma_{i_2} \cdots \sigma_{i_m} = \sigma_{i_1} \cdots\sigma_{i_{s - 1}} \sigma_{i_{s + 1}} \cdots \sigma_{i_{m - 1}}$ for some $1 \le s \le m - 1$}.
 Note that we have seen that $\sigma_i$ permutes all positive roots except $\alpha_i$.
+In the same reason, we have that $\sigma_i$ permutes all negative roots except $-\alpha_i$.
 We use induction.
 When $m = 2$, that is, $\sigma_{i_1}(\alpha_{i_2})$ is negative, the only way for it to be possible is $i_1 = i_2$, so $ \sigma_{i_1} \sigma_{i_2} = 1$.
 Now we assume that for some $m \in \NaN$ our statement holds.
@@ -1044,7 +1060,8 @@ Then, by the above note, we have two cases: $(\sigma_{i_1} \sigma_{i_2} \cdots \
 The first case is immediate by the induction hypothesis.
 We see the second case.
 In this case $\alpha_{i_0} = \sigma(\alpha_{i_m})$.
-Thus $\sigma_{\alpha_{i_0}} = \sigma_{\sigma(\alpha_{i_m})} = \sigma \sigma_{i_m} \sigma^{-1}$, or $\sigma_{i_0} \sigma \sigma_{i_m} = \sigma$, which we want.
+Thus $\sigma_{\alpha_{i_0}} = \sigma_{\sigma(\alpha_{i_m})} = \sigma \sigma_{i_m} \sigma^{-1}$, or $\sigma_{i_0} \sigma \sigma_{i_m} = \sigma$.
+This is the form which we want, where $s = 0$.
 Therefore, by induction, we have the lemma.
 
 From this we have a corollary.
@@ -1077,14 +1094,6 @@ Hence $(\sigma_i \sigma)(\lambda) = \mu$.
 But since $l(\sigma_i \sigma) = r - 1$, by the induction hypothesis, we can say that all $\sigma_{i_j}$ ($j>1$) fix $\lambda$.
 Thus $\sigma(\lambda) = \sigma_{i_1}(\lambda) = \mu$, so $\sigma_{i_1}$ also fixes $\lambda$.
 Finally, by the induction, we obtain the lemma.
-
-The length gives a way to another important lemma: \textit{for $\lambda \in \overline{\mathcal{W}_\Delta}$ and for any $\sigma \in W$ $\lambda \succeq \sigma(\lambda)$}.
-We attack on an induction on $l(\sigma)$.
-If $l(\sigma) = 1$, then $\sigma = \sigma_i$ for some $i$, so $\lambda - \sigma(\lambda) = \langle \lambda, \alpha_i \rangle \alpha_i$, so $\lambda \succeq \sigma(\lambda)$.
-Assume that for every $\sigma \in W$ with $l(\sigma) = r$ we have that $\lambda \succeq \sigma(\lambda)$ and we consider $\sigma \sigma_i$ with $l(\sigma \sigma_i) = r + 1$.
-To maintain the length, we must have that $\sigma \sigma_i (\alpha_i) \succeq 0$.
-Thus, $\lambda - \sigma \sigma_i(\lambda) = (\lambda - \sigma(\lambda)) + \langle \lambda, \alpha_i \rangle \sigma(\alpha_i) \succeq 0$.
-Therefore, by induction on $r$, we have the conclusion.
 
 \newpage
 
